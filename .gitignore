@@ -1,0 +1,54 @@
+# ===== LaTeX =====
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.dvi
+*.lol
+*.listing
+*.bcf-SAVE-ERROR
+*-blx.bib
+
+# El PDF final SI se versiona: se excluye la carpeta de build
+build/
+_minted*/
+
+# ===== Sistema operativo =====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# ===== Editores =====
+.vscode/
+.idea/
+*.swp
+*~
+
+# ===== Ofimatica temporal =====
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# ===== Datos sensibles (LOPDP Ecuador) =====
+*_datos_personales.*
+*_sin_anonimizar.*
+secrets.env
+.env

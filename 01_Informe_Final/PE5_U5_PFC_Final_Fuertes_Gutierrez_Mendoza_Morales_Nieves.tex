@@ -1,0 +1,843 @@
+% ============================================================
+%  PE5 -- Unidad 5 | PLANTILLA DE TRABAJO DIVIDIDO
+%  MundiPets -- Plataforma de Adopción y Cruza Responsable de Mascotas
+%  Asignatura: Ingeniería de Requisitos (ISR-401) -- UTEQ 2026-2027 PPA
+%  Formato: IEEE onecolumn | Biber + biblatex (estilo IEEE)
+%  Preámbulo trasplantado y adaptado del ERS_SRS_2B_v2_0.tex del PFC,
+%  para que la PE5 y el ERS compartan exactamente el mismo motor de
+%  compilación (mismo compilador, mismo estilo de citas, misma
+%  numeración de tablas/figuras). Ver Sección 0.6 y 0.7 del cuerpo.
+%
+%  COMO USAR ESTE ARCHIVO
+%  ----------------------
+%  Cada bloque  indica QUE debe producir un
+%  integrante en esa sección. El responsable borra la caja 
+%  y la reemplaza por el contenido real. Cuando no quede ninguna caja
+%  gris en el documento, la PE5 está terminada.
+%
+%  COMPILACIÓN (requiere referencias.bib en la misma carpeta):
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      biber    PE5_U5_Trabajo_Dividido
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+% ============================================================
+\documentclass[journal,onecolumn]{IEEEtran}
+
+% ── Codificación e idioma ───────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[autostyle=true, spanish=mexican]{csquotes}
+\usepackage[htt]{hyphenat}   % permite guionar dentro de \texttt (evita Overfull)
+
+% ── Tablas ──────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+% ── Figuras ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{figuras/}{./}}
+\usepackage{float}
+\usepackage{pdflscape}   % matriz de trazabilidad en horizontal
+
+% ── Color ───────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{uteqverde}{RGB}{0,110,60}
+\definecolor{codegray}{gray}{0.95}
+\definecolor{codegreen}{rgb}{0.0,0.5,0.0}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.6}
+\definecolor{codepurple}{rgb}{0.5,0.0,0.35}
+
+% ── Geometría ───────────────────────────────────────────────
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm,
+	headheight=14pt, footskip=1.2cm}
+
+% ── Encabezado y pie ────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small PE5 -- Unidad 5 -- Ingeniería de Requisitos}
+\fancyhead[R]{\small MundiPets -- Trabajo dividido}
+\fancyfoot[C]{\thepage}
+
+% ── Espaciado y listas ──────────────────────────────────────
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{3em}   % tolerancia extra de línea
+\makeatletter
+\@ifundefined{labelindent}{}{\let\labelindent\relax}
+\makeatother
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% ── Títulos de sección ──────────────────────────────────────
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+% ── Leyendas ────────────────────────────────────────────────
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ── Bibliografía (biber + estilo IEEE) ──────────────────────
+% Mismo motor que el ERS del PFC: ver Sección 0.6 y 0.7 del cuerpo
+% para el orden exacto de compilación.
+\usepackage[
+backend=biber,
+style=ieee,
+citestyle=numeric-comp,
+isbn=true,
+doi=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+% ── Enlaces ─────────────────────────────────────────────────
+\usepackage[hidelinks,colorlinks=false]{hyperref}
+\usepackage{url}
+
+% ============================================================
+%  CAJA DE GUÍA (fondo gris claro, borde negro)
+% ============================================================
+\usepackage{mdframed}
+\mdfdefinestyle{guia}{
+	linecolor=black,
+	linewidth=0.6pt,
+	backgroundcolor=gray!10,
+	innertopmargin=6pt,
+	innerbottommargin=6pt,
+	innerleftmargin=8pt,
+	innerrightmargin=8pt,
+	skipabove=4pt,
+	skipbelow=4pt
+}
+
+% 
+\newcommand{\guia}[2]{%
+	\begin{mdframed}[style=guia]
+		\noindent\textbf{Responsable: #1}\\[2pt]
+		\textit{#2}
+	\end{mdframed}
+}
+
+% -- Atajos de nombres (evita erratas al repetirlos) ---------
+\newcommand{\rFUE}{FUERTES ARRAES, Edson Daniel}
+\newcommand{\rGUT}{GUTIÉRREZ ORTEGA, Génesis Adriana}
+\newcommand{\rMEN}{MENDOZA PÁRRAGA, Andy Johel}
+\newcommand{\rMOR}{MORALES SÁNCHEZ, Gary Alejandro}
+\newcommand{\rNIE}{NIEVES SÁNCHEZ, Jimmy Samuel}
+\newcommand{\rTODOS}{TODO EL EQUIPO}
+
+% ============================================================
+\begin{document}
+	
+	% ============================================================
+	% PORTADA (mismo formato que el ERS del PFC, Apéndice de portada)
+	% ============================================================
+	\begin{titlepage}
+		\centering
+		
+		{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
+		
+		\includegraphics[width=0.2\textwidth]{figuras/logo_uteq.png}\\[12pt]
+		
+		{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN\\[4pt]
+			CARRERA DE INGENIERÍA EN SOFTWARE}
+		
+		\vspace{0.3cm}
+		
+		{\normalsize\bfseries TEMA:}\\[4pt]
+		{\normalsize PRÁCTICA DE EVALUACIÓN 5 -- UNIDAD 5\\
+			INTEGRACIÓN, MÉTRICAS Y DEFENSA DEL PROYECTO INTEGRADOR\\
+			SISTEMA MUNDIPETS}\\[4pt]
+		
+		\vspace{0.2cm}
+		
+		{\normalsize\bfseries MATERIA:}\\[4pt]
+		{\normalsize INGENIERÍA DE REQUISITOS (ISR-401)}
+		
+		\vspace{0.2cm}
+		
+		{\normalsize\bfseries DOCENTE:}\\[4pt]
+		{\normalsize ING. GUERRERO ULLOA GLEISTON CICERÓN, PhD.}
+		
+		\vspace{0.2cm}
+		
+		{\normalsize\bfseries INTEGRANTES:}\\[6pt]
+		
+		\textit{\textbf{FUERTES ARRAES EDSON DANIEL}},~CI: 0929115087,~efuertesa2@uteq.edu.ec\\
+		{\small Rol: Analista líder}\\[6pt]
+		
+		\textit{GUTIÉRREZ ORTEGA GÉNESIS ADRIANA},~CI: 1250274477,~ggutierrezo@uteq.edu.ec\\
+		{\small Rol: Verificador}\\[6pt]
+		
+		\textit{MENDOZA PÁRRAGA ANDY JOHEL},~CI: 1251401590,~amedozap9@uteq.edu.ec\\
+		{\small Rol: Modelador}\\[6pt]
+		
+		\textit{MORALES SÁNCHEZ GARY ALEJANDRO},~CI: 1251154173,~gmoraless2@uteq.edu.ec\\
+		{\small Rol: Documentador}\\[6pt]
+		
+		\textit{NIEVES SÁNCHEZ JIMMY SAMUEL},~CI: 1250907878,~jnievess@uteq.edu.ec\\
+		{\small Rol: Verificador}
+		
+		\vspace{0.2cm}
+		
+		{\normalsize\bfseries CURSO:}\\[4pt]
+		{\normalsize CUARTO SEMESTRE PARALELO \enquote{B}}
+		
+		\vspace{0.2cm}
+		
+		{\normalsize\bfseries Versión del documento:} 1.0 (plantilla de trabajo dividido)\\[4pt]
+		\textbf{Repositorio GitHub (PE5):}\\
+		\url{https://github.com/MiloSaurio4kHD/MundiPets-PE5-IngReq-Fuertes-Gutierrez-Mendoza-Morales-Nieves.git}\\[2pt]
+		\textbf{Repositorio GitHub (PFC base -- ERS, UML, PE1--PE4):}\\
+		\url{https://github.com/andymendozap03/MundiPets-PFC-IngReq.git}
+		
+		\vspace{1.5cm}
+		
+		{\normalsize\bfseries QUEVEDO -- LOS RÍOS -- ECUADOR}\\[4pt]
+		{\normalsize\bfseries 2026 -- 2027 PPA}
+		
+	\end{titlepage}
+	
+	\thispagestyle{fancy}
+	
+	
+	% ------------------------------------------------------------
+	%  AVISO DE PISO G1
+	% ------------------------------------------------------------
+	
+	
+	% ------------------------------------------------------------
+	%  RESUMEN BILINGUE
+	% ------------------------------------------------------------
+	\begin{abstract}
+		
+	\end{abstract}
+	
+	\begin{IEEEkeywords}
+		Ingeniería de requisitos, ISO/IEC/IEEE 29148:2018, ISO/IEC 25010:2023,
+		métricas de calidad, trazabilidad end-to-end, requisitos de inteligencia
+		artificial, MundiPets.
+	\end{IEEEkeywords}
+	
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	
+	\newpage
+	
+	% ============================================================
+	%  FUNDAMENTO TEORICO
+	%  Sin numerar, como el Resumen/Indice: la Seccion 8 de la guia
+	%  ampliada fija exactamente 10 secciones NUMERADAS (Introduccion
+	%  ... Conclusiones) y el criterio C6 exige entregar "las diez
+	%  secciones exigidas". Insertar esto como Seccion 1 numerada
+	%  correria toda la numeracion y dejaria Conclusiones como 11,
+	%  incumpliendo esa exigencia literal. Por eso va como bloque de
+	%  portada, igual que Caratula/Resumen/Indice, pero con entidad
+	%  propia y visible en el indice general.
+	% ============================================================
+	\section*{Fundamento Teórico}
+	\addcontentsline{toc}{section}{Fundamento Teórico}
+	\label{sec:fundamento_teorico}
+	
+	% -- FT.1 --------------------------------------------------------
+	\subsection*{Marco de calidad y especificación de requisitos}
+	\addcontentsline{toc}{subsection}{Marco de calidad y especificación (Fuertes)}
+	
+	% -- FT.2 --------------------------------------------------------
+	\subsection*{Fundamentos de la especificación y el ciclo de vida}
+	\addcontentsline{toc}{subsection}{Fundamentos de especificación (Gutiérrez)}
+	
+	% -- FT.3 --------------------------------------------------------
+	\subsection*{Fundamentos de la trazabilidad y el modelado}
+	\addcontentsline{toc}{subsection}{Fundamentos de trazabilidad (Morales)}
+	
+	% -- FT.4 --------------------------------------------------------
+	\subsection*{Fundamentos de los requisitos de inteligencia artificial}
+	\addcontentsline{toc}{subsection}{Fundamentos de requisitos de IA (Mendoza)}
+	
+	% -- FT.5 --------------------------------------------------------
+	\subsection*{Fundamentos de gestión de proyecto y trabajo en equipo}
+	\addcontentsline{toc}{subsection}{Fundamentos de gestión (Nieves)}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 1 -- INTRODUCCION
+	% ============================================================
+	\section{Introducción}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 2 -- METODOLOGIA DE IR
+	% ============================================================
+	\section{Metodología de Ingeniería de Requisitos}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 3 -- ERS/SRS FINAL
+	% ============================================================
+	\section{ERS/SRS Final del Sistema MundiPets}
+	
+	% -- 3.1 --------------------------------------------------------
+	\subsection{Estructura conforme a ISO/IEC/IEEE 29148:2018}
+	
+	% -- 3.2 --------------------------------------------------------
+	\subsection{Requisitos clave y cambios incorporados en PE1--PE5}
+	
+	\begin{table}[H]
+		\caption{Requisitos clave y cambios incorporados durante PE1--PE5.}
+		\label{tab:cambios_ers}
+		\small
+		\begin{tabularx}{\textwidth}{|c|L{3.2cm}|X|L{2.6cm}|}
+			\hline
+			\textbf{ID} & \textbf{Requisito} & \textbf{Cambio aplicado y motivo} & \textbf{Práctica} \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 3.3 --------------------------------------------------------
+	\subsection{Control de versión, identificadores y línea base}
+	
+	\begin{table}[H]
+		\caption{Identificación de la versión final del ERS.}
+		\label{tab:version_ers}
+		\small
+		\begin{tabularx}{\textwidth}{|L{4.5cm}|X|}
+			\hline
+			\textbf{Campo} & \textbf{Valor} \\
+			\hline
+			Versión del ERS & \\
+			\hline
+			Fecha de congelación & \\
+			\hline
+			\textit{Commit} asociado (hash corto) & \\
+			\hline
+			Etiqueta de línea base en Git & \\
+			\hline
+			Responsable de la consolidación & \rGUT \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 4 -- MODELOS UML
+	% ============================================================
+	\section{Modelos UML del Sistema}
+	
+	\begin{figure}[H]
+		\centering
+		\fbox{\parbox{0.85\textwidth}{\centering\vspace{2.5cm}
+				\textit{[Reemplazar por la figura:}\\ \texttt{07\_Modelos\_UML/} \texttt{casos\_uso/cu\_general.png}\textit{]}
+				\vspace{2.5cm}}}
+		\caption{Diagrama de casos de uso general del sistema MundiPets.}
+		\label{fig:cu_general}
+	\end{figure}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 5 -- VALIDACION
+	% ============================================================
+	\section{Validación: Inspección, Defectos y Re-inspección}
+	
+	% -- 5.1 --------------------------------------------------------
+	\subsection{Resultados de la inspección de la PE4}
+	
+	% -- 5.2 --------------------------------------------------------
+	\subsection{Correcciones aplicadas}
+	
+	% -- 5.3 --------------------------------------------------------
+	\subsection{Re-inspección de la PE5 y defectos residuales}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 6 -- GESTION Y TRAZABILIDAD
+	% ============================================================
+	\section{Gestión y Trazabilidad}
+	
+	% -- 6.1 --------------------------------------------------------
+	\subsection{Línea base y control de cambios}
+	
+	% -- 6.2 --------------------------------------------------------
+	\subsection{Matriz de trazabilidad final}
+	
+	\begin{figure}[H]
+		\centering
+		\fbox{\parbox{0.85\textwidth}{\centering\vspace{2.5cm}
+				\textit{[Reemplazar por la figura:}\\ \texttt{04\_Trazabilidad/} \texttt{capturas/matriz\_final.png}\textit{]}
+				\vspace{2.5cm}}}
+		\caption{Vista general de la matriz de trazabilidad final de MundiPets.}
+		\label{fig:matriz}
+	\end{figure}
+	
+	% -- 6.3 --------------------------------------------------------
+	\subsection{Diagnóstico de cobertura: huérfanos y cadenas rotas}
+	
+	\begin{table}[H]
+		\caption{Requisitos huérfanos, artefactos huérfanos y cadenas rotas.}
+		\label{tab:huerfanos}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.4cm}|L{2.4cm}|X|L{3cm}|}
+			\hline
+			\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 6.4 --------------------------------------------------------
+	\subsection{Sincronización entre el \textit{product backlog} y el ERS}
+	
+	\begin{table}[H]
+		\caption{Sincronización entre el \textit{product backlog} y el ERS.}
+		\label{tab:backlog}
+		\small
+		\begin{tabularx}{\textwidth}{|X|c|c|c|}
+			\hline
+			\textbf{Verificación} & \textbf{Cumple} & \textbf{Total} & \textbf{\%} \\
+			\hline
+			RF con al menos una historia de usuario asociada & & & \\
+			\hline
+			Historias del \textit{backlog} con un RF de origen identificado & & & \\
+			\hline
+			Herramienta de tablero declarada: \rule{4cm}{0.4pt} & \multicolumn{3}{c|}{} \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 7 -- REQUISITOS DE IA
+	% ============================================================
+	\section{Requisitos de los Componentes de Inteligencia Artificial}
+	
+	% -- 7.1 --------------------------------------------------------
+	\subsection{Identificación y justificación de los componentes}
+	
+	% -- 7.2 --------------------------------------------------------
+	\subsection{Ficha del componente IA-01}
+	
+	\begin{table}[H]
+		\caption{Ficha del componente de inteligencia artificial IA-01.}
+		\label{tab:ficha_ia01}
+		\small
+		\begin{tabularx}{\textwidth}{|L{4.2cm}|X|}
+			\hline
+			\textbf{Campo} & \textbf{Contenido} \\
+			\hline
+			Identificador y nombre & IA-01 --- \\
+			\hline
+			Tarea y tipo & (recomendación / clasificación / detección de anomalías / conversación / visión) \\
+			\hline
+			Entradas y salidas & Variables de entrada, formato y semántica de la salida \\
+			\hline
+			Consumidor del resultado & Quién usa la salida y para qué decisión \\
+			\hline
+			Datos de entrenamiento & Origen, volumen estimado, variables, etiquetado, calidad mínima, sesgos conocidos, base legal del tratamiento y política de conservación \\
+			\hline
+			Métricas de éxito & Métrica principal con umbral, métricas secundarias, conjunto de evaluación \\
+			\hline
+			Equidad & Métrica de equidad, grupos comparados, brecha máxima tolerada \\
+			\hline
+			Explicabilidad & Qué se explica, a quién, en qué formato y en qué momento \\
+			\hline
+			Riesgos y \textit{fallback} & Consecuencia del error y comportamiento del sistema si el modelo falla o no está disponible \\
+			\hline
+			Clasificación de riesgo & Nivel conforme al enfoque basado en riesgo del Reglamento (UE) 2024/1689 \cite{euaiact2024} y obligaciones derivadas \\
+			\hline
+			Plan de monitoreo & Indicadores en producción, frecuencia de medición, umbral de alerta por deriva, criterio de reentrenamiento o retirada \\
+			\hline
+			Trazas & RF y RNF del sistema con los que se relaciona \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 7.3 --------------------------------------------------------
+	\subsection{Requisitos funcionales y no funcionales de IA}
+	
+	\begin{table}[H]
+		\caption{Requisitos funcionales y no funcionales de los componentes de IA.}
+		\label{tab:req_ia}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.2cm}|c|X|L{3.2cm}|}
+			\hline
+			\textbf{ID} & \textbf{Tipo} & \textbf{Enunciado con umbral y unidad} & \textbf{Método de comprobación} \\
+			\hline
+			RF-IA-01 & RF & & \\
+			\hline
+			RF-IA-02 & RF & & \\
+			\hline
+			RF-IA-03 & RF & & \\
+			\hline
+			RNF-IA-01 & Rendimiento & & \\
+			\hline
+			RNF-IA-02 & Rendimiento & & \\
+			\hline
+			RNF-IA-03 & Rendimiento & & \\
+			\hline
+			RNF-IA-04 & Equidad & & \\
+			\hline
+			RNF-IA-05 & Equidad & & \\
+			\hline
+			RNF-IA-06 & Explicabilidad & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 7.4 --------------------------------------------------------
+	\subsection{Ética, privacidad y clasificación de riesgo}
+	
+	% -- 7.5 --------------------------------------------------------
+	\subsection{Plan de monitoreo y trazado de los requisitos de IA}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 8 -- METRICAS DE CALIDAD
+	% ============================================================
+	\section{Métricas de Calidad del ERS}
+	
+	% -- 8.1 --------------------------------------------------------
+	\subsection{Instrumento de auditoría}
+	
+	% -- 8.2 --------------------------------------------------------
+	\subsection{Cálculo de las seis métricas con aritmética visible}
+	
+	{\setlength{\jot}{8pt}
+		\begin{align*}
+			M_{1a} &= \frac{\text{req.\ con los 4 atributos completos}}{\text{req.\ totales}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{1b} &= \frac{\text{CU especificados}}{\text{CU identificados}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{1c} &= \frac{\text{actores con} \geq 1\ \text{RF}}{\text{actores}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{2}  &= 1 - \frac{\text{conflictos detectados}}{\text{pares de requisitos analizados}} = \underline{\hspace{2.5cm}} \\
+			M_{3}  &= \frac{\text{req.\ con criterio BDD comprobable}}{\text{req.\ totales}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{4ade} &= \frac{\text{RF con cadena adelante completa}}{\text{RF}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{4atr} &= \frac{\text{RF con fuente o \textit{stakeholder} identificado}}{\text{RF}} \times 100 = \underline{\hspace{2.5cm}} \\
+			M_{5}  &= \frac{\sum_{i=1}^{n} \text{req.\ afectados al modificar } r_i}{n} = \underline{\hspace{2.5cm}} \\
+			M_{6}  &= \frac{\text{defectos hallados después de la inspección}}{\text{req.\ totales}} = \underline{\hspace{2.5cm}}
+	\end{align*}}
+	
+	% -- 8.3 --------------------------------------------------------
+	\subsection{Tabla de auditoría de calidad}
+	
+	\begin{table}[H]
+		\caption{Tabla de auditoría de calidad del ERS de MundiPets.}
+		\label{tab:auditoria}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.1cm}|C{1.6cm}|C{1.9cm}|L{2.6cm}|C{1.1cm}|X|}
+			\hline
+			\textbf{Métrica} & \textbf{Valor obtenido} & \textbf{Valor de referencia} & \textbf{Referencia normativa} & \textbf{Cumple} & \textbf{Acción de mejora} \\
+			\hline
+			M1 Completitud & & $\geq$95\,\% & ISO 25010; 29148 & S/N & \\
+			\hline
+			M2 Consistencia & & $\geq$0,98 & ISO 25010 & S/N & \\
+			\hline
+			M3 Verificabilidad & & $\geq$90\,\% & ISO 29148 & S/N & \\
+			\hline
+			M4 Trazabilidad & & 90 / 100\,\% & ISO 29148 & S/N & \\
+			\hline
+			M5 Modificabilidad & & $\leq$3,0 & ISO 25010 & S/N & \\
+			\hline
+			M6 Corrección & & $\leq$0,05 & ISO 25010 & S/N & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 8.4 --------------------------------------------------------
+	\subsection{Comparación antes/después de las mejoras aplicadas}
+	
+	\begin{table}[H]
+		\caption{Comparación antes/después de las mejoras aplicadas al ERS.}
+		\label{tab:antes_despues}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.6cm}|c|c|X|}
+			\hline
+			\textbf{Métrica} & \textbf{Antes} & \textbf{Después} & \textbf{Mejora aplicada al ERS} \\
+			\hline
+			M1 & & & \\
+			\hline
+			M2 & & & \\
+			\hline
+			M3 & & & \\
+			\hline
+			M4 & & & \\
+			\hline
+			M5 & & & \\
+			\hline
+			M6 & & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 9 -- RETROSPECTIVA
+	% ============================================================
+	\section{Retrospectiva del Equipo}
+	
+	\begin{table}[H]
+		\caption{Retrospectiva Start--Stop--Continue del equipo.}
+		\label{tab:retrospectiva}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.2cm}|X|L{3.6cm}|}
+			\hline
+			\textbf{Categoría} & \textbf{Elemento (mínimo tres por categoría)} & \textbf{Responsable / acción} \\
+			\hline
+			\multirow{3}{*}{Start} & & \\
+			\cline{2-3}
+			& & \\
+			\cline{2-3}
+			& & \\
+			\hline
+			\multirow{3}{*}{Stop} & & \\
+			\cline{2-3}
+			& & \\
+			\cline{2-3}
+			& & \\
+			\hline
+			\multirow{3}{*}{Continue} & & \\
+			\cline{2-3}
+			& & \\
+			\cline{2-3}
+			& & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 10 -- CONCLUSIONES
+	% ============================================================
+	\section{Conclusiones}
+	
+	\subsection*{Conclusión 1 --- Unidad 1: Fundamentos y elicitación}
+	\addcontentsline{toc}{subsection}{Conclusión 1 --- Unidad 1}
+	
+	\subsection*{Conclusión 2 --- Unidad 2: Especificación del ERS}
+	\addcontentsline{toc}{subsection}{Conclusión 2 --- Unidad 2}
+	
+	\subsection*{Conclusión 3 --- Unidad 3: Modelado UML y trazabilidad}
+	\addcontentsline{toc}{subsection}{Conclusión 3 --- Unidad 3}
+	
+	\subsection*{Conclusión 4 --- Unidad 4: Validación y gestión de cambios}
+	\addcontentsline{toc}{subsection}{Conclusión 4 --- Unidad 4}
+	
+	\subsection*{Conclusión 5 --- Unidad 5: Integración, métricas e IA}
+	\addcontentsline{toc}{subsection}{Conclusión 5 --- Unidad 5}
+	
+	\newpage
+	
+	% ============================================================
+	%  SECCION 11 -- DEFENSA
+	% ============================================================
+	\section*{Preparación de la Defensa Técnica}
+	
+	% -- 11.1 --------------------------------------------------------
+	\subsection*{Reparto de la exposición}
+	
+	\begin{table}[H]
+		\caption{Reparto de la exposición y los tiempos de la defensa.}
+		\label{tab:defensa}
+		\small
+		\begin{tabularx}{\textwidth}{|c|X|L{3.6cm}|c|}
+			\hline
+			\textbf{\#} & \textbf{Bloque de diapositivas} & \textbf{Expone} & \textbf{Tiempo} \\
+			\hline
+			1--2 & Portada; problema y contexto & \rNIE & 3 min \\
+			\hline
+			3--5 & Sistema y \textit{stakeholders}; proceso de IR (PE1--PE5); ERS: estructura y requisitos clave & \rGUT & 5 min \\
+			\hline
+			6 & Modelos UML principales & \rMOR & 2 min \\
+			\hline
+			7 & Validación: resultados de la inspección & \rFUE & 2 min \\
+			\hline
+			8 & Trazabilidad y métricas & \rMOR, \rFUE & 4 min \\
+			\hline
+			9 & Componentes de inteligencia artificial & \rMEN & 3 min \\
+			\hline
+			10--12 & Lecciones aprendidas; conclusiones; preguntas & \rNIE & 1 min + cierre \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- 11.2 --------------------------------------------------------
+	\subsection*{Reglas de la defensa}
+	
+	\newpage
+	
+	% ============================================================
+	%  REFERENCIAS
+	% ============================================================
+	\printbibliography[title={Referencias}]
+	
+	\newpage
+	
+	% ============================================================
+	%  ANEXOS
+	% ============================================================
+	\appendix
+	
+	% -- ANEXO A ---------------------------------------------------
+	\section{Instrumento de Auditoría de Calidad del ERS}
+	\label{app:auditoria}
+	
+	% -- ANEXO B ---------------------------------------------------
+	\section{Banco de Preguntas del Tribunal con Respuestas Ancladas}
+	\label{app:preguntas}
+	
+	\begin{table}[H]
+		\caption{Preguntas del tribunal, respuesta preparada y artefacto de respaldo.}
+		\label{tab:banco}
+		\small
+		\begin{tabularx}{\textwidth}{|c|L{5cm}|X|L{3cm}|}
+			\hline
+			\textbf{\#} & \textbf{Pregunta} & \textbf{Respuesta preparada} & \textbf{Artefacto} \\
+			\hline
+			1 & ¿Cuál es la frontera del sistema y qué queda deliberadamente fuera? & & \\
+			\hline
+			6 & Muéstrenme un requisito y díganme de qué evidencia concreta nació. & & \\
+			\hline
+			13 & Tomen un RF y díganme qué se rompería si mañana cambia. & & \\
+			\hline
+			16 & ¿Qué decide el modelo y qué pasa cuando se equivoca? & & \\
+			\hline
+			19 & ¿Qué métrica salió peor y qué hicieron al respecto? & & \\
+			\hline
+			20 & Enséñenme los conteos con los que calcularon la verificabilidad. & & \\
+			\hline
+			22 & ¿Qué partes del informe fueron asistidas por IA y cómo las validaron? & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	% -- ANEXO C ---------------------------------------------------
+	\section{Declaración Individual de Aporte al PFC}
+	\label{app:aporte}
+	
+	\begin{table}[H]
+		\caption{Declaración individual de aporte al proyecto integrador.}
+		\label{tab:aporte}
+		\small
+		\begin{tabularx}{\textwidth}{|L{3.4cm}|X|L{4cm}|}
+			\hline
+			\textbf{Integrante} & \textbf{Aportes concretos (artefactos y secciones)} & \textbf{Evidencia en Git (\textit{commits}, archivos, fechas)} \\
+			\hline
+			\rFUE & & \\
+			\hline
+			\rMOR & & \\
+			\hline
+			\rMEN & & \\
+			\hline
+			\rGUT & & \\
+			\hline
+			\rNIE & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\begin{figure}[H]
+		\centering
+		\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}
+				\textit{[Insertar captura del historial de \textit{commits} con autoría y fecha por integrante]}
+				\vspace{2cm}}}
+		\caption{Historial de \textit{commits} del repositorio al corte de la PE5.}
+		\label{fig:commits}
+	\end{figure}
+	
+	% -- ANEXO D ---------------------------------------------------
+	\section{Retrospectiva Start--Stop--Continue (detalle)}
+	\label{app:retrospectiva}
+	
+	% -- ANEXO E ---------------------------------------------------
+	\section{Referencias y Declaración de Uso de Inteligencia Artificial}
+	\label{app:ia_declaracion}
+	
+	\begin{table}[H]
+		\caption{Declaración de uso de inteligencia artificial por sección.}
+		\label{tab:declaracion_ia}
+		\small
+		\begin{tabularx}{\textwidth}{|L{2.6cm}|L{3.2cm}|X|L{3.4cm}|}
+			\hline
+			\textbf{Sección} & \textbf{Herramienta} & \textbf{Tipo de asistencia} & \textbf{Método de validación} \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+			& & & \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\noindent El equipo declara ser responsable de la veracidad, coherencia y
+	originalidad del contenido final entregado.
+	
+	% -- ANEXO F ---------------------------------------------------
+	\clearpage
+	\begin{landscape}
+		\section{Matriz de Trazabilidad Final (completa)}
+		\label{app:matriz}
+		
+		\begin{longtable}{|c|L{2.2cm}|c|c|c|c|L{3.5cm}|c|c|L{2.4cm}|}
+			\caption{Matriz de trazabilidad final del sistema MundiPets.}
+			\label{tab:matriz_completa}\\
+			\hline
+			\textbf{RF/RNF} & \textbf{Fuente} & \textbf{CU} & \textbf{Clase} & \textbf{DFD} & \textbf{Estado} & \textbf{Criterio BDD} & \textbf{CP} & \textbf{Historia} & \textbf{Estado traza} \\
+			\hline
+			\endfirsthead
+			\hline
+			\textbf{RF/RNF} & \textbf{Fuente} & \textbf{CU} & \textbf{Clase} & \textbf{DFD} & \textbf{Estado} & \textbf{Criterio BDD} & \textbf{CP} & \textbf{Historia} & \textbf{Estado traza} \\
+			\hline
+			\endhead
+			\hline
+			\endfoot
+			\hline
+			\endlastfoot
+			RF-01 & & & & & & & & & \\
+			\hline
+			RF-02 & & & & & & & & & \\
+			\hline
+			RF-03 & & & & & & & & & \\
+			\hline
+			\multicolumn{10}{|c|}{\textit{[Continuar hasta RF-27, RNF-01--RNF-16 y los requisitos RF-IA / RNF-IA]}} \\
+			\hline
+		\end{longtable}
+	\end{landscape}
+	
+\end{document}

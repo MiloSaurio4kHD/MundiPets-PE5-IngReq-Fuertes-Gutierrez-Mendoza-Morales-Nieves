@@ -1,0 +1,17 @@
+* text=auto eol=lf
+
+*.tex   text diff=tex
+*.bib   text
+*.md    text
+*.csv   text
+*.bat   text eol=crlf
+
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.svg   text
+*.xlsx  binary
+*.pptx  binary
+*.docx  binary
+*.vpp   binary
+*.mp4   binary

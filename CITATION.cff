@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "MundiPets - PFC de Ingenieria de Requisitos (PE5)"
+message: "Si utiliza este trabajo, citelo como se indica."
+type: software
+authors:
+  - family-names: "Fuertes Arraes"
+    given-names: "Edson Daniel"
+  - family-names: "Gutierrez Ortega"
+    given-names: "Genesis Adriana"
+  - family-names: "Mendoza Parraga"
+    given-names: "Andy Johel"
+  - family-names: "Morales Sanchez"
+    given-names: "Gary Alejandro"
+  - family-names: "Nieves Sanchez"
+    given-names: "Jimmy Samuel"
+version: "5.0"
+date-released: "2026-01-01"

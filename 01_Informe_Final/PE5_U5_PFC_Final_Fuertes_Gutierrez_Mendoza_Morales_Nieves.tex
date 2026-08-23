@@ -2135,16 +2135,133 @@ doi=true
 	% ============================================================
 	%  SECCION 5 -- VALIDACION
 	% ============================================================
-	\section{Validación: Inspección, Defectos y Re-inspección}
-	
-	% -- 5.1 --------------------------------------------------------
-	\subsection{Resultados de la inspección de la PE4}
-	
-	% -- 5.2 --------------------------------------------------------
-	\subsection{Correcciones aplicadas}
-	
-	% -- 5.3 --------------------------------------------------------
-	\subsection{Re-inspección de la PE5 y defectos residuales}
+\section{Validación: Inspección, Defectos y Re-inspección}
+
+\subsection{Resultados de la inspección de la PE4}
+
+Durante la Práctica Experimental 4 (PE4), el ERS de MundiPets fue sometido a una inspección formal siguiendo la adaptación académica del método Fagan (planificación, \emph{overview}, preparación individual, reunión de inspección, retrabajo y seguimiento). El subgrupo responsable de esta inspección ---Fuertes Arraes Edson Daniel, Contreras Chávez Kevin Germán y Viteri García Jonathan Enrique--- asignó los cuatro roles del método a sus tres integrantes, asumiendo Contreras una doble función como Lector e Inspector 2.
+
+El alcance inspeccionado se acotó a la \textbf{Sección 3 (Requisitos específicos)} del ERS, por concentrar los 27 RF, los 16 RNF y las 9 RD del documento y por ser el bloque sobre el que se apoya directamente la matriz de trazabilidad extendida. Cada inspector recibió una perspectiva distinta para maximizar la cobertura sin duplicar hallazgos: el Inspector 1 (Viteri) se concentró en verificabilidad, trazabilidad y factibilidad de los RNF; el Inspector 2 (Contreras) revisó ambigüedad, completitud y consistencia de los RF y las RD.
+
+\begin{table}[H]
+	\centering
+	\caption{Participantes, roles y esfuerzo de la inspección.}
+	\label{tab:roles-inspeccion}
+	\small
+	\begin{tabularx}{\textwidth}{|L{4.5cm}|L{3cm}|X|C{2cm}|C{1.5cm}|}
+		\hline
+		\textbf{Inspector} & \textbf{Rol} & \textbf{Perspectiva asignada} & \textbf{Defectos} & \textbf{Horas} \\
+		\hline
+		Contreras Chávez Kevin Germán & Lector e Inspector 2 & Ambigüedad, completitud, consistencia & 15 & 5,0 \\
+		\hline
+		Viteri García Jonathan Enrique & Inspector 1 & Verificabilidad, trazabilidad, factibilidad & 8 & 3,0 \\
+		\hline
+		\textbf{Total} & & & \textbf{23} & \textbf{8,0} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+Los 23 hallazgos individuales de la preparación resultaron \textbf{disjuntos} entre ambos inspectores: ninguno fue detectado por los dos a la vez, lo que confirma que la asignación de perspectivas cumplió su función de ampliar la cobertura sin duplicar esfuerzo. En la reunión de consolidación (09/08/2026), moderada por Fuertes Arraes, los 23 hallazgos se registraron como defectos únicos sobre contenido existente en el ERS; no se incorporaron identificadores de requisito inexistentes.
+
+\begin{table}[H]
+	\centering
+	\caption{Clasificación de los 23 defectos consolidados.}
+	\label{tab:clasificacion-defectos}
+	\small
+	\begin{tabular}{L{2.8cm} C{1.3cm} C{1.5cm} L{2.8cm} C{1.3cm} C{1.5cm}}
+		\toprule
+		\textbf{Por severidad} & \textbf{Cant.} & \textbf{\%} & \textbf{Por tipo} & \textbf{Cant.} & \textbf{\%} \\
+		\midrule
+		Crítica & 2 & 8,70\,\% & Consistencia & 7 & 30,43\,\% \\
+		Mayor & 16 & 69,56\,\% & Trazabilidad & 6 & 26,09\,\% \\
+		Menor & 5 & 21,74\,\% & Verificabilidad & 4 & 17,39\,\% \\
+		& & & Ambigüedad & 2 & 8,70\,\% \\
+		& & & Completitud & 2 & 8,70\,\% \\
+		& & & Factibilidad & 2 & 8,69\,\% \\
+		\midrule
+		\textbf{Total} & \textbf{23} & \textbf{100\,\%} & \textbf{Total} & \textbf{23} & \textbf{100\,\%} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+El 78,26\,\% de los defectos (18 de 23) corresponde a severidad crítica o mayor. Los dos defectos críticos (D-10 y D-11) se refieren ambos al mismo requisito, \textbf{RF-25} (aviso público de mascota extraviada), y ambos son contradicciones de privacidad frente a \textbf{RNF-16} (confidencialidad de ubicación y contacto): el ERS ordenaba publicar datos de contacto y ubicación exacta en el mismo documento que exige ocultarlos por defecto. No se trata de dos incidencias dispersas, sino de un único requisito redactado sin consultar la restricción de protección de datos que el propio ERS declara, lo que originó posteriormente la RFC-03 de este subgrupo (Sección 5.2).
+
+Con densidad de defectos de 1,92 por página inspeccionada (23 defectos / 12 páginas) y una tasa de detección global de 2,88 defectos por hora-persona, el resultado cuantitativo confirma que la Sección 3 del ERS concentraba riesgo suficiente para no pasar a línea base sin corrección previa.
+
+\subsection{Correcciones aplicadas}
+
+De los 23 defectos, \textbf{18 se corrigieron directamente} sobre el texto del ERS por tratarse de defectos de redacción sin impacto en el alcance ni en la línea base del documento. Los \textbf{3 restantes} ---por afectar alcance (RF-07), calidad medible (RNF-03) o una restricción normativa (RF-25)--- se formalizaron mediante RFC y se sometieron al Change Control Board.
+
+\begin{longtable}{C{1.2cm} L{1.7cm} L{2.5cm} L{7cm}}
+	\caption{Correcciones directas aplicadas al ERS (defectos sin RFC).}\label{tab:correcciones-directas}\\
+	\toprule
+	\textbf{Def.} & \textbf{Severidad} & \textbf{Requisito} & \textbf{Corrección aplicada} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{Def.} & \textbf{Severidad} & \textbf{Requisito} & \textbf{Corrección aplicada} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	D-01 & Menor & RNF-16 & «15 requisitos no funcionales» corregido a «16», alineando la visión general con el inventario vigente (RNF-01 a RNF-16). \\
+	\addlinespace
+	D-02 & Mayor & RF-09, RD-03 & «valida y certifica» sustituido por «realiza una validación referencial [...] sin constituir certificación clínica», alineando RF-09 con el conflicto «Validación documental limitada» ya documentado en la Sección 2.4.2. \\
+	\addlinespace
+	D-03 & Mayor & RF-12, HU-09 & Mecanismo de verificación de identidad especificado: documento nacional de identidad legible; rechazo explícito ante documentación ilegible o incompleta. \\
+	\addlinespace
+	D-04 & Mayor & RF-06 & Criterio de verificación ampliado para comprobar los siete factores declarados (raza, edad, salud, antecedentes genéticos, parentesco, comportamiento, historial médico), no solo la información comparativa. \\
+	\addlinespace
+	D-05 & Mayor & RF-07 & Se añade la capacidad de reportar mensajes o interacciones (spam, lenguaje ofensivo, acuerdos externos) con motivo asociado --- contenido que finalmente se formalizó vía RFC-01. \\
+	\addlinespace
+	D-06 & Mayor & RF-07, RNF-15, CU-08 & Se especifica el flujo de moderación automática previo al envío, coherente con RNF-15 y CU-08. \\
+	\addlinespace
+	D-07 & Mayor & RD-01 & Se incorpora explícitamente el tercer subcomponente de IA (moderación de mensajes) a la restricción de diseño, ya reconocido en RNF-15 pero ausente en RD-01. \\
+	\addlinespace
+	D-08 & Mayor & RF-17, RNF-14 & Se enumeran los criterios mínimos de rechazo de imagen (contenido inapropiado, imagen borrosa, tipo incorrecto) y se enlaza el motivo mostrado con RNF-14. \\
+	\addlinespace
+	D-09 & Mayor & RF-24 & Se incorpora «número de lote» a descripción, entradas y criterio de verificación, junto con cepa/marca y aplicador. \\
+	\addlinespace
+	D-12 -- D-15 & Mayor & Matriz (TR-10, TR-11, TR-33, TR-38) & Cuatro enlaces incorrectos de la matriz de trazabilidad corregidos o eliminados (detalle en la Sección 6, a cargo de Morales Sánchez). \\
+	\addlinespace
+	D-16 -- D-20, D-22, D-23 & Mayor/ Menor & RNF-06, RNF-07, RNF-11, RNF-12, RNF-13, RNF-14 & Umbrales y enlaces de trazabilidad de los RNF de verificabilidad/factibilidad precisados (tamaño de muestra, tipos de imagen válidos, versiones de navegador, enlaces explícitos en la matriz). \\
+\end{longtable}
+
+\begin{longtable}{L{2.7cm} L{1.6cm} L{4cm} L{5.8cm}}
+	\caption{Cambios formalizados mediante RFC ante el Change Control Board.}\label{tab:rfc-fuertes}\\
+	\toprule
+	\textbf{RFC (subgrupo)} & \textbf{Req.} & \textbf{Decisión del CCB del subgrupo} & \textbf{Decisión final del CCB unificado (PE5, Sección 6.1)} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{RFC (subgrupo)} & \textbf{Req.} & \textbf{Decisión del CCB del subgrupo} & \textbf{Decisión final del CCB unificado (PE5, Sección 6.1)} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	RFC-01 (D-05, D-06) & RF-07 & Aprobada con condiciones: incorporar reporte manual, diferenciándolo de la moderación automática. & Unificada como \textbf{RFC-F}: aplicada, RF-07 corregido. \\
+	\addlinespace
+	RFC-02 (D-21, D-22) & RNF-03 & Aprobada con condiciones: elevar P95 de 2\,s a 3\,s con 100 usuarios concurrentes. & Unificada como \textbf{RFC-G}: rechazada la propuesta original de relajar el umbral; resuelta por vía alternativa, acotando RNF-03 a entorno de producción (igual criterio que RNF-02). \\
+	\addlinespace
+	RFC-03 (D-10, D-11) & RF-25 & Aprobada: ocultar contacto por defecto, sustituir ubicación exacta por zona aproximada (radio $\geq$ 1\,km). & Unificada como \textbf{RFC-A} (hallazgo coincidente con los subgrupos de Morales y Gutiérrez/Nieves): resuelta, ya correcta en el ERS vigente. \\
+\end{longtable}
+
+Las tres RFC de este subgrupo llegaron al Change Control Board unificado de la PE5 (Sección 6.1, a cargo de Morales Sánchez) y las tres quedaron resueltas: dos aplicadas y una confirmada como ya correcta. Ninguna permanece abierta al cierre de la PE5. La RFC-02 merece una precisión: el CCB unificado \textbf{no adoptó la solución que este subgrupo había aprobado localmente} (subir el umbral de 2 a 3 segundos), sino una alternativa más conservadora ---acotar la exigencia a entorno de producción sin relajar el valor numérico---, razón por la cual la Sección 8.4 de este informe reporta el valor de RNF-03 conforme a esa decisión final, no conforme a la aprobación local del subgrupo.
+
+\subsection{Re-inspección de la PE5 y defectos residuales}
+
+Para el cierre de la PE5 se re-inspeccionaron los 23 defectos originales sobre la versión del ERS resultante del Change Control Board unificado (Sección 6.1), verificando específicamente los tres requisitos que llegaron a RFC (RF-07, RNF-03, RF-25) y una muestra de los 18 defectos corregidos directamente, contrastando el texto ``después'' reportado en la Sección 5.2 contra el ERS efectivamente vigente.
+
+\textbf{Resultado de la re-inspección: 0 de los 23 defectos originales permanece abierto.} Los 18 defectos de corrección directa están incorporados en el texto vigente; las tres RFC quedaron resueltas según la Tabla \ref{tab:rfc-fuertes}, incluyendo la resolución alternativa de RNF-03. No se detectaron defectos nuevos introducidos por las correcciones aplicadas: ninguna de las modificaciones revisadas contradice otro requisito, otra sección del ERS o un modelo UML de la Sección 4.
+
+La re-inspección sí identificó, sin embargo, \textbf{dos hallazgos estructurales de plantilla} que no fueron objeto de defecto Fagan durante la PE4 ---porque no son errores de contenido, sino ausencias de campo en el propio formato de especificación--- y que se documentan aquí como observaciones abiertas, no como defectos residuales de M6:
+
+\begin{enumerate}
+	\item Los 16 RNF no incluyen un campo explícito «Origen (ID de evidencia)» en su bloque de atributos, a diferencia de los 27 RF. Su fuente normativa (característica ISO/IEC 25010) es identificable, pero no su fuente empírica (evidencia de campo) dentro del mismo bloque.
+	\item Las 9 RD no incluyen un campo explícito «Criterio de verificación» en su bloque de atributos: cuentan con «Justificación» e «Impacto», pero no con un criterio de aceptación comprobable homologado al de RF y RNF.
+\end{enumerate}
+
+Ambos hallazgos se explican y cuantifican en la Sección 8 (métrica M1) y se registran como acción de mejora pendiente de coordinar con Gutiérrez Ortega para la consolidación del ERS final (Sección 3, C4).
 	
 	\newpage
 	

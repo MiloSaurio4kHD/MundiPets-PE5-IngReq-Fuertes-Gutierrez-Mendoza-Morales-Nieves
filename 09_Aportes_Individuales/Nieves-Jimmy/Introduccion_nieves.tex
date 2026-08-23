@@ -1,0 +1,85 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[numbers]{natbib}
+\bibliographystyle{ieeetr}
+
+\title{PE5 -- Vista previa individual\\Sección 1: Introducción}
+\author{Nieves Sánchez, Jimmy Samuel}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+
+\section{Introducción}
+
+\textbf{Problema.} Los procesos de adopción y cruza responsable de mascotas se
+desarrollan hoy, en su mayoría, de manera informal: mediante publicaciones dispersas
+en redes sociales, grupos de mensajería o acuerdos verbales entre particulares, sin
+un canal centralizado que garantice la veracidad de la información publicada ni la
+trazabilidad del proceso. La elicitación realizada en PE1--PE2 documentó esta
+problemática de forma directa: los propietarios y adoptantes entrevistados señalaron
+reiteradamente la falta de transparencia de algunos refugios sobre el estado
+sanitario de las mascotas muchas veces por saturación y falta de financiamiento
+fijo, casos de mascotas que no correspondían a lo anunciado, y estafas en
+adopciones en línea mediante cobros sucesivos por concepto de envío o implementos. A esto se suma la ausencia de mecanismos de verificación de la
+identidad del propietario y de la calidad de las fotografías publicadas, lo que
+facilita la proliferación de perfiles fraudulentos o irrelevantes. MundiPets
+responde a este problema como una plataforma digital que centraliza la información
+de las mascotas, valida su publicación y ofrece mecanismos de apoyo incluyendo
+componentes basados en inteligencia artificial para moderar contenido y sugerir
+compatibilidad, sin sustituir en ningún caso la evaluación profesional veterinaria.
+
+\textbf{Contexto.} El dominio de MundiPets involucra a propietarios de mascotas,
+adoptantes, interesados en procesos de cruza, refugios y veterinarias aliadas, cada
+uno con necesidades y niveles de acceso distintos dentro de la plataforma. El
+entorno organizacional es el de un proyecto académico integrador desarrollado
+durante las prácticas PE1 a PE5 de la asignatura Ingeniería de Requisitos
+(ISR-401), en el que el equipo actuó simultáneamente como analista de requisitos y
+como validador de su propio trabajo mediante inspecciones formales. La evidencia
+recogida en PE1--PE2 (entrevistas y cuestionarios a propietarios, adoptantes,
+interesados en cruza y refugios) reveló, además, posturas heterogéneas frente a la
+privacidad de la información: mientras una parte de los usuarios entrevistados
+prefiere compartir abiertamente el historial médico de sus mascotas porque considera
+que beneficia al animal ante una emergencia, otra parte delimita como sensible
+únicamente el tipo de sangre y las enfermedades, reservando ese dato al veterinario. Esta heterogeneidad condicionó directamente las decisiones de
+especificación registradas en el ERS y sustenta, en particular, los requisitos de
+base legal y clasificación de riesgo de los componentes de IA descritos en la
+Sección 7.
+
+\textbf{Objetivos.} El objetivo general de la PE5 es consolidar e integrar el
+trabajo de las cuatro prácticas previas en un informe final único que demuestre,
+con evidencia auditable, que el ERS de MundiPets cumple los atributos de calidad
+exigidos por \citep{ieee29148}. De este objetivo general se desprenden cinco
+objetivos específicos, correspondientes a las cinco secciones centrales del
+informe: (1)~auditar la calidad del ERS mediante las seis métricas M1--M6 con
+aritmética visible y trazable a los conteos base; (2)~cerrar la trazabilidad
+end-to-end del sistema, resolviendo requisitos huérfanos, artefactos huérfanos y
+cadenas rotas; (3)~especificar formalmente los componentes de inteligencia
+artificial del sistema, con requisitos funcionales y no funcionales medibles;
+(4)~consolidar una versión final única y coherente del ERS/SRS, con control de
+versión e identificadores verificados; y (5)~preparar y sustentar la defensa
+técnica individual ante el tribunal, evidenciando dominio del proyecto completo.
+
+\textbf{Estructura del documento.} Tras este Fundamento Teórico, que reúne las
+bases conceptuales y normativas aplicadas por cada integrante siguiendo los
+principios de elicitación y validación de \citep{pohl2025}, el informe se organiza
+en diez secciones: la Sección~2 describe la metodología de ingeniería de
+requisitos efectivamente seguida en PE1--PE5; la Sección~3 presenta el ERS/SRS
+final conforme a la estructura de \citep{ieee29148}; la Sección~4 ofrece una
+lectura interpretativa de los modelos UML vigentes; la Sección~5 documenta la
+inspección formal y la reinspección de defectos; la Sección~6 desarrolla la
+gestión y la trazabilidad, incluida la matriz final; la Sección~7 especifica los
+requisitos de los componentes de inteligencia artificial; la Sección~8 presenta
+el instrumento y los resultados de la auditoría de calidad del ERS; la
+Sección~9 recoge la retrospectiva del equipo; y la Sección~10 cierra con cinco
+conclusiones integradoras, una por cada unidad del proyecto. El Apéndice reúne el
+instrumento de auditoría completo, el banco de preguntas del tribunal, la
+declaración individual de aporte y la matriz de trazabilidad final en su versión
+legible.
+
+\bibliography{intro_referencias}
+
+\end{document}

@@ -2287,37 +2287,49 @@ hallazgo detectado de forma independiente por tres subgrupos distintos,
 quedando 10 solicitudes de cambio únicas. La Tabla~\ref{tab:rfc_registro}
 consolida estas 10 RFC, su decisión del CCB y su justificación.
 
-\begin{table}[H]
-	\centering
+\begin{longtable}{|c|L{2.2cm}|L{3.6cm}|L{5.4cm}|L{1.6cm}|}
 	\caption{Registro de RFC tramitados en la PE4 sobre el ERS de MundiPets.}
-	\label{tab:rfc_registro}
+	\label{tab:rfc_registro} \\
+	\hline
+	\textbf{RFC} & \textbf{Requisito afectado} & \textbf{Decisión} & \textbf{Justificación} & \textbf{Fecha} \\
+	\hline
+	\endfirsthead
+	
+	\multicolumn{5}{l}{\small\textit{Tabla~\ref{tab:rfc_registro} (continuación).}} \\
+	\hline
+	\textbf{RFC} & \textbf{Requisito afectado} & \textbf{Decisión} & \textbf{Justificación} & \textbf{Fecha} \\
+	\hline
+	\endhead
+	
+	\hline
+	\multicolumn{5}{r}{\small\textit{Continúa en la página siguiente.}} \\
+	\endfoot
+	
+	\hline
+	\endlastfoot
+	
 	\small
-	\begin{tabularx}{\textwidth}{|c|X|X|X|c|}
-		\hline
-		\textbf{RFC} & \textbf{Requisito afectado} & \textbf{Decisión} & \textbf{Justificación} & \textbf{Fecha} \\
-		\hline
-		RFC-A & RF-25, RNF-16 & Aprobado / Aprobado con condiciones (3 subgrupos) & RNF-16 (base legal LOPDP) exige ocultar ubicación/contacto por defecto; RF-25 los exponía & 08--09/08/2026 \\
-		\hline
-		RFC-B & RD-06, RL-04 & Aprobado & El propio RD-06 reconoce que ningún RF implementa el derecho de eliminación (Art. 15 LOPDP) & 09/08/2026 \\
-		\hline
-		RFC-C & RF-10, RD-08 & Aprobado & RD-08 exige canal de respaldo ante caída de WhatsApp, pero RF-10 no lo formaliza & 09/08/2026 \\
-		\hline
-		RFC-D & RNF-09, RD-08 & Aprobado con condiciones & Comprometer un proveedor de pago (WhatsApp) sin presupuesto aprobado es inviable & 09/08/2026 \\
-		\hline
-		RFC-E & RNF-02 & Aprobado & El MVP local no permite verificar disponibilidad mensual del 99\,\% & 09/08/2026 \\
-		\hline
-		RFC-F & RF-07, RNF-15 & Aprobado con condiciones & El ERS reconoce el conflicto ``comunicación inadecuada'' sin RF que lo resuelva & 08/08/2026 \\
-		\hline
-		RFC-G & RNF-03 & Aprobado con condiciones & El umbral de 2s no era verificable con la infraestructura disponible & 08/08/2026 \\
-		\hline
-		RFC-H & RF-07, RNF-15 & Aprobado con condiciones & RNF-15 exige explicabilidad de una moderación que ningún RF especifica & 09/08/2026 \\
-		\hline
-		RFC-I & RF-06, RNF-06, RNF-13 & Aprobado & RNF-06/RNF-13 califican una salida que RF-06 no declaraba producir & 09/08/2026 \\
-		\hline
-		RFC-J & RF-01, RF-27, RL-01 & Aprobado & El consentimiento debe ser revocable en cualquier momento (Art. 7 y 8 LOPDP) & 09/08/2026 \\
-		\hline
-	\end{tabularx}
-\end{table}
+	RFC-A & RF-25, RNF-16 & Aprobado / Aprobado con condiciones (3 subgrupos) & RNF-16 (base legal LOPDP) exige ocultar ubicación/contacto por defecto; RF-25 los exponía & 08--09/08/2026 \\
+	\hline
+	RFC-B & RD-06, RL-04 & Aprobado & El propio RD-06 reconoce que ningún RF implementa el derecho de eliminación (Art. 15 LOPDP) & 09/08/2026 \\
+	\hline
+	RFC-C & RF-10, RD-08 & Aprobado & RD-08 exige canal de respaldo ante caída de WhatsApp, pero RF-10 no lo formaliza & 09/08/2026 \\
+	\hline
+	RFC-D & RNF-09, RD-08 & Aprobado con condiciones & Comprometer un proveedor de pago (WhatsApp) sin presupuesto aprobado es inviable & 09/08/2026 \\
+	\hline
+	RFC-E & RNF-02 & Aprobado & El MVP local no permite verificar disponibilidad mensual del 99\,\% & 09/08/2026 \\
+	\hline
+	RFC-F & RF-07, RNF-15 & Aprobado con condiciones & El ERS reconoce el conflicto ``comunicación inadecuada'' sin RF que lo resuelva & 08/08/2026 \\
+	\hline
+	RFC-G & RNF-03 & Aprobado con condiciones & El umbral de 2s no era verificable con la infraestructura disponible & 08/08/2026 \\
+	\hline
+	RFC-H & RF-07, RNF-15 & Aprobado con condiciones & RNF-15 exige explicabilidad de una moderación que ningún RF especifica & 09/08/2026 \\
+	\hline
+	RFC-I & RF-06, RNF-06, RNF-13 & Aprobado & RNF-06/RNF-13 califican una salida que RF-06 no declaraba producir & 09/08/2026 \\
+	\hline
+	RFC-J & RF-01, RF-27, RL-01 & Aprobado & El consentimiento debe ser revocable en cualquier momento (Art. 7 y 8 LOPDP) & 09/08/2026 \\
+	\hline
+\end{longtable}
 
 Ningún CCB de los cuatro subgrupos de la PE4 rechazó una RFC: las 10
 solicitudes únicas fueron aprobadas o aprobadas con condiciones sobre la
@@ -2337,52 +2349,67 @@ entrevista que sustentara un requisito funcional nuevo y verificable
 (RFC-B, RFC-J). La Tabla~\ref{tab:rfc_estado} documenta la decisión final
 de cada una; ninguna RFC permanece sin resolver al cierre de la PE5.
 
-\begin{table}[H]
-	\centering
+\begin{longtable}{|c|L{4.2cm}|L{7.4cm}|}
 	\caption{Estado de incorporación en la línea base vigente (ERS v4.0).}
-	\label{tab:rfc_estado}
+	\label{tab:rfc_estado} \\
+	\hline
+	\textbf{RFC} & \textbf{Origen (subgrupo PE4)} & \textbf{Decisión final del CCB (cierre PE5)} \\
+	\hline
+	\endfirsthead
+	
+	\multicolumn{3}{l}{\small\textit{Tabla~\ref{tab:rfc_estado} (continuación).}} \\
+	\hline
+	\textbf{RFC} & \textbf{Origen (subgrupo PE4)} & \textbf{Decisión final del CCB (cierre PE5)} \\
+	\hline
+	\endhead
+	
+	\hline
+	\multicolumn{3}{r}{\small\textit{Continúa en la página siguiente.}} \\
+	\endfoot
+	
+	\hline
+	\endlastfoot
+	
 	\small
-	\begin{tabularx}{\textwidth}{|c|X|X|}
-		\hline
-		\textbf{RFC} & \textbf{Origen (subgrupo PE4)} & \textbf{Decisión final del CCB (cierre PE5)} \\
-		\hline
-		RFC-A & Fuertes, Morales, Gutiérrez/Nieves & Resuelto: ya estaba correcto en el ERS \\
-		\hline
-		RFC-B & Mendoza & Rechazado, con justificación: crear el RF sin evidencia de entrevista lo volvería no verificable. RD-06 se mantiene como restricción reconocida \\
-		\hline
-		RFC-C & Mendoza & Aplicado: RF-10 corregido \\
-		\hline
-		RFC-D & Morales & Rechazado: se prefirió RFC-C como solución al mismo problema \\
-		\hline
-		RFC-E & Mendoza & Aplicado: RNF-02 corregido \\
-		\hline
-		RFC-F & Fuertes & Aplicado: RF-07 corregido \\
-		\hline
-		RFC-G & Fuertes & Rechazada la propuesta original (relajar el umbral); resuelto por vía alternativa: RNF-03 acotado a producción, igual que RNF-02 \\
-		\hline
-		RFC-H & Morales & Resuelto: RNF-15 reacotado a RF-07, sin crear RF nuevo \\
-		\hline
-		RFC-I & Gutiérrez/Nieves & Aplicado: RF-06 corregido \\
-		\hline
-		RFC-J & Gutiérrez/Nieves & Rechazado, con justificación: requeriría un RF con efectos en cascada no verificable sin evidencia. RL-01 queda con brecha reconocida, no con RFC abierta \\
-		\hline
-	\end{tabularx}
-\end{table}
+	RFC-A & Fuertes, Morales, Gutiérrez/Nieves & Resuelto: ya estaba correcto en el ERS \\
+	\hline
+	RFC-B & Mendoza & Rechazado, con justificación: crear el RF sin evidencia de entrevista lo volvería no verificable. RD-06 se mantiene como restricción reconocida \\
+	\hline
+	RFC-C & Mendoza & Aplicado: RF-10 corregido \\
+	\hline
+	RFC-D & Morales & Rechazado: se prefirió RFC-C como solución al mismo problema \\
+	\hline
+	RFC-E & Mendoza & Aplicado: RNF-02 corregido \\
+	\hline
+	RFC-F & Fuertes & Aplicado: RF-07 corregido \\
+	\hline
+	RFC-G & Fuertes & Rechazada la propuesta original (relajar el umbral); resuelto por vía alternativa: RNF-03 acotado a producción, igual que RNF-02 \\
+	\hline
+	RFC-H & Morales & Resuelto: RNF-15 reacotado a RF-07, sin crear RF nuevo \\
+	\hline
+	RFC-I & Gutiérrez/Nieves & Aplicado: RF-06 corregido \\
+	\hline
+	RFC-J & Gutiérrez/Nieves & Rechazado, con justificación: requeriría un RF con efectos en cascada no verificable sin evidencia. RL-01 queda con brecha reconocida, no con RFC abierta \\
+	\hline
+\end{longtable}
 
-A la fecha de cierre de esta PE5, el equipo aún no ha establecido una
-línea base formal sobre el repositorio del PFC
-(\url{https://github.com/andymendozap03/MundiPets-PFC-IngReq}). Para
-declarar la línea base final, corresponde ejecutar:
+Al cierre de esta PE5, el equipo estableció formalmente la línea base
+sobre el repositorio del PFC
+(\url{https://github.com/andymendozap03/MundiPets-PFC-IngReq}) mediante
+la etiqueta \texttt{v5.0-PE5-baseline}, anclada al commit
+\texttt{8b1970d} correspondiente a la versión 4.0 del ERS, congelada el
+30/08/2026 (Tabla~\ref{tab:identificacion-version}):
 
 \begin{verbatim}
-	git tag -a baseline-vX.X -m "Linea base final ERS MundiPets - PE5"
-	git push origin baseline-vX.X
+	git tag -a v5.0-PE5-baseline -m "Linea base final ERS MundiPets - PE5"
+	git push origin v5.0-PE5-baseline
 \end{verbatim}
 
-\noindent y completar en esta sección el número de versión, la fecha y
-el \textit{hash} del commit sobre el que quedó anclado el tag, de modo
-que la línea base sea auditable conforme exige el criterio C2 de la
-rúbrica.
+\noindent Con esta etiqueta, la línea base queda auditable conforme
+exige el criterio C2 de la rúbrica: cualquier integrante o el propio
+tribunal puede verificar el estado exacto del ERS al cierre de la PE5
+ejecutando \texttt{git checkout v5.0-PE5-baseline} sobre el repositorio
+del PFC.
 
 % -- 6.2 --------------------------------------------------------
 \subsection{Matriz de trazabilidad final}
@@ -2481,27 +2508,39 @@ parciales pendientes.
 % -- 6.3 --------------------------------------------------------
 \subsection{Diagnóstico de cobertura: huérfanos y cadenas rotas}
 
-\begin{table}[H]
-	\centering
+\begin{longtable}{|L{3.4cm}|L{1.8cm}|L{4.6cm}|L{4.6cm}|}
 	\caption{Diagnóstico de cobertura: huérfanos, cadenas rotas y trazas parciales.}
-	\label{tab:diagnostico_cobertura}
+	\label{tab:diagnostico_cobertura} \\
+	\hline
+	\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
+	\hline
+	\endfirsthead
+	
+	\multicolumn{4}{l}{\small\textit{Tabla~\ref{tab:diagnostico_cobertura} (continuación).}} \\
+	\hline
+	\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
+	\hline
+	\endhead
+	
+	\hline
+	\multicolumn{4}{r}{\small\textit{Continúa en la página siguiente.}} \\
+	\endfoot
+	
+	\hline
+	\endlastfoot
+	
 	\small
-	\begin{tabularx}{\textwidth}{|X|c|X|X|}
-		\hline
-		\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
-		\hline
-		Clases \textit{Administrator}, \textit{Role}, \textit{UserRole} & Cadena rota & Se modeló un subsistema completo de administración y gestión de roles (Diagrama de clases, partición Usuarios y Roles) sin que ningún RF lo especifique; ``administrador'' solo aparece como ejemplo genérico en el glosario del ERS. & \textbf{Resuelto.} Clases eliminadas del diagrama de clases (partición Usuarios y Roles). Se corrigió además RD-02, que aún mencionaba ``administradores'' en su descripción y en las tablas resumen. El control de acceso por tipo de usuario queda cubierto por la herencia \textit{Shelter}/\textit{Owner}/\textit{Veterinarian} $\to$ \textit{User}. \\
-		\hline
-		Clase \textit{VeterinaryAppointment} & Cadena rota & Se modeló la gestión de citas veterinarias (agendar/cancelar), en la partición Mascotas y Salud, sin que exista RF ni CU correspondiente; contradice además dos exclusiones de alcance ya declaradas en el ERS (``no reemplaza consulta veterinaria'', ``no ofrece agenda médica completa''). & \textbf{Resuelto.} Eliminada de la partición Mascotas y Salud. RF-10 (recordatorios pasivos) queda diferenciado de la reserva activa de turnos, que sigue fuera de alcance. \\
-		\hline
-		RF-11 (Administrar privacidad) & Traza parcial & Tenía CU-06, HU-08 y CA-08, pero ninguna clase propia en el diagrama de clases; las secuencias de CU-06 mencionan \textit{PrivacySettingsRepository}, nunca modelada. & \textbf{Resuelto.} Se agregó la clase \textit{PrivacySettings} (composición 1:1 con \textit{Pet}), con los atributos y métodos usados en las secuencias de CU-06/CU-10. \\
-		\hline
-		RF-20 (Coordinar encuentros de socialización supervisados) & Traza parcial (hallazgo adicional, no detectado en la primera revisión) & Tiene CU-08, pero ninguna clase propia; su propia postcondición menciona un ``historial de interacciones'' que nunca se modeló. & \textbf{Resuelto.} Se agregó la clase \textit{Interaction}, asociada a \textit{Pet} (0..* en ambos extremos), que registra el encuentro coordinado vía CU-08. \\
-		\hline
-		RF-23 (Alertas de riesgo sanitario o físico) & Traza parcial & Tenía CU-06, HU-15 y CA-15, pero ninguna clase propia. & \textbf{Resuelto.} Se agregó el método \textit{checkRiskAlert(): string}, compartido entre \textit{Interaction} y \textit{BreedingRequest}, ya que la alerta es una validación transitoria (no persistida) evaluada antes de confirmar la interacción o solicitud. \\
-		\hline
-	\end{tabularx}
-\end{table}
+	Clases \textit{Administrator}, \textit{Role}, \textit{UserRole} & Cadena rota & Se modeló un subsistema completo de administración y gestión de roles (Diagrama de clases, partición Usuarios y Roles) sin que ningún RF lo especifique; ``administrador'' solo aparece como ejemplo genérico en el glosario del ERS. & \textbf{Resuelto.} Clases eliminadas del diagrama de clases (partición Usuarios y Roles). Se corrigió además RD-02, que aún mencionaba ``administradores'' en su descripción y en las tablas resumen. El control de acceso por tipo de usuario queda cubierto por la herencia \textit{Shelter}/\textit{Owner}/\textit{Veterinarian} $\to$ \textit{User}. \\
+	\hline
+	Clase \textit{VeterinaryAppointment} & Cadena rota & Se modeló la gestión de citas veterinarias (agendar/cancelar), en la partición Mascotas y Salud, sin que exista RF ni CU correspondiente; contradice además dos exclusiones de alcance ya declaradas en el ERS (``no reemplaza consulta veterinaria'', ``no ofrece agenda médica completa''). & \textbf{Resuelto.} Eliminada de la partición Mascotas y Salud. RF-10 (recordatorios pasivos) queda diferenciado de la reserva activa de turnos, que sigue fuera de alcance. \\
+	\hline
+	RF-11 (Administrar privacidad) & Traza parcial & Tenía CU-06, HU-08 y CA-08, pero ninguna clase propia en el diagrama de clases; las secuencias de CU-06 mencionan \textit{PrivacySettingsRepository}, nunca modelada. & \textbf{Resuelto.} Se agregó la clase \textit{PrivacySettings} (composición 1:1 con \textit{Pet}), con los atributos y métodos usados en las secuencias de CU-06/CU-10. \\
+	\hline
+	RF-20 (Coordinar encuentros de socialización supervisados) & Traza parcial (hallazgo adicional, no detectado en la primera revisión) & Tiene CU-08, pero ninguna clase propia; su propia postcondición menciona un ``historial de interacciones'' que nunca se modeló. & \textbf{Resuelto.} Se agregó la clase \textit{Interaction}, asociada a \textit{Pet} (0..* en ambos extremos), que registra el encuentro coordinado vía CU-08. \\
+	\hline
+	RF-23 (Alertas de riesgo sanitario o físico) & Traza parcial & Tenía CU-06, HU-15 y CA-15, pero ninguna clase propia. & \textbf{Resuelto.} Se agregó el método \textit{checkRiskAlert(): string}, compartido entre \textit{Interaction} y \textit{BreedingRequest}, ya que la alerta es una validación transitoria (no persistida) evaluada antes de confirmar la interacción o solicitud. \\
+	\hline
+\end{longtable}
 
 \noindent\textbf{Nota sobre huérfanos:} no se agrega ninguna fila de este
 tipo porque los 43 elementos (27 RF + 16 RNF) cuentan con fuente (código

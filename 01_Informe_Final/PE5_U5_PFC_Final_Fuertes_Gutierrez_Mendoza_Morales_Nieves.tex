@@ -66,7 +66,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyhead[L]{\small PE5 -- Unidad 5 -- Ingeniería de Requisitos}
-\fancyhead[R]{\small MundiPets -- Trabajo dividido}
+\fancyhead[R]{\small MundiPets}
 \fancyfoot[C]{\thepage}
 
 % ── Espaciado y listas ──────────────────────────────────────
@@ -202,9 +202,13 @@ doi=true
 		
 		\vspace{0.2cm}
 		
-		{\normalsize\bfseries Versión del documento:} 1.0 (plantilla de trabajo dividido)\\[4pt]
+		{\normalsize\bfseries Versión del documento:} 1.0\\[4pt]
+		\vspace{0.5cm}
 		\textbf{Repositorio GitHub (PE5):}\\
 		\url{https://github.com/MiloSaurio4kHD/MundiPets-PE5-IngReq-Fuertes-Gutierrez-Mendoza-Morales-Nieves.git}\\[2pt]
+		
+		\vspace{0.5cm}
+		
 		\textbf{Repositorio GitHub (PFC base -- ERS, UML, PE1--PE4):}\\
 		\url{https://github.com/andymendozap03/MundiPets-PFC-IngReq.git}
 		
@@ -236,6 +240,8 @@ doi=true
 		artificial, MundiPets.
 	\end{IEEEkeywords}
 	
+	\newpage
+	
 	\tableofcontents
 	\listoffigures
 	\listoftables
@@ -260,6 +266,15 @@ doi=true
 	% -- FT.1 --------------------------------------------------------
 	\subsection*{Marco de calidad y especificación de requisitos}
 	\addcontentsline{toc}{subsection}{Marco de calidad y especificación (Fuertes)}
+		El sustento teórico de esta auditoría descansa en tres cuerpos normativos y metodológicos que se aplican directamente en las Secciones 5 y 8 de este informe.
+	
+	En primer lugar, la norma ISO/IEC 25010:2023 \cite{iso25010} define el modelo de calidad de producto de software mediante ocho características ---adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad---, de las cuales se derivan las seis métricas M1--M6 empleadas en la Sección 8: completitud y consistencia como propiedades estructurales de la especificación, verificabilidad y trazabilidad como propiedades de comprobabilidad, y modificabilidad y corrección como propiedades de mantenimiento del artefacto documental. El propio ERS de MundiPets declara explícitamente su cobertura de las nueve características del modelo (Sección 3.3, tabla de cobertura ISO/IEC 25010), lo que permite anclar cada RNF a una característica normativa concreta en lugar de a un criterio subjetivo de calidad.
+	
+	En segundo lugar, los principios de medición y experimentación en ingeniería de software de Wohlin et al. \cite{wohlin2012} establecen que toda métrica de proceso o de producto debe apoyarse en un conteo verificable y reproducible, no en una estimación cualitativa del equipo. Este principio es el que exige, en la Sección 8.2, mostrar la división aritmética completa de cada métrica ---numerador, denominador y fuente exacta del dato--- en lugar de reportar directamente un porcentaje. Un umbral pedagógico sin conteo detrás no constituye una métrica: es una afirmación no verificable, exactamente la falla que este marco busca prevenir.
+	
+	En tercer lugar, ISO/IEC/IEEE 29148:2018 \cite{ieee29148} fija las características de calidad exigibles a un requisito individual y al conjunto de requisitos de un SRS: necesario, no ambiguo, completo, singular, factible, verificable, correcto, consistente con otros requisitos, y trazable hacia atrás y hacia adelante. La métrica M3 (verificabilidad) de la Sección 8 opera directamente esta característica: un requisito solo se cuenta como verificable si su criterio de aceptación permite diseñar una prueba objetiva, sin depender de adjetivos no medibles (``rápido'', ``adecuado'', ``amigable'') que no fijan umbral, unidad ni método de comprobación.
+	
+	Estos tres marcos ---calidad de producto (25010), medición reproducible (Wohlin) y calidad de la especificación (29148)--- no se aplican de forma aislada: la auditoría de la Sección 8 es, en esencia, la operación conjunta de los tres sobre el ERS final de MundiPets. Se eligieron por ser las fuentes normativas que la propia asignatura y el propio ERS del equipo ya adoptan como marco de referencia, evitando introducir un estándar de calidad ajeno al resto del proyecto.
 	
 	% -- FT.2 --------------------------------------------------------
 	\subsection*{Fundamentos de la especificación y el ciclo de vida}

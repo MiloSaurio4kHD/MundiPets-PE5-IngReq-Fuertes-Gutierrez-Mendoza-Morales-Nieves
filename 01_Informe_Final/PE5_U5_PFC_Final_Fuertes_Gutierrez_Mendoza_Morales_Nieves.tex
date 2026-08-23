@@ -659,6 +659,281 @@ doi=true
 	%  SECCION 2 -- METODOLOGIA DE IR
 	% ============================================================
 	\section{Metodología de Ingeniería de Requisitos}
+	\label{sec:metodologia}
+	
+	El equipo de la PE5 no se conformó desde la primera práctica. Durante PE1--PE4, cada
+	integrante trabajó el mismo sistema del PFC --- MundiPets --- en un subgrupo distinto del
+	curso, y solo a partir de la PE5 el docente reorganizó a los cinco integrantes en un único
+	equipo. Esta circunstancia no resta validez al proceso: los cuatro subgrupos aplicaron, de
+	manera independiente, el mismo marco
+	metodológico sobre el mismo dominio de problema, lo que permite ahora contrastar y
+	consolidar cuatro ejecuciones reales de un mismo proceso de Ingeniería de Requisitos en
+	lugar de una sola. La presente sección describe ese proceso tal como se ejecutó,
+	práctica por práctica, y no un proceso ideal tomado de un manual: cada actividad que se
+	describe a continuación está respaldada por un artefacto verificable en los repositorios
+	de PE1--PE4 del equipo.
+	
+	\subsection{PE1: fundamentos y contexto del sistema}
+	
+	La primera práctica no consistió en elicitar requisitos de campo, sino en construir el
+	marco conceptual necesario para hacerlo con criterio en la práctica siguiente. La actividad
+	central fue doble: por un lado, la caracterización de MundiPets como sistema  su tipo
+	según la clasificación de sistemas reactivos, transformacionales e interactivos que
+	propone Pohl \cite{pohl2025}, y la identificación de sus stakeholders mediante una matriz
+	de poder e interés fundamentada en el PMBOK 7.\textsuperscript{a} edición \cite{pmbok7};
+	por otro, la aplicación de las ocho perspectivas de contexto de Pohl (dominio, uso,
+	organización, tiempo, sujeto, desarrollo, intención y tecnología) junto con una declaración
+	de visión en el formato propuesto por Moore \cite{pohl2025}. 
+	
+	Se optó por esta técnica y no
+	por una elicitación directa porque, en ausencia de un marco de análisis previo, una primera
+	sesión con usuarios corre el riesgo de producir una lista de deseos sin estructura ni
+	cobertura demostrable de las dimensiones que un sistema sociotécnico como MundiPets
+	una plataforma de adopción, cruza responsable y bienestar animal efectivamente
+	involucra. Los cuatro subgrupos coincidieron en clasificar a MundiPets como un sistema de
+	información colaborativo con un núcleo interactivo, componentes reactivos (notificaciones)
+	y un componente transformacional (el cálculo de compatibilidad), y en identificar como
+	stakeholders de alto interés o alto poder a los dueños de mascotas, los administradores de
+	la plataforma, las organizaciones de adopción, los veterinarios y los patrocinadores.
+	
+	El artefacto que produjo la PE1 fue, en consecuencia, un mapa de restricciones y
+	necesidades preliminares no todavía requisitos formales, sino los temas y las preguntas
+	que era necesario llevar a la siguiente práctica: qué información sanitaria es relevante
+	para permitir una interacción entre mascotas, qué datos deben protegerse por ser sensibles,
+	y qué papel debe jugar la validación veterinaria en el proceso de emparejamiento. Este mapa
+	es exactamente lo que la PE2 convirtió en una guía de entrevista y en un cuestionario
+	concretos: sin la perspectiva del dominio y la perspectiva de intención definidas en la
+	PE1, la PE2 no habría tenido un criterio explícito para decidir qué preguntar a los
+	propietarios de mascotas ni por qué.
+	
+	\subsection{PE2: elicitación, análisis y priorización}
+	
+	Con el marco de la PE1 como entrada, la PE2 ejecutó la elicitación de requisitos
+	propiamente dicha. La técnica principal fue la \textbf{entrevista estructurada},
+	complementada con un \textbf{cuestionario digital} y, en algunos subgrupos, con una sesión
+	de \textbf{brainstorming} grupal para ampliar la cobertura de ideas antes de la
+	consolidación. La selección de estas dos técnicas como núcleo del proceso y no una
+	sola respondió a una limitación reconocida por el propio equipo: la entrevista aporta
+	profundidad cualitativa y permite explorar, en un intercambio directo con el entrevistado,
+	matices que un formulario cerrado no captura (por ejemplo, qué información considera
+	privada un propietario y por qué), pero alcanza a pocos participantes y depende de la
+	disponibilidad real de los stakeholders; el cuestionario, en cambio, permite recoger
+	información de un número mayor de usuarios potenciales y cuantificar preferencias
+	mediante escalas Likert, pero no permite repreguntar ni aclarar una respuesta ambigua. 
+	
+	Usar solo una de las dos habría dejado un vacío: limitarse a la entrevista habría producido una
+	muestra pequeña y difícil de generalizar; limitarse al cuestionario habría impedido
+	descubrir necesidades implícitas que los participantes no saben nombrar hasta que se les
+	pregunta directamente. El IREB CPRE FL sustenta esta selección al describir la entrevista y
+	el cuestionario como técnicas complementarias cuya combinación reduce el riesgo de sesgo de
+	una sola fuente \cite{ireb2026}.
+	
+	La aplicación concreta a MundiPets es trazable a un acta real. En la entrevista
+	estructurada aplicada a una propietaria de mascota, ante la pregunta de qué información
+	considera privada o sensible sobre su mascota, la entrevistada señaló la ubicación exacta,
+	los datos personales del dueño y los detalles médicos que no deberían mostrarse
+	públicamente sin autorización. Esta respuesta, tomada de forma aislada, no es un requisito;
+	se convirtió en uno solo después de pasar por el análisis de la PE2, que la clasificó como
+	una necesidad de privacidad y protección de datos y la tradujo en un requisito no funcional
+	de confidencialidad de la información sensible del perfil. La misma entrevista, ante la
+	pregunta sobre qué información es necesaria antes de permitir que una mascota interactúe
+	con otra, arrojó como respuesta la necesidad de conocer vacunas al día, desparasitación,
+	enfermedades recientes y antecedentes de comportamiento agresivo: esa respuesta es el
+	origen directo de los requisitos de validación sanitaria y de compatibilidad que
+	posteriormente se refinaron en la PE3. La cadena evidencia--necesidad--requisito queda así
+	documentada, no supuesta.
+	
+	Una vez recogidos, los requisitos crudos se sometieron a un proceso de análisis,
+	clasificación (funcional, no funcional, conforme al modelo de calidad de producto de
+	ISO/IEC 25010 \cite{iso25010}) y priorización. Para priorizar se aplicaron dos técnicas
+	complementarias y no una sola, cada una con un propósito distinto. \textbf{MoSCoW}
+	clasificó los requisitos en las categorías Debe tener, Debería tener, Podría tener y No
+	tendrá esta vez, y resolvió la pregunta de qué construir primero dado un alcance acotado de
+	tiempo; esta técnica era necesaria porque el equipo identificó más funcionalidades de las
+	que un MVP inicial podía cubrir, y sin un criterio explícito de priorización la selección
+	del alcance habría quedado a discreción de cada integrante. 
+	
+	El \textbf{modelo de Kano}, por
+	su parte, no compite con MoSCoW sino que responde una pregunta distinta: no cuánto urge un
+	requisito, sino qué tipo de satisfacción produce en el usuario si se cumple o si falta
+	básico, de desempeño o atractivo. Esta distinción resultó relevante para MundiPets
+	porque algunas funcionalidades, como la validación veterinaria de la información sanitaria,
+	resultaron básicas (su ausencia genera insatisfacción aunque su presencia no sea percibida
+	como un plus), mientras que otras, como el cálculo de compatibilidad asistido por
+	inteligencia artificial, resultaron atractivas (su ausencia no se nota, pero su presencia
+	sí genera valor diferencial). Aplicar solo MoSCoW habría tratado ambos tipos de requisito
+	de forma indistinguible; aplicar solo Kano no habría resuelto el problema operativo de
+	qué construir primero. El artefacto que produjo la PE2 fue la lista depurada y priorizada
+	de requisitos funcionales, no funcionales y de restricción, con su categoría MoSCoW y su
+	clasificación Kano, que sirvió de entrada directa a la especificación formal de la PE3.
+	
+	\subsection{PE3: especificación y modelado}
+	
+	La PE3 tomó los requisitos priorizados de la PE2 y los llevó a una forma verificable y
+	modelada. La primera actividad fue la corrección de la redacción de los requisitos
+	funcionales y no funcionales mediante la \textbf{sintaxis EARS} (Easy Approach to
+	Requirements Syntax) \cite{mavin2009}, que obliga a expresar cada requisito bajo un patrón
+	fijo (universal, condicional, opcional o de estado) en lugar de en lenguaje natural
+	ambiguo. Se eligió EARS porque los requisitos crudos de la PE2, redactados en el lenguaje
+	de la entrevista y el cuestionario, contenían formulaciones no verificables del tipo
+	``el sistema debe ser fácil de usar'' que EARS obliga a reescribir con un disparador, una
+	condición y una respuesta observable del sistema. Esta corrección es la que, más adelante,
+	hace posible calcular la métrica de verificabilidad (M3) en la sección de métricas de
+	calidad de este informe: un requisito redactado en EARS es, por construcción, un requisito
+	verificable.
+	
+	Sobre los requisitos ya corregidos se construyeron tres modelos complementarios. El
+	\textbf{modelo de datos} partió de un diagrama entidad--relación que se transformó en un
+	diagrama de clases UML, siguiendo la práctica de traducir las entidades del dominio
+	(mascota, propietario, veterinario, solicitud de adopción o cruza) en clases con sus
+	atributos y relaciones. 
+	
+	El \textbf{modelo funcional} combinó diagramas de flujo de datos
+	(DFD) con diagramas de actividades UML para representar cómo se mueve la información a
+	través de los procesos principales del sistema publicar un perfil, evaluar
+	compatibilidad, gestionar una solicitud. 
+	
+	El \textbf{modelo de comportamiento} se resolvió
+	con una máquina de estados UML (por ejemplo, para el ciclo de vida de una solicitud de
+	adopción: creada, en revisión, aprobada o rechazada) y con diagramas de secuencia UML que
+	detallan la interacción temporal entre los actores y el sistema para los casos de uso
+	principales. La razón de emplear tres modelos y no uno solo es que cada uno responde una
+	pregunta distinta que ninguno de los otros dos contesta por sí mismo: el modelo de datos
+	responde qué información existe y cómo se relaciona, el modelo funcional responde cómo
+	fluye esa información entre procesos, y el modelo de comportamiento responde en qué orden
+	ocurren los eventos y cómo cambia de estado un objeto del dominio a lo largo del tiempo.
+	
+	Finalmente, la PE3 cerró con una \textbf{matriz de trazabilidad} que integró los tres
+	modelos entre sí y con los requisitos de origen, verificando que cada requisito funcional
+	tuviera al menos un caso de uso, una clase y un elemento del modelo de comportamiento
+	asociado. Esta matriz preliminar es la base directa de la matriz de trazabilidad final que
+	se cierra en la sección de trazabilidad y matriz final de este informe: la PE3 no inventó
+	una estructura nueva para la PE5, sino que extendió la que ya existía.
+	
+	\newpage
+	
+	\subsection{PE4: validación mediante inspección formal y gestión de cambios}
+	
+	Con el ERS modelado en la PE3, la PE4 sometió el documento a una \textbf{inspección formal
+		de tipo Fagan} \cite{fagan1976}, reconocida por ISO/IEC/IEEE 29148:2018 entre las técnicas
+	admisibles del proceso de validación de requisitos \cite{ieee29148}. Se seleccionó la
+	inspección formal en lugar de una revisión informal porque el método de Fagan exige
+	preparación individual documentada antes de la reunión, roles diferenciados (Moderador,
+	Lector, Inspector 1 e Inspector 2) y un checklist estructurado por dimensión de calidad
+	ambigüedad, completitud, consistencia, verificabilidad y factibilidad, lo que produce
+	una evidencia auditable de que la validación ocurrió y de qué se encontró, en lugar de una
+	declaración de que ``se revisó'' el documento sin registro verificable.
+	
+	En el subgrupo de origen de dos de los cinco integrantes actuales del equipo, la inspección
+	se ejecutó sobre el ERS del PFC con dos inspectoras que trabajaron de forma independiente
+	antes de la reunión de consolidación: una desde la perspectiva de consistencia y otra desde
+	las perspectivas de ambigüedad, verificabilidad, completitud y factibilidad. El resultado
+	fue de 33 defectos
+	reportados en total, de los cuales 27 se acreditaron como únicos tras descartar 6
+	coincidencias de frontera detectadas por ambas inspectoras. De esos 27 defectos, 22 se
+	corrigieron directamente sobre el ERS y quedaron reflejados en la versión 1.1 del
+	documento, mientras que 5 defectos menores permanecieron abiertos y fueron reconocidos como
+	tales en el informe, en lugar de declararse cerrados sin respaldo. 
+	
+	Los hallazgos que excedían una corrección directa por afectar el alcance, la calidad de un requisito no
+	funcional o una restricción normativa se tramitaron mediante \textbf{solicitudes de
+		cambio (RFC)} y se sometieron a un \textbf{Comité de Control de Cambios (CCB)} simulado,
+	conforme al proceso de gestión de cambios que describe ISO/IEC/IEEE 12207:2017
+	\cite{iso12207} y que formaliza el PMBOK 7.\textsuperscript{a} edición \cite{pmbok7}: cada
+	RFC se registró, se analizó su impacto y se sometió a una decisión motivada del comité
+	aprobada, aprobada con condiciones o rechazada, dejando acta. Los otros tres subgrupos
+	del equipo ejecutaron el mismo procedimiento sobre sus propias copias del ERS, con
+	resultados cuantitativos distintos pero metodológicamente equivalentes: entre 18 y 23
+	defectos únicos según el subgrupo, siempre con roles Fagan diferenciados y siempre con al
+	menos tres RFC tramitadas ante un CCB.
+	
+	El artefacto que produjo la PE4 fue, en cada subgrupo, una versión corregida y con línea
+	base del ERS, acompañada del registro de defectos, del acta de inspección y de las
+	solicitudes de cambio resueltas. Este es el punto en el que el proceso de las cuatro
+	prácticas individuales se detiene: lo que la PE4 entregó no fue todavía el ERS único del
+	equipo de la PE5, sino cuatro ERS paralelos, cada uno validado de forma independiente sobre
+	el mismo dominio de problema.
+	
+	\subsection{PE5: integración, cierre de cambios pendientes y defensa}
+	
+	La PE5 no repite ninguna de las cuatro prácticas anteriores: las integra. El primer paso
+	metodológico del equipo, ya reunido bajo un mismo repositorio, fue reconciliar las cuatro
+	versiones del ERS surgidas de PE1--PE4 en un documento único y consolidar en él los
+	requisitos, el modelo de datos, el modelo funcional, el modelo de comportamiento y la
+	matriz de trazabilidad de los cuatro subgrupos. Como parte de ese cierre, el equipo revisó
+	las solicitudes de cambio que habían quedado pendientes de las cuatro inspecciones de la
+	PE4 y las resolvió formalmente ante un nuevo CCB: nueve RFC fueron decididas sin dejar
+	ninguna abierta, lo que motivó la corrección de varios requisitos funcionales y no
+	funcionales del ERS consolidado y, en los casos en que la evidencia disponible no permitía
+	aceptar el cambio propuesto, el rechazo justificado de la solicitud con su registro
+	correspondiente como limitación de alcance reconocida. 
+	
+	Sobre esa base consolidada y ya sin
+	cambios pendientes, la PE5 añadió lo que ninguna de las cuatro prácticas anteriores había
+	cubierto: la auditoría de calidad del ERS con las seis métricas de
+	la sección de métricas de calidad, el cierre definitivo de la trazabilidad end-to-end de la
+	sección de trazabilidad y matriz final, la especificación de los componentes de
+	inteligencia artificial de la sección de requisitos de IA, y la preparación de la defensa técnica individual
+	ante el tribunal. En ese sentido, la PE5 es menos una sexta técnica que una disciplina de
+	cierre: aplica a la totalidad del proceso anterior los mismos criterios de verificabilidad
+	que EARS exigió a cada requisito individual en la PE3, pero ahora a la escala del proyecto
+	integrador completo.
+	
+	\newpage
+	
+	\subsection{Tabla resumen del proceso}
+	
+	La Tabla~\ref{tab:resumen-metodologia} sintetiza la actividad, la técnica, el artefacto
+	producido y la norma de referencia de cada práctica, en el mismo orden en que se
+	describieron en esta sección.
+	
+	\begin{table}[H]
+		\centering
+		\caption{Resumen del proceso de Ingeniería de Requisitos aplicado a MundiPets, PE1--PE5.}
+		\label{tab:resumen-metodologia}
+		\footnotesize
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{
+				|>{\raggedright\arraybackslash}p{0.9cm}
+				|>{\raggedright\arraybackslash}p{2.3cm}
+				|>{\raggedright\arraybackslash}X
+				|>{\raggedright\arraybackslash}p{3.1cm}
+				|>{\raggedright\arraybackslash}p{3.4cm}|}
+			\hline
+			\textbf{Práctica} & \textbf{Actividad} & \textbf{Técnica} & \textbf{Artefacto} & \textbf{Norma} \\
+			\hline
+			PE1 & Caracterización del sistema y su contexto & Matriz poder/interés; ocho perspectivas de contexto; declaración de visión (Moore) & Mapa de restricciones y necesidades preliminares & PMBOK 7.\textsuperscript{a} ed.; Pohl \\
+			\hline
+			PE2 & Elicitación, análisis y priorización & Entrevista estructurada; cuestionario digital; brainstorming; MoSCoW; Kano & Lista de requisitos depurada, clasificada y priorizada & ISO/IEC/IEEE 29148:2018; IREB CPRE FL; ISO/IEC 25010:2023 \\
+			\hline
+			PE3 & Especificación y modelado & Sintaxis EARS; modelo de datos (ER/clases UML); modelo funcional (DFD/actividades); modelo de comportamiento (estados/secuencia) & ERS corregido, modelado y con matriz de trazabilidad preliminar & ISO/IEC/IEEE 29148:2018; SWEBOK v4.0 \\
+			\hline
+			PE4 & Validación y gestión de cambios & Inspección formal Fagan; RFC; CCB simulado & ERS corregido, con línea base y registro de defectos & ISO/IEC/IEEE 29148:2018; ISO/IEC/IEEE 12207:2017; PMBOK 7.\textsuperscript{a} ed. \\
+			\hline
+			PE5 & Integración, auditoría y defensa & Consolidación de las cuatro versiones; cierre de RFC pendientes; métricas ISO/IEC 25010; trazabilidad end-to-end; requisitos de IA & ERS final único, matriz de trazabilidad final, informe integrador & ISO/IEC/IEEE 29148:2018; ISO/IEC 25010:2023; Reglamento (UE) 2024/1689 \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\subsection{Fundamento normativo del proceso seguido}
+	
+	El proceso descrito no se apoya en una sola fuente sino en un conjunto de normas y marcos
+	que se complementan sin superponerse. La ISO/IEC/IEEE 29148:2018 encuadra el proceso de punta a punta (elicitación, análisis, especificación, validación y gestión) y es la
+	norma contra la cual se verifica que cada artefacto producido en PE1--PE5 sea,
+	formalmente, parte de un proceso reconocido de Ingeniería de Requisitos y no una secuencia
+	de tareas de curso sin relación entre sí \cite{ieee29148}. La ISO/IEC/IEEE 15288:2023 y la
+	ISO/IEC/IEEE 12207:2017 sitúan ese proceso dentro del ciclo de vida del sistema y del
+	software respectivamente, y son las que sustentan formalmente la actividad de gestión de
+	cambios ejecutada en la PE4 y cerrada en la PE5 \cite{iso15288,iso12207}. Pohl aporta el
+	fundamento conceptual de las actividades que preceden a la especificación formal (elicitación, análisis, negociación) y es la fuente directa de las técnicas aplicadas en
+	la PE1 y en la priorización de la PE2 \cite{pohl2025}. El SWEBOK v4.0 enmarca estas
+	actividades dentro del cuerpo de conocimiento reconocido de la ingeniería de software y
+	respalda en particular la práctica de modelado de la PE3 \cite{swebok2024}. El IREB CPRE FL
+	v3.3.0 aporta el catálogo verificado de técnicas de elicitación (entrevista, cuestionario,
+	brainstorming) que sustenta la selección hecha en la PE2 \cite{ireb2026}. Ninguna de estas
+	fuentes sustituye a las demás: cada una responde a una etapa distinta del mismo proceso, y
+	es esa complementariedad, y no la acumulación de citas, la que permite sostener que las
+	decisiones metodológicas del equipo en PE1--PE5 no fueron arbitrarias.
 	
 	\newpage
 	

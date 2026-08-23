@@ -279,10 +279,190 @@ doi=true
 	% -- FT.2 --------------------------------------------------------
 	\subsection*{Fundamentos de la especificación y el ciclo de vida}
 	\addcontentsline{toc}{subsection}{Fundamentos de especificación (Gutiérrez)}
+	\subsection*{Ingeniería de requisitos y fundamentos de los requisitos}
+	
+	La ingeniería de requisitos comprende el conjunto de actividades orientadas a identificar, analizar,
+	documentar, validar y gestionar las necesidades que un sistema debe satisfacer, de modo que dichas
+	necesidades puedan servir de base verificable para el resto de las actividades de desarrollo
+	\cite{ieee29148,pohl2025}. Esta disciplina no se limita a recoger enunciados de los interesados: los
+	organiza mediante un marco de trabajo que distingue el contexto en que opera el sistema, el propio
+	proceso de obtención y negociación, y los artefactos documentados que resultan de ese proceso
+	\cite{pohl2025}. En el caso de MundiPets, este marco es lo que permite tratar los requisitos no como
+	una lista informal recogida de los futuros usuarios de la plataforma, sino como un conjunto
+	estructurado que puede auditarse, corregirse y cerrarse con criterios objetivos.
+	
+	Un requisito individual, para ser útil al proceso de desarrollo, debe reunir un conjunto de
+	características de calidad reconocidas: debe ser necesario, no ambiguo, completo, singular, factible,
+	verificable y trazable, entre otras \cite{ieee29148}. Estas características no son exigencias
+	puramente formales: son la condición que hace posible que, más adelante, un requisito pueda auditarse
+	con una métrica, enlazarse a un caso de uso y a un caso de prueba, y defenderse ante un tribunal con
+	un artefacto concreto que lo respalde. Por ello, el fundamento de la especificación de MundiPets no
+	puede separarse del fundamento de la calidad del requisito individual.
+	
+	\subsection*{Elicitación, análisis y validación de requisitos}
+	
+	Antes de que un requisito pueda especificarse con calidad, debe elicitarse, analizarse y negociarse
+	con los interesados del sistema. Pohl describe estas actividades como parte de un ciclo continuo en el
+	que la elicitación aporta el conocimiento disperso entre los interesados, el análisis lo estructura y
+	depura, y la negociación resuelve los conflictos de intereses que surgen entre distintos puntos de
+	vista sobre el mismo sistema \cite{pohl2025}. El SWEBOK sitúa estas mismas actividades dentro del área
+	de conocimiento de Requisitos de Software, subrayando que la elicitación y el análisis no son un paso
+	previo desechable, sino una fuente de retroalimentación continua sobre la propia especificación
+	\cite{swebok2024}. El temario del IREB para el nivel Foundation coincide en este punto: la obtención,
+	la documentación y la validación de requisitos se presentan como prácticas interdependientes, no como
+	fases estancas de un proceso lineal \cite{ireb2026}.
+	
+	La validación cierra este ciclo al comprobar que los requisitos documentados representan realmente lo
+	que los interesados necesitan, y no únicamente lo que fue posible transcribir en una primera
+	iteración \cite{ieee29148,pohl2025}. En el proyecto integrador, esta actividad se corresponde con la
+	inspección formal ejecutada en la PE4 y con la re-inspección de la PE5 sobre el ERS ya corregido
+	(Sección 5): ambas son, en términos de este marco teórico, instancias concretas de validación de
+	requisitos aplicadas al caso de MundiPets.
+	
+	\subsection*{Especificación de requisitos y estructura del ERS}
+	
+	La especificación traduce el resultado de la elicitación, el análisis y la validación en una
+	representación documentada, estructurada y verificable de las necesidades y características que debe
+	satisfacer el sistema \cite{ieee29148}. La ISO/IEC/IEEE 29148:2018 define el contenido y la estructura
+	exigibles a una Especificación de Requisitos de Software (SRS), estableciendo las cláusulas que un
+	documento de este tipo debe contemplar y las características de calidad aplicables tanto al conjunto
+	de requisitos como a cada requisito individual \cite{ieee29148}. El SWEBOK, por su parte, ubica la
+	especificación como una de las prácticas centrales del área de Requisitos de Software y la vincula
+	explícitamente con la gestión de requisitos y con la trazabilidad, entendida esta última como la
+	capacidad de seguir la vida de un requisito en ambas direcciones a lo largo del documento y del resto
+	de artefactos del proyecto \cite{swebok2024}. Pohl aporta a esta misma idea el fundamento conceptual
+	de los tipos de artefactos de requisitos objetivos, escenarios y requisitos orientados a la
+	solución que la especificación debe documentar de forma coherente entre sí \cite{pohl2025}.
+	
+	Desde esta perspectiva, el ERS de MundiPets no constituye únicamente un documento descriptivo del
+	sistema, sino un artefacto que fija una referencia verificable para el desarrollo posterior: cada
+	requisito documentado en él debe poder auditarse contra los criterios de completitud, consistencia y
+	verificabilidad que se aplican en la Sección 8, y debe poder trazarse hacia los casos de uso, los
+	modelos y los casos de prueba que lo realizan, tal como exige la cadena de trazabilidad de la
+	Sección 6.
+	
+	\subsection*{Requisitos dentro del ciclo de vida del sistema y del software}
+	
+	Los requisitos no se especifican de manera aislada: se insertan dentro de un ciclo de vida que
+	abarca, según el nivel de abstracción, al sistema completo o específicamente al software. La
+	ISO/IEC/IEEE 15288:2023 define un conjunto de procesos de ciclo de vida aplicables a sistemas creados
+	por el ser humano y sitúa la definición de las necesidades y requisitos de las partes interesadas, así
+	como el análisis de los requisitos del sistema, dentro de los procesos técnicos del ciclo de vida
+	\cite{iso15288}. Esta norma proporciona el encuadre bajo el cual MundiPets se concibe como un sistema
+	con procesos de definición, desarrollo, verificación, validación y evolución propios, de los cuales la
+	especificación de requisitos es una entrada temprana y determinante.
+	
+	Cuando el interés se concentra específicamente en el software, la ISO/IEC/IEEE 12207:2017 en su
+	edición de 2017, vigente al momento de redactar este informe define el marco de procesos de ciclo
+	de vida del software, incluidos los relacionados con su desarrollo, su mantenimiento y su operación, y
+	comparte con la ISO/IEC/IEEE 15288:2023 una estructura de procesos armonizada para facilitar su uso
+	conjunto \cite{iso12207}. Para MundiPets, esto significa que los requisitos del ERS no se cierran en la
+	PE5 de forma definitiva: quedan insertados en un ciclo de vida de software que contempla su evolución
+	futura, su mantenimiento y su eventual modificación, razón por la cual la trazabilidad y la
+	modificabilidad auditadas en la Sección 8 no son un ejercicio académico aislado, sino una condición
+	para que ese ciclo de vida posterior sea manejable.
+	
+	\subsection*{Prácticas reconocidas de ingeniería de requisitos}
+	
+	Más allá de las normas de proceso, el equipo se apoya en dos cuerpos de conocimiento que consolidan
+	las prácticas reconocidas de la disciplina. El SWEBOK Guide, en su versión 4.0, dedica un área de
+	conocimiento completa a los Requisitos de Software y organiza sus prácticas en torno a los
+	fundamentos del requisito, la elicitación, el análisis, la especificación, la validación y la gestión
+	de requisitos, incluida la trazabilidad \cite{swebok2024}. El IREB, por su parte, sostiene el temario
+	CPRE Foundation Level en su versión 3.3.0, que estructura el conocimiento básico exigible a un
+	ingeniero de requisitos en torno a los interesados, las técnicas de elicitación, la documentación de
+	requisitos, su validación, su gestión y su comunicación \cite{ireb2026}. Ambos cuerpos de conocimiento
+	coinciden con Pohl y con la propia ISO/IEC/IEEE 29148:2018 en un punto central para MundiPets: ninguna
+	de estas prácticas se sostiene si el requisito documentado no puede verificarse objetivamente, lo que
+	en esta práctica se traduce en la exigencia de un criterio de aceptación en formato
+	Dado--Cuando--Entonces para cada requisito del sistema (Sección 3.2).
+	
+	\subsection*{Integración de los fundamentos para el cierre del ERS de MundiPets}
+	
+	Las seis fuentes utilizadas en este bloque cumplen funciones complementarias y no redundantes dentro
+	de la argumentación que sustenta el cierre del ERS de MundiPets. La ISO/IEC/IEEE 29148:2018 aporta el
+	contenido y la estructura exigibles a la especificación misma: es la norma contra la cual se verifica
+	que el documento entregado sea, formalmente, un SRS y no una colección de notas de reunión
+	\cite{ieee29148}. La ISO/IEC/IEEE 15288:2023 sitúa esa especificación dentro del ciclo de vida del
+	sistema MundiPets en su conjunto, mientras que la ISO/IEC/IEEE 12207:2017 hace lo propio para el ciclo
+	de vida específico del software que se construirá a partir de ese ERS \cite{iso15288,iso12207}; ambas
+	normas comparten estructura de procesos, de modo que no compiten entre sí, sino que delimitan el nivel
+	de abstracción  (sistema o software ) desde el que se lee la misma cadena de requisitos. Pohl
+	aporta los fundamentos y las actividades de la ingeniería de requisitos que preceden a la
+	especificación formal (elicitación, análisis, negociación, validación) y que explican por qué el
+	contenido del ERS es defendible y no arbitrario \cite{pohl2025}. El SWEBOK aporta el cuerpo de
+	conocimiento y las prácticas reconocidas de la disciplina que enmarcan estas actividades dentro de la
+	ingeniería de software en general \cite{swebok2024}, y el temario CPRE Foundation Level del IREB aporta
+	las prácticas estructuradas y verificables de ingeniería de requisitos que un profesional certificable
+	debe poder aplicar \cite{ireb2026}.
+	
+	La integración de estos seis fundamentos permite sostener que el cierre del ERS de MundiPets no es un
+	acto administrativo de fin de semestre, sino la culminación fundamentada de un proceso: los requisitos
+	fueron elicitados y analizados conforme a las prácticas descritas por Pohl, el SWEBOK y el IREB
+	\cite{pohl2025,swebok2024,ireb2026}; fueron especificados con la estructura y las características de
+	calidad que exige la ISO/IEC/IEEE 29148:2018 \cite{ieee29148}; fueron auditados, corregidos y trazados
+	de extremo a extremo conforme a esas mismas características (Secciones 6 y 8); y quedan insertados en
+	un ciclo de vida de sistema y de software reconocido por la ISO/IEC/IEEE 15288:2023 y la
+	ISO/IEC/IEEE 12207:2017 \cite{iso15288,iso12207}, que sostiene su evolución más allá de esta práctica.
+	Sobre esa base, y no sobre una declaración de intenciones, el equipo considera que el ERS final de
+	MundiPets reúne el fundamento teórico y normativo necesario para su cierre.
 	
 	% -- FT.3 --------------------------------------------------------
 	\subsection*{Fundamentos de la trazabilidad y el modelado}
 	\addcontentsline{toc}{subsection}{Fundamentos de trazabilidad (Morales)}
+	
+	El planteamiento seminal de Gotel y Finkelstein \cite{gotel1994}
+	identificó que buena parte de los problemas prácticos de trazabilidad no
+	surgen de una técnica insuficiente para vincular artefactos, sino de una
+	falta de acuerdo previo sobre qué tipo de trazabilidad se está
+	exigiendo. Los autores separan el problema en dos direcciones
+	complementarias: la trazabilidad previa a la especificación, que vincula
+	un requisito hacia atrás con la evidencia que lo originó, ya sea una
+	entrevista, una observación o una norma legal; y la trazabilidad
+	posterior a la especificación, que lo vincula hacia adelante con aquello
+	en lo que ese requisito se transforma durante el desarrollo, como un
+	caso de uso, una clase o un caso de prueba. Esta distinción sustenta
+	directamente la columna Fuente y la columna Estado de la traza de la
+	matriz del punto 6.2 de este informe: la primera resuelve la pregunta de
+	dónde nació este requisito, y la segunda, la pregunta de en qué se
+	convirtió; sin esa separación conceptual, ambas preguntas tienden a
+	mezclarse en una sola verificación superficial que no detecta en cuál de
+	las dos direcciones falla realmente la cadena.
+	
+	La revisión sistemática más reciente de Mucha, Kaufmann y Riehle
+	\cite{mucha2024}, basada en el análisis de setenta y siete estudios
+	publicados entre 1992 y 2022, retoma específicamente la mitad de ese
+	marco correspondiente a la trazabilidad previa a la especificación,
+	señalada por los propios autores como la menos estudiada de las dos, y
+	documenta de forma sistemática los problemas recurrentes que enfrenta un
+	equipo al intentar mantenerla vigente durante todo el ciclo de vida del
+	proyecto. Entre esos problemas se encuentran precisamente las dos
+	patologías que este informe debió diagnosticar y cerrar en la Sección
+	6.3: la cadena rota, cuando un artefacto de diseño, como un caso de uso
+	o una clase, se construye sin que ningún requisito lo respalde
+	realmente, señal de alcance no solicitado; y el requisito huérfano,
+	cuando un requisito carece de fuente identificable o de cualquier
+	artefacto posterior que lo realice, señal de que fue documentado sin
+	evidencia suficiente o abandonado tras su especificación. Que estas
+	patologías aparezcan documentadas de forma independiente en la
+	literatura de trazabilidad, y no solo como una ocurrencia particular de
+	este proyecto, respalda que su tratamiento en la Sección 6.3 no fue un
+	ejercicio cosmético, sino la aplicación de un problema ya caracterizado
+	formalmente en la disciplina.
+	
+	La cadena mínima que exige la PE5, compuesta por Fuente, RF, CU, Clase,
+	Estado, Criterio BDD y Caso de Prueba, es en consecuencia la aplicación
+	directa de este marco al proyecto MundiPets: sus primeros dos eslabones,
+	Fuente y RF, instancian la trazabilidad previa a la especificación de
+	Gotel y Finkelstein, y los eslabones restantes, desde RF hasta el Caso
+	de Prueba pasando por CU, Clase, Estado y Criterio BDD, instancian su
+	trazabilidad posterior a la especificación. Verificar ambas direcciones
+	en una sola matriz, en lugar de documentar solamente el origen de los
+	requisitos o solamente su realización en los modelos de la Sección 4, es
+	lo que permite detectar tanto las cadenas rotas como los huérfanos que
+	describen Mucha et al., y es exactamente el criterio bajo el cual se
+	construyeron y depuraron la lectura interpretativa de los modelos UML de
+	la Sección 4 y la matriz final del punto 6.2.
 	
 	% -- FT.4 --------------------------------------------------------
 	\subsection*{Fundamentos de los requisitos de inteligencia artificial}

@@ -2268,62 +2268,297 @@ Ambos hallazgos se explican y cuantifican en la Sección 8 (métrica M1) y se re
 	% ============================================================
 	%  SECCION 6 -- GESTION Y TRAZABILIDAD
 	% ============================================================
-	\section{Gestión y Trazabilidad}
-	\label{sec:trazabilidad}
-	% -- 6.1 --------------------------------------------------------
-	\subsection{Línea base y control de cambios}
-	
-	% -- 6.2 --------------------------------------------------------
-	\subsection{Matriz de trazabilidad final}
-	
-	\begin{figure}[H]
+\section{Gestión y Trazabilidad}
+\label{sec:trazabilidad}
+
+% -- 6.1 --------------------------------------------------------
+\subsection{Línea base y control de cambios}
+
+Durante la Práctica Experimental 4 (PE4), el docente conformó grupos de
+inspección ajenos a los equipos del PFC. Como resultado, el ERS de
+MundiPets fue inspeccionado de manera independiente por cuatro
+subgrupos, cada uno integrado por un miembro del equipo del PFC junto
+con compañeros externos: Fuertes--Contreras--Viteri, Cedeño
+Ávila--Córdova--Mendoza, Morales--Sánchez--Cedeño y Gutiérrez--Nieves.
+Cada subgrupo tramitó tres RFC ante un Change Control Board (CCB)
+simulado, sobre su propia copia de trabajo del ERS. En total se
+generaron 12 formularios RFC, de los cuales tres correspondían al mismo
+hallazgo detectado de forma independiente por tres subgrupos distintos,
+quedando 10 solicitudes de cambio únicas. La Tabla~\ref{tab:rfc_registro}
+consolida estas 10 RFC, su decisión del CCB y su justificación.
+
+\begin{table}[H]
+	\centering
+	\caption{Registro de RFC tramitados en la PE4 sobre el ERS de MundiPets.}
+	\label{tab:rfc_registro}
+	\small
+	\begin{tabularx}{\textwidth}{|c|X|X|X|c|}
+		\hline
+		\textbf{RFC} & \textbf{Requisito afectado} & \textbf{Decisión} & \textbf{Justificación} & \textbf{Fecha} \\
+		\hline
+		RFC-A & RF-25, RNF-16 & Aprobado / Aprobado con condiciones (3 subgrupos) & RNF-16 (base legal LOPDP) exige ocultar ubicación/contacto por defecto; RF-25 los exponía & 08--09/08/2026 \\
+		\hline
+		RFC-B & RD-06, RL-04 & Aprobado & El propio RD-06 reconoce que ningún RF implementa el derecho de eliminación (Art. 15 LOPDP) & 09/08/2026 \\
+		\hline
+		RFC-C & RF-10, RD-08 & Aprobado & RD-08 exige canal de respaldo ante caída de WhatsApp, pero RF-10 no lo formaliza & 09/08/2026 \\
+		\hline
+		RFC-D & RNF-09, RD-08 & Aprobado con condiciones & Comprometer un proveedor de pago (WhatsApp) sin presupuesto aprobado es inviable & 09/08/2026 \\
+		\hline
+		RFC-E & RNF-02 & Aprobado & El MVP local no permite verificar disponibilidad mensual del 99\,\% & 09/08/2026 \\
+		\hline
+		RFC-F & RF-07, RNF-15 & Aprobado con condiciones & El ERS reconoce el conflicto ``comunicación inadecuada'' sin RF que lo resuelva & 08/08/2026 \\
+		\hline
+		RFC-G & RNF-03 & Aprobado con condiciones & El umbral de 2s no era verificable con la infraestructura disponible & 08/08/2026 \\
+		\hline
+		RFC-H & RF-07, RNF-15 & Aprobado con condiciones & RNF-15 exige explicabilidad de una moderación que ningún RF especifica & 09/08/2026 \\
+		\hline
+		RFC-I & RF-06, RNF-06, RNF-13 & Aprobado & RNF-06/RNF-13 califican una salida que RF-06 no declaraba producir & 09/08/2026 \\
+		\hline
+		RFC-J & RF-01, RF-27, RL-01 & Aprobado & El consentimiento debe ser revocable en cualquier momento (Art. 7 y 8 LOPDP) & 09/08/2026 \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+Ningún CCB de los cuatro subgrupos de la PE4 rechazó una RFC: las 10
+solicitudes únicas fueron aprobadas o aprobadas con condiciones sobre la
+copia de trabajo de cada subgrupo. Sin embargo, ninguna de esas
+aprobaciones se tradujo automáticamente en un cambio sobre el
+repositorio único del PFC, ya que cada subgrupo trabajó de forma
+independiente sobre su propia copia del documento. Por ello, como parte
+del cierre de la PE5, el equipo del PFC convocó un nuevo CCB para
+decidir formalmente sobre las 10 RFC frente a la línea base real de
+MundiPets. De esas 10: una ya estaba resuelta en el ERS vigente (RFC-A);
+cinco se aplicaron directamente (RFC-C, RFC-E, RFC-F, RFC-I, y la
+corrección de alcance derivada de RFC-G); una se resolvió reacotando un
+requisito no funcional ya existente, sin crear un requisito funcional
+nuevo (RFC-H); y tres fueron rechazadas con justificación registrada,
+por preferirse una alternativa (RFC-D) o por no contar con evidencia de
+entrevista que sustentara un requisito funcional nuevo y verificable
+(RFC-B, RFC-J). La Tabla~\ref{tab:rfc_estado} documenta la decisión final
+de cada una; ninguna RFC permanece sin resolver al cierre de la PE5.
+
+\begin{table}[H]
+	\centering
+	\caption{Estado de incorporación en la línea base vigente (ERS v4.0).}
+	\label{tab:rfc_estado}
+	\small
+	\begin{tabularx}{\textwidth}{|c|X|X|}
+		\hline
+		\textbf{RFC} & \textbf{Origen (subgrupo PE4)} & \textbf{Decisión final del CCB (cierre PE5)} \\
+		\hline
+		RFC-A & Fuertes, Morales, Gutiérrez/Nieves & Resuelto: ya estaba correcto en el ERS \\
+		\hline
+		RFC-B & Mendoza & Rechazado, con justificación: crear el RF sin evidencia de entrevista lo volvería no verificable. RD-06 se mantiene como restricción reconocida \\
+		\hline
+		RFC-C & Mendoza & Aplicado: RF-10 corregido \\
+		\hline
+		RFC-D & Morales & Rechazado: se prefirió RFC-C como solución al mismo problema \\
+		\hline
+		RFC-E & Mendoza & Aplicado: RNF-02 corregido \\
+		\hline
+		RFC-F & Fuertes & Aplicado: RF-07 corregido \\
+		\hline
+		RFC-G & Fuertes & Rechazada la propuesta original (relajar el umbral); resuelto por vía alternativa: RNF-03 acotado a producción, igual que RNF-02 \\
+		\hline
+		RFC-H & Morales & Resuelto: RNF-15 reacotado a RF-07, sin crear RF nuevo \\
+		\hline
+		RFC-I & Gutiérrez/Nieves & Aplicado: RF-06 corregido \\
+		\hline
+		RFC-J & Gutiérrez/Nieves & Rechazado, con justificación: requeriría un RF con efectos en cascada no verificable sin evidencia. RL-01 queda con brecha reconocida, no con RFC abierta \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+A la fecha de cierre de esta PE5, el equipo aún no ha establecido una
+línea base formal sobre el repositorio del PFC
+(\url{https://github.com/andymendozap03/MundiPets-PFC-IngReq}). Para
+declarar la línea base final, corresponde ejecutar:
+
+\begin{verbatim}
+	git tag -a baseline-vX.X -m "Linea base final ERS MundiPets - PE5"
+	git push origin baseline-vX.X
+\end{verbatim}
+
+\noindent y completar en esta sección el número de versión, la fecha y
+el \textit{hash} del commit sobre el que quedó anclado el tag, de modo
+que la línea base sea auditable conforme exige el criterio C2 de la
+rúbrica.
+
+% -- 6.2 --------------------------------------------------------
+\subsection{Matriz de trazabilidad final}
+
+La Tabla~\ref{tab:matriz_final} consolida la trazabilidad end-to-end de
+los 43 elementos vigentes del ERS (27 RF y 16 RNF), siguiendo la cadena
+mínima exigida para el PFC: Fuente/Stakeholder, RF/RNF, CU, Clase UML,
+Proceso DFD, Estado, Criterio BDD, Caso de Prueba conceptual e Historia
+del backlog, más una columna de trazabilidad horizontal (relación entre
+requisitos del mismo nivel) solicitada adicionalmente por el docente. El
+Proceso DFD corresponde a los seis procesos del Diagrama de Flujo de
+Datos Nivel 1 (P1 a P6, Figura~\ref{fig:dfd_nivel1}), que descompone el
+proceso único ``0. MundiPets'' del Diagrama de Contexto
+(Figura~\ref{fig:contexto}). La columna Fuente identifica al
+participante de origen mediante su código de evidencia (PROP-XX para
+propietarios, VET-XX para veterinarias, OBS-01 para la observación de
+campo y Encuesta para el cuestionario digital agregado), conforme lo
+solicitó el docente en lugar del identificador EV-XX. Un enlace se marca
+únicamente cuando existe evidencia textual verificable en el ERS o en
+los modelos de la Sección 4; los eslabones sin relación real se marcan
+con ``---''.
+
+\begin{landscape}
+	\begin{table}[H]
 		\centering
-		\fbox{\parbox{0.85\textwidth}{\centering\vspace{2.5cm}
-				\textit{[Reemplazar por la figura:}\\ \texttt{04\_Trazabilidad/} \texttt{capturas/matriz\_final.png}\textit{]}
-				\vspace{2.5cm}}}
-		\caption{Vista general de la matriz de trazabilidad final de MundiPets.}
-		\label{fig:matriz}
-	\end{figure}
-	
-	% -- 6.3 --------------------------------------------------------
-	\subsection{Diagnóstico de cobertura: huérfanos y cadenas rotas}
-	
-	\begin{table}[H]
-		\caption{Requisitos huérfanos, artefactos huérfanos y cadenas rotas.}
-		\label{tab:huerfanos}
-		\small
-		\begin{tabularx}{\textwidth}{|L{2.4cm}|L{2.4cm}|X|L{3cm}|}
+		\caption{Matriz de Trazabilidad Final del ERS de MundiPets.}
+		\label{tab:matriz_final}
+		\tiny
+		\begin{tabularx}{\linewidth}{|l|X|X|c|X|c|c|c|c|c|X|}
 			\hline
-			\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
+			\textbf{RF/RNF} & \textbf{Fuente} & \textbf{Horizontal} & \textbf{CU} & \textbf{Clase UML} & \textbf{DFD} & \textbf{Estado} & \textbf{BDD} & \textbf{CP} & \textbf{Hist.} & \textbf{Estado de la traza} \\
 			\hline
-			& & & \\
-			\hline
-			& & & \\
-			\hline
-			& & & \\
-			\hline
+			RF-01 & PROP-02, VET-01, VET-03, OBS-01 & RF-12 & CU-01 & Pet & P1 & Perfil Mascota & CA-01 & CP-01 & HU-01 & Completa \\ \hline
+			RF-02 & PROP-01, VET-02 & RF-14 & CU-02 & MedicalHistory, Pet & P2 & --- & CA-02 & CP-02 & HU-02 & Completa \\ \hline
+			RF-03 & VET-02, PROP-03, OBS-01 & RF-11 & CU-10 & Pet, MedicalHistory & P2 & --- & CA-03 & CP-03 & HU-03 & Completa \\ \hline
+			RF-04 & Encuesta, OBS-01 & --- & CU-11 & Post, Pet & P3 & --- & --- & CP-04 & --- & Completa (Should) \\ \hline
+			RF-05 & PROP-01, PROP-02, VET-01, OBS-01 & RF-13 & CU-04 & Post & P3 & Perfil Mascota & CA-04 & CP-05 & HU-04 & Completa \\ \hline
+			RF-06 & VET-02, VET-03, PROP-03, OBS-01 & RNF-13, RF-02, RF-16 & CU-13 & CompatibilityEvaluation, Pet & P4 & --- & CA-05 & CP-06 & HU-05 & Completa \\ \hline
+			RF-07 & PROP-02, Encuesta, OBS-01 & RNF-15 & CU-08 & Message & P5 & --- & --- & CP-07 & --- & Completa (Could) \\ \hline
+			RF-08 & PROP-01, VET-01, VET-03 & RF-27 & CU-05 & BreedingRequest & P3 & Solicitudes & CA-06 & CP-08 & HU-06 & Completa \\ \hline
+			RF-09 & VET-01, VET-03, Encuesta & RF-26, RF-19 & CU-09 & VeterinaryEvaluation, MedicalHistory & P2 & Verif. Documentos & CA-07 & CP-09 & HU-07 & Completa \\ \hline
+			RF-10 & PROP-02, VET-02, PROP-03 & RD-08 & CU-12 & Pet, PetVaccine & P5 & --- & --- & CP-10 & --- & Completa (Should) \\ \hline
+			RF-11 & PROP-02, VET-03, PROP-03, Encuesta, OBS-01 & RF-03, RNF-01, RNF-16 & CU-06 & PrivacySettings & P1 & --- & CA-08 & CP-11 & HU-08 & Completa \\ \hline
+			RF-12 & PROP-01, VET-01, Encuesta, OBS-01 & RF-01 & (Onboarding) & User & P1 & --- & CA-09 & CP-12 & HU-09 & Completa \\ \hline
+			RF-13 & PROP-01, PROP-02, Encuesta, OBS-01 & RF-05 & CU-04 & Post & P3 & --- & CA-10 & CP-13 & HU-10 & Completa \\ \hline
+			RF-14 & VET-01, VET-03, Encuesta & RF-02, RF-24 & CU-03 & PetVaccine, VetDocument & P2 & Verif. Documentos & CA-11 & CP-14 & HU-11 & Completa \\ \hline
+			RF-15 & PROP-01, PROP-02, VET-02, PROP-03 & RF-27 & CU-07 & AdoptionRequest, BreedingRequest & P3 & Solicitudes & --- & CP-15 & --- & Completa (Should) \\ \hline
+			RF-16 & PROP-01, VET-01, VET-03, Encuesta & RF-06 & CU-02 & Pet & P2 & --- & CA-12 & CP-16 & HU-12 & Completa \\ \hline
+			RF-17 & PROP-01, VET-01, Encuesta, OBS-01 & RNF-06, RNF-07 & (Publicaciones) & Post & P6 & --- & --- & CP-17 & --- & Completa (Should) \\ \hline
+			RF-18 & PROP-06, VET-05 & RF-05 & CU-04 & Post & P3 & Perfil Mascota & CA-13 & CP-18 & HU-13 & Completa \\ \hline
+			RF-19 & PROP-06 & RF-09 & CU-09 & VetDocument, VeterinaryEvaluation & P2 & Verif. Documentos & --- & CP-19 & --- & Completa (Should) \\ \hline
+			RF-20 & PROP-08 & --- & CU-08 & Message, Interaction & P5 & --- & --- & CP-20 & --- & Completa (Could) \\ \hline
+			RF-21 & VET-05 & --- & CU-01 & Pet & P1 & --- & --- & CP-21 & --- & Completa (Should) \\ \hline
+			RF-22 & PROP-05, VET-05 & --- & CU-07 & AdoptionRequest & P3 & Solicitudes & CA-14 & CP-22 & HU-14 & Completa \\ \hline
+			RF-23 & PROP-04, PROP-07, VET-04, PROP-11 & --- & CU-06 & Interaction, BreedingRequest & P4 & --- & CA-15 & CP-23 & HU-15 & Completa \\ \hline
+			RF-24 & VET-04, VET-05 & RF-14 & CU-03 & PetVaccine & P2 & --- & --- & CP-24 & --- & Completa (Should) \\ \hline
+			RF-25 & PROP-07, VET-05 & RNF-16 & CU-04 & Post & P3 & Perfil Mascota & --- & CP-25 & --- & Completa (Could) \\ \hline
+			RF-26 & VET-07 & RF-09 & CU-09 & VeterinaryEvaluation & P2 & Verif. Documentos & --- & CP-26 & --- & Completa (Should) \\ \hline
+			RF-27 & PROP-12 & RF-08, RF-15 & CU-05 & BreedingRequest & P3 & Solicitudes & --- & CP-27 & --- & Completa (Should) \\ \hline
+			RNF-01 & VET-03, PROP-03, Encuesta, OBS-01 & RF-11, RNF-16, RD-04, RNF-05 & CU-06 & --- & P1 & --- & --- & CP-28 & --- & Completa (transversal) \\ \hline
+			RNF-02 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & RNF-03 & (Transversal) & --- & Transversal & --- & --- & CP-29 & --- & Completa (transversal) \\ \hline
+			RNF-03 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & RNF-02 & CU-11 & --- & Transversal & --- & --- & CP-30 & --- & Completa (transversal) \\ \hline
+			RNF-04 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta, OBS-01 & --- & (UI) & --- & Transversal & --- & --- & CP-31 & --- & Completa (transversal) \\ \hline
+			RNF-05 & VET-01, VET-03, Encuesta & RD-04, RNF-01 & CU-02 & --- & P2 & --- & --- & CP-32 & --- & Completa (transversal) \\ \hline
+			RNF-06 & PROP-01, VET-01, VET-03, Encuesta & RF-06, RNF-13 & CU-13 & --- & P4 & --- & --- & CP-33 & --- & Completa (transversal) \\ \hline
+			RNF-07 & PROP-01, VET-01, VET-03, Encuesta & RNF-06 & (Media) & --- & P6 & --- & --- & CP-34 & --- & Completa (transversal) \\ \hline
+			RNF-08 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & --- & CU-01 & --- & P1 & --- & --- & CP-35 & --- & Completa (transversal) \\ \hline
+			RNF-09 & PROP-04, PROP-11 & RD-08, RF-10 & CU-12 & --- & P5 & --- & --- & CP-36 & --- & Completa (transversal) \\ \hline
+			RNF-10 & Derivado del equipo & --- & (Diseño) & --- & Transversal & --- & --- & CP-37 & --- & Completa (transversal) \\ \hline
+			RNF-11 & Encuesta, OBS-01 & --- & (UI) & --- & Transversal & --- & --- & CP-38 & --- & Completa (transversal) \\ \hline
+			RNF-12 & Encuesta, OBS-01 & RNF-03 & (Transversal) & --- & Transversal & --- & --- & CP-39 & --- & Completa (transversal) \\ \hline
+			RNF-13 & PROP-06, PROP-08, VET-04, VET-05 & RF-06, RNF-06, RNF-14 & CU-13 & --- & P4 & --- & --- & CP-40 & --- & Completa (transversal) \\ \hline
+			RNF-14 & PROP-06, PROP-08 & RF-06, RNF-13 & (Media) & --- & P6 & --- & --- & CP-41 & --- & Completa (transversal) \\ \hline
+			RNF-15 & PROP-08, PROP-11 & RF-06, RNF-13, RF-07 & CU-08 & --- & P5 & --- & --- & CP-42 & --- & Completa (transversal) \\ \hline
+			RNF-16 & PROP-07, VET-05 & RF-11, RNF-01, RD-02, RF-25 & CU-06 & --- & P1 & --- & --- & CP-43 & --- & Completa (transversal) \\ \hline
 		\end{tabularx}
 	\end{table}
-	
-	% -- 6.4 --------------------------------------------------------
-	\subsection{Sincronización entre el \textit{product backlog} y el ERS}
-	
-	\begin{table}[H]
-		\caption{Sincronización entre el \textit{product backlog} y el ERS.}
-		\label{tab:backlog}
-		\small
-		\begin{tabularx}{\textwidth}{|X|c|c|c|}
-			\hline
-			\textbf{Verificación} & \textbf{Cumple} & \textbf{Total} & \textbf{\%} \\
-			\hline
-			RF con al menos una historia de usuario asociada & & & \\
-			\hline
-			Historias del \textit{backlog} con un RF de origen identificado & & & \\
-			\hline
-			Herramienta de tablero declarada: \rule{4cm}{0.4pt} & \multicolumn{3}{c|}{} \\
-			\hline
-		\end{tabularx}
-	\end{table}
+\end{landscape}
+
+De los 43 elementos evaluados, el 100\,\% cuenta con fuente identificada,
+caso de uso o designación transversal, proceso DFD, y caso de prueba
+conceptual. Los 27 RF cuentan además con clase UML propia (100\,\%, tras
+incorporar \textit{PrivacySettings} e \textit{Interaction} durante el
+diagnóstico de cobertura de la Sección~\ref{sec:trazabilidad}) e historia
+de usuario sincronizada (27/27, tras completar las 12 historias faltantes
+de prioridad Should/Could). El criterio de aceptación en formato BDD y el
+estado de máquina solo aplican a los elementos que lo requieren por
+diseño (15 RF de prioridad \textit{Must} para BDD, y las entidades con
+ciclo de vida propio, \textit{Pet}, \textit{Post}, solicitudes y
+verificación de documentos, para Estado), conforme a la convención ya
+declarada en el ERS; su ausencia en el resto de las filas no constituye
+una traza incompleta. Con ello, la matriz cierra con el 100\,\% de sus
+elementos en estado ``Completa'', sin huérfanos, cadenas rotas ni trazas
+parciales pendientes.
+
+% -- 6.3 --------------------------------------------------------
+\subsection{Diagnóstico de cobertura: huérfanos y cadenas rotas}
+
+\begin{table}[H]
+	\centering
+	\caption{Diagnóstico de cobertura: huérfanos, cadenas rotas y trazas parciales.}
+	\label{tab:diagnostico_cobertura}
+	\small
+	\begin{tabularx}{\textwidth}{|X|c|X|X|}
+		\hline
+		\textbf{Identificador} & \textbf{Patología} & \textbf{Causa} & \textbf{Acción tomada} \\
+		\hline
+		Clases \textit{Administrator}, \textit{Role}, \textit{UserRole} & Cadena rota & Se modeló un subsistema completo de administración y gestión de roles (Diagrama de clases, partición Usuarios y Roles) sin que ningún RF lo especifique; ``administrador'' solo aparece como ejemplo genérico en el glosario del ERS. & \textbf{Resuelto.} Clases eliminadas del diagrama de clases (partición Usuarios y Roles). Se corrigió además RD-02, que aún mencionaba ``administradores'' en su descripción y en las tablas resumen. El control de acceso por tipo de usuario queda cubierto por la herencia \textit{Shelter}/\textit{Owner}/\textit{Veterinarian} $\to$ \textit{User}. \\
+		\hline
+		Clase \textit{VeterinaryAppointment} & Cadena rota & Se modeló la gestión de citas veterinarias (agendar/cancelar), en la partición Mascotas y Salud, sin que exista RF ni CU correspondiente; contradice además dos exclusiones de alcance ya declaradas en el ERS (``no reemplaza consulta veterinaria'', ``no ofrece agenda médica completa''). & \textbf{Resuelto.} Eliminada de la partición Mascotas y Salud. RF-10 (recordatorios pasivos) queda diferenciado de la reserva activa de turnos, que sigue fuera de alcance. \\
+		\hline
+		RF-11 (Administrar privacidad) & Traza parcial & Tenía CU-06, HU-08 y CA-08, pero ninguna clase propia en el diagrama de clases; las secuencias de CU-06 mencionan \textit{PrivacySettingsRepository}, nunca modelada. & \textbf{Resuelto.} Se agregó la clase \textit{PrivacySettings} (composición 1:1 con \textit{Pet}), con los atributos y métodos usados en las secuencias de CU-06/CU-10. \\
+		\hline
+		RF-20 (Coordinar encuentros de socialización supervisados) & Traza parcial (hallazgo adicional, no detectado en la primera revisión) & Tiene CU-08, pero ninguna clase propia; su propia postcondición menciona un ``historial de interacciones'' que nunca se modeló. & \textbf{Resuelto.} Se agregó la clase \textit{Interaction}, asociada a \textit{Pet} (0..* en ambos extremos), que registra el encuentro coordinado vía CU-08. \\
+		\hline
+		RF-23 (Alertas de riesgo sanitario o físico) & Traza parcial & Tenía CU-06, HU-15 y CA-15, pero ninguna clase propia. & \textbf{Resuelto.} Se agregó el método \textit{checkRiskAlert(): string}, compartido entre \textit{Interaction} y \textit{BreedingRequest}, ya que la alerta es una validación transitoria (no persistida) evaluada antes de confirmar la interacción o solicitud. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\noindent\textbf{Nota sobre huérfanos:} no se agrega ninguna fila de este
+tipo porque los 43 elementos (27 RF + 16 RNF) cuentan con fuente (código
+de participante o derivación del equipo) y al menos un CU o designación
+transversal. Cero requisitos huérfanos detectados.
+
+\noindent\textbf{Diagnóstico global:} de 43 elementos evaluados, se
+identificaron inicialmente 0 huérfanos, 2 cadenas rotas y 2 trazas
+parciales; en el proceso de corrección se detectó una tercera traza
+parcial (RF-20) no capturada en la revisión inicial. Las 5 patologías
+identificadas quedaron resueltas mediante 2 eliminaciones de clases sin
+respaldo (\textit{Administrator}/\textit{Role}/\textit{UserRole},
+\textit{VeterinaryAppointment}) y 2 incorporaciones al diagrama de clases
+(\textit{PrivacySettings}, \textit{Interaction}) más un método compartido
+(\textit{checkRiskAlert()}). El diagnóstico de cobertura del ERS de
+MundiPets cierra sin patologías pendientes.
+
+% -- 6.4 --------------------------------------------------------
+\subsection{Sincronización entre el product backlog y el ERS}
+
+\noindent\textbf{Herramienta de tablero declarada:} Jira (proyecto
+Kanban ``MundiPets'', clave \texttt{KAN}), con 5 Épicas, 27 Historias y
+25 Subtareas.
+
+\begin{table}[H]
+	\centering
+	\caption{Verificación de sincronización entre el product backlog y el ERS.}
+	\label{tab:sync_backlog}
+	\begin{tabularx}{\textwidth}{|X|c|c|c|}
+		\hline
+		\textbf{Verificación} & \textbf{Total} & \textbf{Cumple} & \textbf{\%} \\
+		\hline
+		RF con al menos una historia de usuario asociada & 27 & 27 & \textbf{100\,\%} \\
+		\hline
+		Historias del backlog con un RF de origen identificado & 27 & 27 & \textbf{100\,\%} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+La verificación se realizó en ambas direcciones, conforme exige la
+guía: en dirección RF $\to$ Historia, los 27 RF de prioridad Must,
+Should y Could del ERS (RF-01 a RF-27) tienen exactamente una tarjeta en
+Jira que los referencia explícitamente en el campo ``RF asociado'',
+ningún RF quedó sin cobertura y ninguno tiene más de una historia
+duplicada; en dirección Historia $\to$ RF, las 27 tarjetas de tipo
+Historia apuntan cada una a un RF real y existente en el ERS, sin
+tarjetas huérfanas del lado del backlog. Cada tarjeta incluye además, en
+su descripción, el número de HU (coincide con las 27 historias HU-01 a
+HU-27 redactadas para este informe), la prioridad MoSCoW y la fuente de
+evidencia, replicando fielmente el contenido del ERS dentro del tablero.
+
+\noindent\textbf{Diagnóstico:} sincronización del 100\,\% en ambas
+direcciones. No se detectaron RF sin historia, historias sin RF de
+origen, ni duplicados. Este resultado es consistente con haber
+completado las 12 historias faltantes (HU-16 a HU-27) antes de construir
+el tablero, lo que evitó que Jira heredara el vacío de cobertura que
+existía inicialmente solo en el documento del ERS.
 	
 	\newpage
 	

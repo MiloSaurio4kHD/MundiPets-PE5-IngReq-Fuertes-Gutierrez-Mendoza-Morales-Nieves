@@ -1,0 +1,224 @@
+\documentclass[journal,onecolumn]{IEEEtran}
+
+% ── Encabezado ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small ERS/SRS Final}
+\fancyfoot[C]{\thepage}
+
+% ============================================================
+% IDIOMA Y CODIFICACIÓN  (mover ANTES de csquotes)
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+
+% ============================================================
+% CITAS Y TEXTO
+% ============================================================
+\usepackage{csquotes}
+
+% ============================================================
+% ESPACIADO Y LISTAS
+% ============================================================
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\usepackage{enumitem}
+
+% ============================================================
+% IDIOMA Y CODIFICACIÓN
+% ============================================================
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% ============================================================
+% PAPEL Y GEOMETRÍA
+% ============================================================
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% ============================================================
+% IMÁGENES
+% ============================================================
+\usepackage{graphicx}
+\graphicspath{{Figuras/}}
+
+% ============================================================
+% TABLAS
+% ============================================================
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+
+% ============================================================
+% MATEMÁTICAS
+% ============================================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ============================================================
+% CÓDIGO FUENTE
+% ============================================================
+\usepackage{listings}
+
+% ============================================================
+% FORMATO ACADÉMICO
+% ============================================================
+\usepackage{microtype}
+\usepackage{float}
+
+% ============================================================
+% CAPTIONS (TÍTULOS DE FIGURAS/TABLAS)
+% ============================================================
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ============================================================
+% REFERENCIAS / HIPERVÍNCULOS
+% ============================================================
+\usepackage[hidelinks]{hyperref}
+
+% ============================================================
+% NUMERACIÓN Y NOMBRES EN ESPAÑOL
+% ============================================================
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% ============================================================
+% ESTILO DE TÍTULOS DE SECCIÓN
+% ============================================================
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% ============================================================
+% CADA SECCIÓN PRINCIPAL (\section) INICIA EN PÁGINA NUEVA
+% ============================================================
+\usepackage{etoolbox}
+\pretocmd{\section}{\clearpage}{}{}
+
+% ============================================================
+% BIBLIOGRAFÍA (BIBLATEX + BIBER)
+% ============================================================
+\usepackage[
+backend=biber,
+style=ieee,
+sorting=none
+]{biblatex}
+\addbibresource{referencias_estructura.bib}
+
+% ============================================================
+% DOCUMENTO
+% ============================================================
+\begin{document}
+
+% ============================================================
+% SECCIÓN 3: ERS/SRS FINAL DEL SISTEMA MUNDIPETS
+% Responsable: GUTIÉRREZ ORTEGA, Génesis Adriana
+% ============================================================
+
+\section{ERS/SRS Final del Sistema MundiPets}
+\label{sec:ers-final}
+
+\subsection{Estructura conforme a ISO/IEC/IEEE 29148:2018}
+\label{sec:estructura-29148}
+
+El ERS final de MundiPets se organizó siguiendo la estructura de contenido que
+ISO/IEC/IEEE 29148:2018 establece para una Especificación de Requisitos de
+Software \cite{ieee29148}. La Tabla~\ref{tab:correspondencia-29148} muestra la
+correspondencia explícita entre las cláusulas de la norma y las secciones
+efectivamente desarrolladas en el documento del equipo; no se transcribe aquí
+el contenido de cada sección, que se encuentra íntegro en el ERS consolidado
+del repositorio, sino que se documenta dónde localizarlo y bajo qué cláusula
+normativa queda encuadrado.
+
+\begin{table}[H]
+	\centering
+	\caption{Correspondencia entre las cláusulas de ISO/IEC/IEEE 29148:2018 y las secciones del ERS de MundiPets.}
+	\label{tab:correspondencia-29148}
+	\footnotesize
+	\renewcommand{\arraystretch}{1.3}
+	\begin{tabularx}{\textwidth}{
+		|>{\raggedright\arraybackslash}p{3.6cm}
+		|>{\raggedright\arraybackslash}X|}
+		\hline
+		\textbf{Cláusula ISO/IEC/IEEE 29148:2018} & \textbf{Sección del ERS de MundiPets} \\
+		\hline
+		1. Introducción & Sección 1 --- Introducción \\
+		\hline
+		\quad 1.1 Propósito & 1.1 Propósito del documento \\
+		\hline
+		\quad 1.2 Alcance & 1.2 Alcance del producto \\
+		\hline
+		\quad 1.3 Definiciones, acrónimos y abreviaturas & 1.3 Definiciones, acrónimos y abreviaturas (glosario) \\
+		\hline
+		\quad 1.4 Referencias & 1.4 Referencias \\
+		\hline
+		\quad 1.5 Visión general del documento & 1.5 Visión general del documento \\
+		\hline
+		2. Descripción general & Sección 2 --- Descripción general \\
+		\hline
+		\quad 2.1 Perspectiva del producto & 2.1 Perspectiva del producto y límite del sistema (incluye el entorno operativo) \\
+		\hline
+		\quad 2.2 Funciones del producto & 2.2 Funciones del producto \\
+		\hline
+		\quad 2.3 Características de los usuarios & 2.3 Clases y características de usuarios; 2.4 Mapa de stakeholders (matriz poder/interés y conflictos potenciales) \\
+		\hline
+		\quad 2.4 Restricciones generales & 2.5 Entorno operativo (aspectos no cubiertos en 2.1) \\
+		\hline
+		\quad 2.5 Suposiciones y dependencias & 2.6 Suposiciones y dependencias \\
+		\hline
+		3. Requisitos específicos & Sección 3 --- Requisitos específicos completos \\
+		\hline
+		\quad 3.1 Requisitos de interfaces externas & 3.1 Interfaces externas (usuario, hardware, software) \\
+		\hline
+		\quad 3.2 Requisitos funcionales & 3.2 Requisitos funcionales (RF-01 a RF-27) \\
+		\hline
+		\quad 3.3 Requisitos de rendimiento & Incorporados dentro de 3.3 Requisitos no funcionales (RNF-02, RNF-03, RNF-12) \\
+		\hline
+		\quad 3.4 Restricciones de diseño & 3.5 Restricciones de diseño (RD-01 a RD-09) \\
+		\hline
+		\quad 3.5 Atributos del sistema software (calidad) & 3.3 Requisitos no funcionales (RNF-01 a RNF-16) \\
+		\hline
+		\quad 3.6 Otros requisitos (legales, de negocio) & 3.4 Requisitos legales \\
+		\hline
+		4. Información de apoyo & 3.6 Historias de usuario y criterios de aceptación (verificabilidad); Sección 4 --- Modelado del sistema con UML; Sección 5 --- Priorización y trazabilidad extendida (matriz de trazabilidad) \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+La correspondencia es completa: ninguna cláusula de contenido que la norma
+exige para un SRS quedó sin sección equivalente en el ERS de MundiPets. La
+distinción entre requisitos de rendimiento (cláusula 3.3) y atributos de
+calidad del software (cláusula 3.5) que la norma trata como categorías separadas se resolvió integrando ambas dentro de la sección única de
+Requisitos no funcionales del documento del equipo, clasificando internamente
+cada RNF según corresponda a rendimiento, seguridad, usabilidad, mantenibilidad
+u otro atributo de calidad; esta es una decisión de organización del equipo,
+no una omisión, y se declara aquí de forma explícita por la misma razón que
+exige la verificabilidad de un requisito individual: que la trazabilidad entre
+lo declarado y lo exigido sea comprobable por cualquier lector, incluido el
+tribunal.
+
+El ERS del equipo contiene, además de las cláusulas normativas anteriores, dos
+bloques de contenido que exceden el mínimo que exige ISO/IEC/IEEE 29148:2018:
+la Sección 6, Producto Mínimo Viable (alcance del MVP, arquitectura de
+despliegue y evidencia de funcionamiento), y la Sección 7, Componente empírico
+del proyecto (protocolo de validación experimental, preguntas de investigación
+en formato PICOC, hipótesis, variables, participantes, instrumentos, plan de
+análisis estadístico y registro previo del protocolo). Ninguno de estos dos
+bloques corresponde a una cláusula de la norma y, por lo tanto, no se fuerza su
+inclusión en la Tabla~\ref{tab:correspondencia-29148}: son contenido adicional
+que el equipo decidió mantener como valor agregado del proyecto integrador,
+más allá de la estructura mínima que un SRS conforme a 29148 exige.
+
+\printbibliography[heading=none]
+
+\end{document}

@@ -1,0 +1,280 @@
+% ============================================================
+%  PE5 -- Unidad 5 | PLANTILLA DE TRABAJO DIVIDIDO
+%  MundiPets -- Plataforma de Adopción y Cruza Responsable de Mascotas
+%  Asignatura: Ingeniería de Requisitos (ISR-401) -- UTEQ 2026-2027 PPA
+%  Formato: IEEE onecolumn | Biber + biblatex (estilo IEEE)
+%  Preámbulo trasplantado y adaptado del ERS_SRS_2B_v2_0.tex del PFC,
+%  para que la PE5 y el ERS compartan exactamente el mismo motor de
+%  compilación (mismo compilador, mismo estilo de citas, misma
+%  numeración de tablas/figuras). Ver Sección 0.6 y 0.7 del cuerpo.
+%
+%  COMO USAR ESTE ARCHIVO
+%  ----------------------
+%  Cada bloque  indica QUE debe producir un
+%  integrante en esa sección. El responsable borra la caja 
+%  y la reemplaza por el contenido real. Cuando no quede ninguna caja
+%  gris en el documento, la PE5 está terminada.
+%
+%  COMPILACIÓN (requiere referencias.bib en la misma carpeta):
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      biber    PE5_U5_Trabajo_Dividido
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+% ============================================================
+\documentclass[journal,onecolumn]{IEEEtran}
+
+% ── Codificación e idioma ───────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[autostyle=true, spanish=mexican]{csquotes}
+\usepackage[htt]{hyphenat}   % permite guionar dentro de \texttt (evita Overfull)
+
+% ── Tablas ──────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+% ── Figuras ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{figuras/}{./}}
+\usepackage{float}
+\usepackage{pdflscape}   % matriz de trazabilidad en horizontal
+
+% ── Color ───────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{uteqverde}{RGB}{0,110,60}
+\definecolor{codegray}{gray}{0.95}
+\definecolor{codegreen}{rgb}{0.0,0.5,0.0}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.6}
+\definecolor{codepurple}{rgb}{0.5,0.0,0.35}
+
+% ── Geometría ───────────────────────────────────────────────
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm,
+	headheight=14pt, footskip=1.2cm}
+
+% ── Encabezado y pie ────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small PE5 -- Unidad 5 -- Ingeniería de Requisitos}
+\fancyhead[R]{\small MundiPets -- Trabajo dividido}
+\fancyfoot[C]{\thepage}
+
+% ── Espaciado y listas ──────────────────────────────────────
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{3em}   % tolerancia extra de línea
+\makeatletter
+\@ifundefined{labelindent}{}{\let\labelindent\relax}
+\makeatother
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% ── Títulos de sección ──────────────────────────────────────
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+% ── Leyendas ────────────────────────────────────────────────
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ── Bibliografía (biber + estilo IEEE) ──────────────────────
+% Mismo motor que el ERS del PFC: ver Sección 0.6 y 0.7 del cuerpo
+% para el orden exacto de compilación.
+\usepackage[
+backend=biber,
+style=ieee,
+citestyle=numeric-comp,
+isbn=true,
+doi=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+% ── Enlaces ─────────────────────────────────────────────────
+\usepackage[hidelinks,colorlinks=false]{hyperref}
+\usepackage{url}
+
+% ============================================================
+%  CAJA DE GUÍA (fondo gris claro, borde negro)
+% ============================================================
+\usepackage{mdframed}
+\mdfdefinestyle{guia}{
+	linecolor=black,
+	linewidth=0.6pt,
+	backgroundcolor=gray!10,
+	innertopmargin=6pt,
+	innerbottommargin=6pt,
+	innerleftmargin=8pt,
+	innerrightmargin=8pt,
+	skipabove=4pt,
+	skipbelow=4pt
+}
+
+% 
+\newcommand{\guia}[2]{%
+	\begin{mdframed}[style=guia]
+		\noindent\textbf{Responsable: #1}\\[2pt]
+		\textit{#2}
+	\end{mdframed}
+}
+
+% -- Atajos de nombres (evita erratas al repetirlos) ---------
+\newcommand{\rFUE}{FUERTES ARRAES, Edson Daniel}
+\newcommand{\rGUT}{GUTIÉRREZ ORTEGA, Génesis Adriana}
+\newcommand{\rMEN}{MENDOZA PÁRRAGA, Andy Johel}
+\newcommand{\rMOR}{MORALES SÁNCHEZ, Gary Alejandro}
+\newcommand{\rNIE}{NIEVES SÁNCHEZ, Jimmy Samuel}
+\newcommand{\rTODOS}{TODO EL EQUIPO}
+
+% ============================================================
+\begin{document}
+	
+	% ============================================================
+	% PORTADA (mismo formato que el ERS del PFC, Apéndice de portada)
+	% ============================================================
+
+	% ============================================================
+	%  SECCION 10 -- CONCLUSIONES
+	% ============================================================
+	\section{Conclusiones}
+	
+	
+	\subsection*{Conclusión 5 --- Unidad 5: Integración, métricas e IA}
+	\addcontentsline{toc}{subsection}{Conclusión 5 --- Unidad 5}
+Especificar los tres componentes de inteligencia artificial de MundiPets obligó a replantear
+el ERS en cuatro aspectos que un requisito determinista no exige. Cada uno de los 27
+requisitos de IA tuvo que fijar un umbral, una unidad y un método de comprobación explícitos
+--85\,\% de coincidencia veterinaria en IA-01, 95\,\% de clasificación correcta en IA-02, 1\,s
+de latencia en IA-03--, en línea con el desplazamiento de programar a entrenar que documentan
+Vogelsang y Borg \cite{vogelsang2019}. Además, cada componente necesitó RNF de equidad entre
+subgrupos (razas, especies, vocabulario) y RNF de explicabilidad (RNF-13, RNF-14, RNF-15) que
+ningún otro requisito del sistema exige, precisamente porque, como muestra la evidencia de
+Habibullah, Gay y Horkoff, estos atributos suelen quedar sin medir si no se exigen de forma
+explícita \cite{habibullah2023}.
+
+La base legal fue el cuarto replanteamiento: el Art.\,20 de la LOPDP (RL-06) no es una
+referencia genérica de ética, sino la fuente normativa directa que obligó a declarar RNF-13
+desde PE3--PE4, y ese mismo principio se extendió en la Sección~\ref{sec:etica_ia} a los tres
+componentes con su base legal, clasificación de riesgo \cite{euaiact2024} y supervisión humana.
+El resultado no fue una sección aislada de IA, sino una extensión del mismo marco de
+verificabilidad del ERS, sostenida por el plan de monitoreo de la Sección~\ref{sec:monitoreo_ia}
+más allá de la entrega de este documento.
+	\newpage
+	
+	% ============================================================
+	%  SECCION 11 -- DEFENSA
+	% =================================================
+	
+	% ============================================================
+	%  ANEXOS
+	% ============================================================
+	\appendix
+	
+	% -- ANEXO A ---------------------------------------------------
+% -- ANEXO B ---------------------------------------------------
+\section{Banco de Preguntas del Tribunal con Respuestas Ancladas}
+\label{app:preguntas}
+
+\begin{longtable}{|c|L{4.4cm}|L{6.6cm}|L{3cm}|}
+	\caption{Preguntas del tribunal, respuesta preparada y artefacto de respaldo.}
+	\label{tab:banco} \\
+	\hline
+	\textbf{\#} & \textbf{Pregunta} & \textbf{Respuesta preparada} & \textbf{Artefacto} \\
+	\hline
+	\endfirsthead
+	
+	\multicolumn{4}{l}{\small\textit{Tabla~\ref{tab:banco} (continuación).}} \\
+	\hline
+	\textbf{\#} & \textbf{Pregunta} & \textbf{Respuesta preparada} & \textbf{Artefacto} \\
+	\hline
+	\endhead
+	
+	\hline
+	\multicolumn{4}{r}{\small\textit{Continúa en la página siguiente.}} \\
+	\endfoot
+	
+	\hline
+	\endlastfoot
+	
+	\multicolumn{4}{|l|}{\textit{Fundamentos}} \\
+	\hline
+	1 & ¿Cuál es la frontera del sistema y qué queda deliberadamente fuera? & El límite comprende gestión de perfiles, publicación de anuncios, búsqueda y comunicación entre usuarios, y registro de información sanitaria validada. Quedan fuera la atención veterinaria en sí misma, el transporte de mascotas y la gestión legal de tenencia. & ERS; diagrama de contexto. \\
+	\hline
+	2 & ¿Por qué se siguió el proceso de PE1 a PE5 y no se especificó todo de una vez? & Porque los requisitos de MundiPets, especialmente los que dependen de evidencia de campo (entrevistas, cuestionario, walkthroughs) y de los componentes de IA, no podían fijarse sin validar primero con los usuarios reales; el proceso iterativo permitió detectar defectos en la PE4 y corregirlos antes de esta entrega. & ERS; historial de versiones del ERS. \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Elicitación}} \\
+	\hline
+	3 & ¿Qué técnicas de elicitación usó el equipo y por qué esas y no otras? & Entrevista semiestructurada como técnica principal (EV-01 a EV-18, EV-23 y EV-24), complementada con un cuestionario (61 respuestas válidas) y con sesiones de validación \textit{walkthrough} grabadas en video con consentimiento (EV-19 a EV-24), sobre usuarios técnicos (veterinarias) y no técnicos (propietarios). Se prefirió esta combinación sobre una encuesta única porque el dominio requiere profundidad sobre procesos poco formalizados que el cuestionario por sí solo no captura. & ERS; cuestionario; evidencia EV-01 a EV-24. \\
+	\hline
+	4 & Muéstrenme un requisito que nació de una entrevista con una veterinaria. & RF-26 y RF-27 nacieron directamente de la evidencia EV-23 (walkthrough/entrevista con PROP-12) y EV-24 (walkthrough/entrevista con VET-07) recolectada específicamente para esta entrega. & ERS; evidencia EV-23/EV-24; historial de versiones del ERS (v4.0). \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Especificación}} \\
+	\hline
+	5 & ¿Cómo se estructura el ERS conforme a la norma que citan? & El ERS sigue la estructura de cláusulas de contenido de ISO/IEC/IEEE 29148:2018, con correspondencia explícita entre cada cláusula de la norma y la sección del documento del equipo. & ERS. \\
+	\hline
+	6 & Muéstrenme un requisito y díganme de qué evidencia concreta nació. & RF-06 (evaluar compatibilidad para cruza) tiene como origen la evidencia EV-01 a EV-08, EV-11, EV-13 a EV-16: los propietarios e interesados en cruza entrevistados señalaron reiteradamente la dificultad de evaluar de forma informal la compatibilidad entre mascotas. & ERS, ficha de RF-06 (campo ``Origen ID de evidencia''). \\
+	\hline
+	7 & ¿Cómo se aplicó MoSCoW y por qué también Kano y WSJF? & MoSCoW clasificó los requisitos por urgencia de implementación (Must/Should/Could/Won't); Kano se usó para distinguir funcionalidades básicas de las que generan satisfacción diferencial, con base en las respuestas del cuestionario; WSJF ordenó el trabajo por relación entre costo del retraso y tamaño del esfuerzo, mostrando que el valor más alto no siempre encabeza la lista de prioridad. & ERS; cuestionario; tablas de priorización MoSCoW, Kano y WSJF. \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Validación}} \\
+	\hline
+	8 & ¿Qué defectos se encontraron en la inspección de la PE4 y cómo se corrigieron? & [Completar con el resumen de defectos de la inspección de la PE4 y las correcciones aplicadas.] & Informe de inspección de la PE4. \\
+	\hline
+	9 & ¿Qué defectos residuales quedaron tras la re-inspección de la PE5? & [Completar con el registro de defectos residuales de la re-inspección.] & Registro de re-inspección; Anexo A. \\
+	\hline
+	10 & ¿Cómo se valida un requisito con criterio BDD? & Cada requisito con criterio BDD comprobable se redacta en formato Dado/Cuando/Entonces y se verifica ejecutando el escenario descrito contra el comportamiento observado del sistema o del MVP. & ERS; Tabla 3, conteo \#11 (requisitos con criterio BDD comprobable). \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Gestión}} \\
+	\hline
+	11 & ¿Cómo se controla la versión del ERS y se evita un identificador duplicado? & El ERS final declara número de versión, fecha de congelación, hash de commit y etiqueta de línea base en Git; se verifica unicidad de identificadores en las series RF, RNF, RL, RD, CU y RF-IA antes de cerrar la entrega. & ERS; repositorio Git (etiqueta de línea base). \\
+	\hline
+	12 & Muéstrenme un requisito nuevo incorporado en esta entrega y díganme por qué. & RF-26 y RF-27, incorporados en la versión 4.0 del ERS a partir de la evidencia EV-23 y EV-24 recolectada para esta entrega, tras la inspección de la PE4. & ERS, historial de versiones (v4.0). \\
+	\hline
+	13 & Tomen un RF y díganme qué se rompería si mañana cambia. & Si RF-06 (evaluar compatibilidad para cruza) cambiara, se rompería su explicabilidad legal asociada (RNF-13, exigida por RL-06, Art.\,20 LOPDP), su métrica de exactitud (RNF-06) y los 9 requisitos de IA-01 que trazan hacia él. & ERS, fichas RF-06/RNF-06/RNF-13/RL-06; Tabla~\ref{tab:req_ia}; matriz de trazabilidad final. \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Inteligencia artificial}} \\
+	\hline
+	14 & ¿Qué componentes de IA tiene MundiPets y por qué esos y no otros? & Tres: evaluación de compatibilidad para cruza (IA-01), validación de imágenes de perfil (IA-02) y moderación de mensajes (IA-03), cada uno justificado con evidencia documental propia (EV-01 a EV-08, EV-11, EV-13 a EV-16 para IA-01; EV-01, EV-03, EV-05, EV-07, EV-08 para IA-02; EV-02, EV-07, EV-08 para IA-03), no por moda tecnológica. & Fichas de componentes de IA, Tablas~\ref{tab:ficha_ia01}--\ref{tab:ficha_ia03}. \\
+	\hline
+	15 & ¿Qué pasa si un componente de IA no está disponible? & Ninguno bloquea el sistema: IA-01 muestra ``compatibilidad no determinada, se recomienda evaluación veterinaria''; IA-02 deriva la imagen a revisión manual; IA-03 entrega los mensajes sin moderación automática. Los tres mantienen $\geq$ 99\,\% de disponibilidad mensual como objetivo. & Fichas de IA-01, IA-02, IA-03 (campo ``Riesgos y \textit{fallback}''); Tabla~\ref{tab:monitoreo_ia}. \\
+	\hline
+	16 & ¿Qué decide el modelo y qué pasa cuando se equivoca? & IA-01 decide un nivel de compatibilidad orientativo, nunca definitivo; IA-02 decide aceptar o rechazar una imagen, con posibilidad de apelación por revisión manual; IA-03 decide bloquear o entregar un mensaje, también apelable. Ningún error de los tres componentes toma la decisión final por el usuario. & Fichas de IA-01, IA-02, IA-03 (campos ``Consumidor del resultado'' y ``Riesgos y \textit{fallback}''). \\
+	\hline
+	17 & ¿Cómo se mide la equidad de los componentes de IA y qué brecha se tolera? & Cada componente mide la diferencia de tasa de acierto (o falso bloqueo/rechazo) entre subgrupos con distinta representación en los datos --razas, especies e iluminación, o tipo de vocabulario y longitud del mensaje-- con una brecha máxima tolerada de 10 puntos porcentuales en los 6 RNF de equidad. & Tabla~\ref{tab:req_ia} (requisitos RNF-IA-04, RNF-IA-05, RNF-IA-10, RNF-IA-11, RNF-IA-16, RNF-IA-17). \\
+	\hline
+	18 & ¿Cuál es la base legal para tratar los datos que usan los componentes de IA? & El consentimiento del titular y la protección de datos desde el diseño conforme a los Art.\,7, 8, 10 lit.\,e y 39 de la LOPDP \cite{lopdp2021} y su Reglamento General \cite{lopdp_reglamento2023}; adicionalmente, IA-01 tiene como base legal directa el derecho a explicación de decisiones automatizadas del Art.\,20 LOPDP (RL-06). & ERS, requisito RL-06; fichas de componentes de IA (campo ``Datos de entrenamiento''). \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Métricas}} \\
+	\hline
+	19 & ¿Qué métrica salió peor y qué hicieron al respecto? & [Completar con la métrica (M1--M6) de menor cumplimiento y la acción de mejora aplicada, una vez cerrada la Tabla de auditoría.] & Tabla de auditoría de calidad; comparación antes/después. \\
+	\hline
+	20 & Enséñenme los conteos con los que calcularon la verificabilidad. & [Completar con los conteos base de M3 --requisitos con criterio BDD comprobable sobre requisitos totales-- y la referencia exacta a la subsección del ERS.] & Tabla 3 (Conteos base del ERS); Anexo A (conteos auditables). \\
+	\hline
+	21 & ¿Por qué el peso de M1 (completitud) es mayor que el de M5 (impacto de cambio)? & Porque la completitud de atributos obligatorios es una condición de piso para que el resto de métricas sea calculable de forma confiable, mientras que el impacto de cambio se mide sobre una muestra y es más sensible a la elección de los cinco requisitos evaluados. & Instrumento de auditoría (pesos M1--M6). \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{Ética e integridad académica}} \\
+	\hline
+	22 & ¿Qué partes del informe fueron asistidas por IA y cómo las validaron? & Cada sección declara la herramienta usada, el tipo de asistencia (redacción, revisión de estilo, generación de código) y el método de validación aplicado; las secciones evaluativas (análisis, conclusiones, justificaciones de decisiones de ingeniería) son producción propia verificada por el equipo. & Declaración de uso de inteligencia artificial por sección. \\
+	\hline
+\end{longtable}
+
+	
+
+\end{document}

@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+
+\title{PE5 -- Vista previa individual\\Sección 9: Retrospectiva del Equipo}
+\author{Nieves Sánchez, Jimmy Samuel}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\section{Retrospectiva del Equipo}
+
+Esta retrospectiva se realizó en formato Start--Stop--Continue, referida al
+proceso real del equipo durante PE1--PE5. Dado que en PE3--PE4 cada
+integrante trabajó en un subgrupo distinto al equipo actual de PFC, la
+evidencia de calidad de la elicitación se documenta por subgrupo de origen
+y se contrasta a continuación con la coordinación real observada en el
+repositorio de la PE5\footnote{No se encontró un repositorio de PE4
+(inspección Fagan) del subgrupo de Fuertes Arraes al momento de redactar
+esta retrospectiva; queda pendiente incorporar esa evidencia si se
+consigue el enlace correspondiente.}.
+
+\begin{longtable}{|p{2.2cm}|p{7.3cm}|p{4.3cm}|}
+	\caption{Retrospectiva Start--Stop--Continue del equipo.} \label{tab:retrospectiva} \\
+	\hline
+	\textbf{Categoría} & \textbf{Elemento (mínimo tres por categoría)} & \textbf{Responsable / acción} \\
+	\hline
+	\endfirsthead
+	\hline
+	\textbf{Categoría} & \textbf{Elemento (mínimo tres por categoría)} & \textbf{Responsable / acción} \\
+	\hline
+	\endhead
+	\hline
+	\endfoot
+	\hline
+	\endlastfoot
+
+	\multirow{3}{*}{Start}
+	& Definir y acordar la Tabla 4 (cronograma de hitos) cuanto antes; a la fecha ningún hito tiene fecha asignada, lo que bloquea coordinar las tres dependencias críticas del equipo. & Nieves Sánchez \\
+	\cline{2-3}
+	& Empezar a hacer commits individuales desde la cuenta propia de cada integrante: a la fecha los dos únicos commits del repositorio de la PE5 pertenecen a la misma persona. & Todo el equipo \\
+	\cline{2-3}
+	& Conseguir y anexar la evidencia de inspección Fagan de la PE4 del subgrupo de Fuertes, que falta para completar el diagnóstico de defectos del equipo completo. & Fuertes Arraes \\
+	\hline
+
+	\multirow{3}{*}{Stop}
+	& Dejar requisitos no funcionales sin criterio de verificación acotado hasta la inspección: le ocurrió tanto al subgrupo de Nieves (RNF-06 sin \% ni tamaño de muestra) como al de Mendoza (las nueve restricciones de diseño RD-01 a RD-09 carecían de este campo). & Fuertes (auditoría M3), Mendoza \\
+	\cline{2-3}
+	& Atar requisitos a un proveedor externo específico sin necesidad: le costó una RFC completa al subgrupo de Morales, cuya restricción de diseño quedó amarrada a un proveedor de mensajería nominal. & Mendoza (requisitos de IA y no funcionales) \\
+	\cline{2-3}
+	& Declarar alcance del sistema sin respaldo de evidencia: dos funciones tuvieron que eliminarse del alcance en el subgrupo de Morales por no contar con evidencia de campo ni figurar en la matriz de trazabilidad. & Todo el equipo, al redactar la Sección 1 \\
+	\hline
+
+	\multirow{3}{*}{Continue}
+	& Seguir usando el formato RFC + Acta CCB para gestionar cambios al ERS: los tres subgrupos con evidencia disponible (Nieves, Mendoza, Morales) lo usaron y cerraron defectos reales mediante este mecanismo. & Gutiérrez Ortega; Fuertes y Gutiérrez (re-medición) \\
+	\cline{2-3}
+	& Seguir revisando la exposición de datos sensibles en los requisitos: el subgrupo de Morales corrigió un defecto crítico real en el que un requisito exponía datos de contacto directo. & Gutiérrez (base legal de IA), Mendoza \\
+	\cline{2-3}
+	& Seguir verificando que las cifras sean consistentes en toda la matriz de trazabilidad: los tres subgrupos con evidencia disponible tuvieron que corregir inconsistencias numéricas reales entre secciones del documento. & Morales Sánchez \\
+	\hline
+\end{longtable}
+
+\end{document}

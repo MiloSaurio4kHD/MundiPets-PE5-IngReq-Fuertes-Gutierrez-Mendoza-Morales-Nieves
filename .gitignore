@@ -24,6 +24,7 @@
 *.listing
 *.bcf-SAVE-ERROR
 *-blx.bib
+*.synctex(busy)
 
 # El PDF final SI se versiona: se excluye la carpeta de build
 build/

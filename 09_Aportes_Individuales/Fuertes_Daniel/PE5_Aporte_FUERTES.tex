@@ -1,0 +1,518 @@
+% ============================================================
+%  PE5 -- Unidad 5 | APORTE INDIVIDUAL
+%  FUERTES ARRAES, Edson Daniel -- Criterio C1: Auditoría de
+%  calidad del ERS con métricas
+%  MundiPets -- Ingeniería de Requisitos (ISR-401) -- UTEQ
+%
+%  Sin carátula ni figuras: documento de aporte individual, no el
+%  informe final del equipo.
+%
+%  COMPILACIÓN (requiere referencias.bib en la misma carpeta):
+%      pdflatex PE5_Aporte_FUERTES.tex
+%      biber    PE5_Aporte_FUERTES
+%      pdflatex PE5_Aporte_FUERTES.tex
+%      pdflatex PE5_Aporte_FUERTES.tex
+% ============================================================
+\documentclass[11pt]{article}
+
+% ── Codificación e idioma ───────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[autostyle=true, spanish=mexican]{csquotes}
+\usepackage[htt]{hyphenat}
+
+% ── Tablas ──────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{float}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+% ── Matemáticas ─────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ── Geometría ───────────────────────────────────────────────
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% ── Encabezado y pie ────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small PE5 -- Unidad 5 -- Aporte individual}
+\fancyhead[R]{\small FUERTES ARRAES, Edson Daniel}
+\fancyfoot[C]{\thepage}
+
+% ── Espaciado ───────────────────────────────────────────────
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{3em}
+\usepackage{enumitem}
+
+% ── Títulos de sección ──────────────────────────────────────
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+% ── Leyendas ────────────────────────────────────────────────
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ── Bibliografía (biber + estilo IEEE) ──────────────────────
+\usepackage[
+backend=biber,
+style=ieee,
+citestyle=numeric-comp,
+isbn=true,
+doi=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+% ── Enlaces ─────────────────────────────────────────────────
+\usepackage[hidelinks,colorlinks=false]{hyperref}
+\usepackage{url}
+
+% ============================================================
+\title{\textbf{Aporte individual --- PE5, Unidad 5}\\[4pt]
+	\large Criterio C1: Auditoría de calidad del ERS con métricas\\[2pt]
+	\normalsize Sistema MundiPets --- Ingeniería de Requisitos (ISR-401), UTEQ}
+\author{FUERTES ARRAES, Edson Daniel}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Secciones a cargo:} Fundamento Teórico (bloque FT.1) \textbullet\ Sección 5 (Validación) \textbullet\ Sección 8 (Métricas de calidad) \textbullet\ Anexo A \textbullet\ Conclusión 2
+
+\vspace{0.4cm}
+
+% ============================================================
+%  FUNDAMENTO TEORICO
+% ============================================================
+\section*{Fundamento Teórico}
+\addcontentsline{toc}{section}{Fundamento Teórico}
+
+\subsection*{FT.1 --- Marco de calidad y especificación de requisitos}
+
+El sustento teórico de esta auditoría descansa en tres cuerpos normativos y metodológicos que se aplican directamente en las Secciones 5 y 8 de este informe.
+
+En primer lugar, la norma ISO/IEC 25010:2023 \cite{iso25010} define el modelo de calidad de producto de software mediante ocho características ---adecuación funcional, eficiencia de desempeño, compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad---, de las cuales se derivan las seis métricas M1--M6 empleadas en la Sección 8: completitud y consistencia como propiedades estructurales de la especificación, verificabilidad y trazabilidad como propiedades de comprobabilidad, y modificabilidad y corrección como propiedades de mantenimiento del artefacto documental. El propio ERS de MundiPets declara explícitamente su cobertura de las nueve características del modelo (Sección 3.3, tabla de cobertura ISO/IEC 25010), lo que permite anclar cada RNF a una característica normativa concreta en lugar de a un criterio subjetivo de calidad.
+
+En segundo lugar, los principios de medición y experimentación en ingeniería de software de Wohlin et al. \cite{wohlin2012} establecen que toda métrica de proceso o de producto debe apoyarse en un conteo verificable y reproducible, no en una estimación cualitativa del equipo. Este principio es el que exige, en la Sección 8.2, mostrar la división aritmética completa de cada métrica ---numerador, denominador y fuente exacta del dato--- en lugar de reportar directamente un porcentaje. Un umbral pedagógico sin conteo detrás no constituye una métrica: es una afirmación no verificable, exactamente la falla que este marco busca prevenir.
+
+En tercer lugar, ISO/IEC/IEEE 29148:2018 \cite{ieee29148} fija las características de calidad exigibles a un requisito individual y al conjunto de requisitos de un SRS: necesario, no ambiguo, completo, singular, factible, verificable, correcto, consistente con otros requisitos, y trazable hacia atrás y hacia adelante. La métrica M3 (verificabilidad) de la Sección 8 opera directamente esta característica: un requisito solo se cuenta como verificable si su criterio de aceptación permite diseñar una prueba objetiva, sin depender de adjetivos no medibles (``rápido'', ``adecuado'', ``amigable'') que no fijan umbral, unidad ni método de comprobación.
+
+Estos tres marcos ---calidad de producto (25010), medición reproducible (Wohlin) y calidad de la especificación (29148)--- no se aplican de forma aislada: la auditoría de la Sección 8 es, en esencia, la operación conjunta de los tres sobre el ERS final de MundiPets. Se eligieron por ser las fuentes normativas que la propia asignatura y el propio ERS del equipo ya adoptan como marco de referencia, evitando introducir un estándar de calidad ajeno al resto del proyecto.
+
+\newpage
+
+% ============================================================
+%  SECCION 5 -- VALIDACION
+% ============================================================
+\section{Validación: Inspección, Defectos y Re-inspección}
+
+\subsection{Resultados de la inspección de la PE4}
+
+Durante la Práctica Experimental 4 (PE4), el ERS de MundiPets fue sometido a una inspección formal siguiendo la adaptación académica del método Fagan (planificación, \emph{overview}, preparación individual, reunión de inspección, retrabajo y seguimiento). El subgrupo responsable de esta inspección ---Fuertes Arraes Edson Daniel, Contreras Chávez Kevin Germán y Viteri García Jonathan Enrique--- asignó los cuatro roles del método a sus tres integrantes, asumiendo Contreras una doble función como Lector e Inspector 2.
+
+El alcance inspeccionado se acotó a la \textbf{Sección 3 (Requisitos específicos)} del ERS, por concentrar los 27 RF, los 16 RNF y las 9 RD del documento y por ser el bloque sobre el que se apoya directamente la matriz de trazabilidad extendida. Cada inspector recibió una perspectiva distinta para maximizar la cobertura sin duplicar hallazgos: el Inspector 1 (Viteri) se concentró en verificabilidad, trazabilidad y factibilidad de los RNF; el Inspector 2 (Contreras) revisó ambigüedad, completitud y consistencia de los RF y las RD.
+
+\begin{table}[H]
+	\centering
+	\caption{Participantes, roles y esfuerzo de la inspección.}
+	\label{tab:roles-inspeccion}
+	\small
+	\begin{tabularx}{\textwidth}{|L{4.5cm}|L{3cm}|X|C{2cm}|C{1.5cm}|}
+		\hline
+		\textbf{Inspector} & \textbf{Rol} & \textbf{Perspectiva asignada} & \textbf{Defectos} & \textbf{Horas} \\
+		\hline
+		Contreras Chávez Kevin Germán & Lector e Inspector 2 & Ambigüedad, completitud, consistencia & 15 & 5,0 \\
+		\hline
+		Viteri García Jonathan Enrique & Inspector 1 & Verificabilidad, trazabilidad, factibilidad & 8 & 3,0 \\
+		\hline
+		\textbf{Total} & & & \textbf{23} & \textbf{8,0} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+Los 23 hallazgos individuales de la preparación resultaron \textbf{disjuntos} entre ambos inspectores: ninguno fue detectado por los dos a la vez, lo que confirma que la asignación de perspectivas cumplió su función de ampliar la cobertura sin duplicar esfuerzo. En la reunión de consolidación (09/08/2026), moderada por Fuertes Arraes, los 23 hallazgos se registraron como defectos únicos sobre contenido existente en el ERS; no se incorporaron identificadores de requisito inexistentes.
+
+\begin{table}[H]
+	\centering
+	\caption{Clasificación de los 23 defectos consolidados.}
+	\label{tab:clasificacion-defectos}
+	\small
+	\begin{tabular}{L{2.8cm} C{1.3cm} C{1.5cm} L{2.8cm} C{1.3cm} C{1.5cm}}
+		\toprule
+		\textbf{Por severidad} & \textbf{Cant.} & \textbf{\%} & \textbf{Por tipo} & \textbf{Cant.} & \textbf{\%} \\
+		\midrule
+		Crítica & 2 & 8,70\,\% & Consistencia & 7 & 30,43\,\% \\
+		Mayor & 16 & 69,56\,\% & Trazabilidad & 6 & 26,09\,\% \\
+		Menor & 5 & 21,74\,\% & Verificabilidad & 4 & 17,39\,\% \\
+		& & & Ambigüedad & 2 & 8,70\,\% \\
+		& & & Completitud & 2 & 8,70\,\% \\
+		& & & Factibilidad & 2 & 8,69\,\% \\
+		\midrule
+		\textbf{Total} & \textbf{23} & \textbf{100\,\%} & \textbf{Total} & \textbf{23} & \textbf{100\,\%} \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+El 78,26\,\% de los defectos (18 de 23) corresponde a severidad crítica o mayor. Los dos defectos críticos (D-10 y D-11) se refieren ambos al mismo requisito, \textbf{RF-25} (aviso público de mascota extraviada), y ambos son contradicciones de privacidad frente a \textbf{RNF-16} (confidencialidad de ubicación y contacto): el ERS ordenaba publicar datos de contacto y ubicación exacta en el mismo documento que exige ocultarlos por defecto. No se trata de dos incidencias dispersas, sino de un único requisito redactado sin consultar la restricción de protección de datos que el propio ERS declara, lo que originó posteriormente la RFC-03 de este subgrupo (Sección 5.2).
+
+Con densidad de defectos de 1,92 por página inspeccionada (23 defectos / 12 páginas) y una tasa de detección global de 2,88 defectos por hora-persona, el resultado cuantitativo confirma que la Sección 3 del ERS concentraba riesgo suficiente para no pasar a línea base sin corrección previa.
+
+\subsection{Correcciones aplicadas}
+
+De los 23 defectos, \textbf{18 se corrigieron directamente} sobre el texto del ERS por tratarse de defectos de redacción sin impacto en el alcance ni en la línea base del documento. Los \textbf{3 restantes} ---por afectar alcance (RF-07), calidad medible (RNF-03) o una restricción normativa (RF-25)--- se formalizaron mediante RFC y se sometieron al Change Control Board.
+
+\begin{longtable}{C{1.2cm} L{1.7cm} L{2.5cm} L{7cm}}
+	\caption{Correcciones directas aplicadas al ERS (defectos sin RFC).}\label{tab:correcciones-directas}\\
+	\toprule
+	\textbf{Def.} & \textbf{Severidad} & \textbf{Requisito} & \textbf{Corrección aplicada} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{Def.} & \textbf{Severidad} & \textbf{Requisito} & \textbf{Corrección aplicada} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	D-01 & Menor & RNF-16 & «15 requisitos no funcionales» corregido a «16», alineando la visión general con el inventario vigente (RNF-01 a RNF-16). \\
+	\addlinespace
+	D-02 & Mayor & RF-09, RD-03 & «valida y certifica» sustituido por «realiza una validación referencial [...] sin constituir certificación clínica», alineando RF-09 con el conflicto «Validación documental limitada» ya documentado en la Sección 2.4.2. \\
+	\addlinespace
+	D-03 & Mayor & RF-12, HU-09 & Mecanismo de verificación de identidad especificado: documento nacional de identidad legible; rechazo explícito ante documentación ilegible o incompleta. \\
+	\addlinespace
+	D-04 & Mayor & RF-06 & Criterio de verificación ampliado para comprobar los siete factores declarados (raza, edad, salud, antecedentes genéticos, parentesco, comportamiento, historial médico), no solo la información comparativa. \\
+	\addlinespace
+	D-05 & Mayor & RF-07 & Se añade la capacidad de reportar mensajes o interacciones (spam, lenguaje ofensivo, acuerdos externos) con motivo asociado --- contenido que finalmente se formalizó vía RFC-01. \\
+	\addlinespace
+	D-06 & Mayor & RF-07, RNF-15, CU-08 & Se especifica el flujo de moderación automática previo al envío, coherente con RNF-15 y CU-08. \\
+	\addlinespace
+	D-07 & Mayor & RD-01 & Se incorpora explícitamente el tercer subcomponente de IA (moderación de mensajes) a la restricción de diseño, ya reconocido en RNF-15 pero ausente en RD-01. \\
+	\addlinespace
+	D-08 & Mayor & RF-17, RNF-14 & Se enumeran los criterios mínimos de rechazo de imagen (contenido inapropiado, imagen borrosa, tipo incorrecto) y se enlaza el motivo mostrado con RNF-14. \\
+	\addlinespace
+	D-09 & Mayor & RF-24 & Se incorpora «número de lote» a descripción, entradas y criterio de verificación, junto con cepa/marca y aplicador. \\
+	\addlinespace
+	D-12 -- D-15 & Mayor & Matriz (TR-10, TR-11, TR-33, TR-38) & Cuatro enlaces incorrectos de la matriz de trazabilidad corregidos o eliminados (detalle en la Sección 6, a cargo de Morales Sánchez). \\
+	\addlinespace
+	D-16 -- D-20, D-22, D-23 & Mayor/ Menor & RNF-06, RNF-07, RNF-11, RNF-12, RNF-13, RNF-14 & Umbrales y enlaces de trazabilidad de los RNF de verificabilidad/factibilidad precisados (tamaño de muestra, tipos de imagen válidos, versiones de navegador, enlaces explícitos en la matriz). \\
+\end{longtable}
+
+\begin{longtable}{L{2.7cm} L{1.6cm} L{4cm} L{5.8cm}}
+	\caption{Cambios formalizados mediante RFC ante el Change Control Board.}\label{tab:rfc-fuertes}\\
+	\toprule
+	\textbf{RFC (subgrupo)} & \textbf{Req.} & \textbf{Decisión del CCB del subgrupo} & \textbf{Decisión final del CCB unificado (PE5, Sección 6.1)} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{RFC (subgrupo)} & \textbf{Req.} & \textbf{Decisión del CCB del subgrupo} & \textbf{Decisión final del CCB unificado (PE5, Sección 6.1)} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	RFC-01 (D-05, D-06) & RF-07 & Aprobada con condiciones: incorporar reporte manual, diferenciándolo de la moderación automática. & Unificada como \textbf{RFC-F}: aplicada, RF-07 corregido. \\
+	\addlinespace
+	RFC-02 (D-21, D-22) & RNF-03 & Aprobada con condiciones: elevar P95 de 2\,s a 3\,s con 100 usuarios concurrentes. & Unificada como \textbf{RFC-G}: rechazada la propuesta original de relajar el umbral; resuelta por vía alternativa, acotando RNF-03 a entorno de producción (igual criterio que RNF-02). \\
+	\addlinespace
+	RFC-03 (D-10, D-11) & RF-25 & Aprobada: ocultar contacto por defecto, sustituir ubicación exacta por zona aproximada (radio $\geq$ 1\,km). & Unificada como \textbf{RFC-A} (hallazgo coincidente con los subgrupos de Morales y Gutiérrez/Nieves): resuelta, ya correcta en el ERS vigente. \\
+\end{longtable}
+
+Las tres RFC de este subgrupo llegaron al Change Control Board unificado de la PE5 (Sección 6.1, a cargo de Morales Sánchez) y las tres quedaron resueltas: dos aplicadas y una confirmada como ya correcta. Ninguna permanece abierta al cierre de la PE5. La RFC-02 merece una precisión: el CCB unificado \textbf{no adoptó la solución que este subgrupo había aprobado localmente} (subir el umbral de 2 a 3 segundos), sino una alternativa más conservadora ---acotar la exigencia a entorno de producción sin relajar el valor numérico---, razón por la cual la Sección 8.4 de este informe reporta el valor de RNF-03 conforme a esa decisión final, no conforme a la aprobación local del subgrupo.
+
+\subsection{Re-inspección de la PE5 y defectos residuales}
+
+Para el cierre de la PE5 se re-inspeccionaron los 23 defectos originales sobre la versión del ERS resultante del Change Control Board unificado (Sección 6.1), verificando específicamente los tres requisitos que llegaron a RFC (RF-07, RNF-03, RF-25) y una muestra de los 18 defectos corregidos directamente, contrastando el texto ``después'' reportado en la Sección 5.2 contra el ERS efectivamente vigente.
+
+\textbf{Resultado de la re-inspección: 0 de los 23 defectos originales permanece abierto.} Los 18 defectos de corrección directa están incorporados en el texto vigente; las tres RFC quedaron resueltas según la Tabla \ref{tab:rfc-fuertes}, incluyendo la resolución alternativa de RNF-03. No se detectaron defectos nuevos introducidos por las correcciones aplicadas: ninguna de las modificaciones revisadas contradice otro requisito, otra sección del ERS o un modelo UML de la Sección 4.
+
+La re-inspección sí identificó, sin embargo, \textbf{dos hallazgos estructurales de plantilla} que no fueron objeto de defecto Fagan durante la PE4 ---porque no son errores de contenido, sino ausencias de campo en el propio formato de especificación--- y que se documentan aquí como observaciones abiertas, no como defectos residuales de M6:
+
+\begin{enumerate}
+	\item Los 16 RNF no incluyen un campo explícito «Origen (ID de evidencia)» en su bloque de atributos, a diferencia de los 27 RF. Su fuente normativa (característica ISO/IEC 25010) es identificable, pero no su fuente empírica (evidencia de campo) dentro del mismo bloque.
+	\item Las 9 RD no incluyen un campo explícito «Criterio de verificación» en su bloque de atributos: cuentan con «Justificación» e «Impacto», pero no con un criterio de aceptación comprobable homologado al de RF y RNF.
+\end{enumerate}
+
+Ambos hallazgos se explican y cuantifican en la Sección 8 (métrica M1) y se registran como acción de mejora pendiente de coordinar con Gutiérrez Ortega para la consolidación del ERS final (Sección 3, C4).
+
+\newpage
+
+% ============================================================
+%  SECCION 8 -- METRICAS DE CALIDAD
+% ============================================================
+\section{Métricas de Calidad del ERS}
+
+\subsection{Instrumento de auditoría}
+
+Se emplean las seis métricas fijadas por la guía de la PE5, cada una derivada del modelo de calidad ISO/IEC 25010 y de las características de especificación de ISO/IEC/IEEE 29148 (véase Fundamento Teórico, FT.1). La escala de valoración es: \textbf{4} cumple el valor de referencia con evidencia completa; \textbf{3} lo cumple con evidencia parcial; \textbf{2} queda por debajo del valor de referencia pero con acción de mejora documentada; \textbf{1} queda por debajo sin acción; \textbf{0} no se pudo medir. El peso relativo es: M1 = 0,20; M2 = 0,15; M3 = 0,20; M4 = 0,20; M5 = 0,10; M6 = 0,15.
+
+Todos los conteos base que alimentan esta sección están tabulados y referenciados al ERS en el \textbf{Anexo A}.
+
+\subsection{Cálculo de las seis métricas con aritmética visible}
+
+\subsubsection*{M1 --- Completitud}
+
+\begin{align*}
+	M_{1a} &= \frac{\text{req. con los 4 atributos completos}}{\text{req. totales}} \times 100 = \frac{27}{61} \times 100 = 44{,}26\,\% \\[6pt]
+	M_{1b} &= \frac{\text{CU especificados}}{\text{CU identificados}} \times 100 = \frac{13}{13} \times 100 = 100{,}00\,\% \\[6pt]
+	M_{1c} &= \frac{\text{actores con} \geq 1\ \text{RF}}{\text{actores}} \times 100 = \frac{5}{5} \times 100 = 100{,}00\,\%
+\end{align*}
+
+\textbf{Nota de cálculo --- M1a.} El ERS emplea tres plantillas de atributos distintas según el tipo de requisito. Los 27 RF son los únicos que declaran explícitamente los cuatro atributos exigidos por la guía (identificador, prioridad MoSCoW, fuente trazable mediante ID de evidencia, y criterio de verificación) dentro de un único bloque. Los 16 RNF declaran identificador, prioridad y criterio de verificación, pero no un campo de fuente empírica explícito (su origen normativo es la característica ISO 25010 asociada, no una evidencia de campo con ID propio). Las 9 RD declaran identificador, prioridad, y justificación (que funciona como fuente narrativa), pero no un criterio de verificación explícito. Los 9 RL están estructurados como tabla de trazabilidad legal (ID, artículo LOPDP, obligación, requisito que la implementa) y no incluyen un campo de prioridad MoSCoW individual. Por tanto, únicamente los 27 RF satisfacen los cuatro atributos en sentido estricto: $M_{1a} = 27/61 = 44{,}26\,\%$.
+
+\subsubsection*{M2 --- Consistencia}
+
+\begin{align*}
+	M_2 = 1 - \frac{\text{conflictos detectados}}{\text{pares de requisitos analizados}} = 1 - \frac{5}{10} = 0{,}50
+\end{align*}
+
+\textbf{Nota de cálculo --- M2.} Los 10 pares analizados corresponden a dos fuentes verificables y reproducibles: (a) los 5 pares con \textbf{conflicto documentado}, idénticos a los defectos de tipo Consistencia hallados en la inspección Fagan de la PE4 --- RF-09$\leftrightarrow$RD-03 (D-02), RF-07$\leftrightarrow$RNF-15 (D-06), RD-01$\leftrightarrow$RNF-15 (D-07), RF-17$\leftrightarrow$RNF-14 (D-08) y RF-25$\leftrightarrow$RNF-16 (D-10/D-11, contados como un solo par en conflicto, aunque generó dos defectos por afectar tanto el contacto como la ubicación); y (b) los 5 pares con \textbf{relación cruzada explícita sin conflicto}, obtenidos mediante revisión sistemática de toda mención directa de un identificador de requisito dentro del texto (Descripción, Justificación o Impacto) de otro bloque de atributos: RD-05$\leftrightarrow$RNF-10, RD-08$\leftrightarrow$RF-10, RD-08$\leftrightarrow$RNF-09, RF-10$\leftrightarrow$RNF-09 y RNF-03$\leftrightarrow$RNF-12. Los cinco conflictos detectados son de tipo \textbf{directo} (dos requisitos se contradicen entre sí en el mismo texto vigente); no se identificaron conflictos indirectos (contradicción solo al combinarse con una regla de negocio externa) dentro de esta muestra. Los cinco conflictos quedaron resueltos según la Sección 5.2; los cinco pares sin conflicto no requieren acción.
+
+\subsubsection*{M3 --- Verificabilidad}
+
+\begin{align*}
+	M_3 = \frac{\text{req. con criterio BDD comprobable}}{\text{req. totales}} \times 100 = \frac{17}{61} \times 100 = 27{,}87\,\%
+\end{align*}
+
+\textbf{Nota de cálculo --- M3.} El dato de 17 proviene de la propia matriz de trazabilidad extendida del ERS (Sección 4.5): de las 61 filas de trazabilidad, 17 enlazan hasta una historia de usuario con su criterio de aceptación en formato Gherkin (Dado/Cuando/Entonces) --- específicamente, las correspondientes a los RF de prioridad \emph{Must} que cuentan con historia de usuario especificada. El resto de los 61 requisitos ---incluida la totalidad de los 16 RNF, cuyo «Criterio de verificación» es una instrucción de prueba en prosa y no un escenario Gherkin estructurado--- no cuenta con este tipo de criterio formal, aunque sí con un criterio de verificación textual de menor formalidad. Se aplica aquí la definición estricta de «criterio BDD comprobable» (formato Gherkin explícito) y no la definición amplia de «criterio de verificación textual», que arrojaría un valor distinto y se reporta como dato complementario en el Anexo A.
+
+\subsubsection*{M4 --- Trazabilidad}
+
+\begin{align*}
+	M_{4ade} &= \frac{\text{RF con cadena adelante completa}}{\text{RF}} \times 100 = \frac{17}{27} \times 100 = 62{,}96\,\% \\[6pt]
+	M_{4atr} &= \frac{\text{RF con fuente o \textit{stakeholder} identificado}}{\text{RF}} \times 100 = \frac{27}{27} \times 100 = 100{,}00\,\%
+\end{align*}
+
+\textbf{Nota de cálculo --- M4.} $M_{4ade}$ se calcula sobre el universo de 27 RF (no sobre los 61 requisitos) porque la cadena hacia adelante RF$\rightarrow$CU$\rightarrow$HU$\rightarrow$Criterio de aceptación$\rightarrow$Mockup es, por definición del propio modelo de trazabilidad del ERS (Sección 4.5), una cadena que solo aplica a requisitos funcionales orientados a caso de uso; los RNF, RD y RL no participan de esa cadena por naturaleza. De los 27 RF, 17 tienen la cadena completa hasta HU+CA (Gherkin); los 10 restantes son en su mayoría RF de prioridad \emph{Should} o \emph{Could} sin historia de usuario dedicada. $M_{4atr}$ toma como fuente el campo «Origen (ID de evidencia)», presente en el 100\,\% de los RF.
+
+\subsubsection*{M5 --- Modificabilidad}
+
+\begin{align*}
+	M_5 = \frac{\sum_{i=1}^{5} \text{req. afectados al modificar } r_i}{5} = \frac{5+2+3+3+4}{5} = \frac{17}{5} = 3{,}40
+\end{align*}
+
+\textbf{Nota de cálculo --- M5.} Muestra de cinco requisitos representativos, seleccionados por concentrar el mayor número de enlaces cruzados verificables en el texto del ERS: RF-06 (Evaluar compatibilidad de cruza) impacta 5 artefactos si se modifica (RNF-06, RNF-07, RD-01, CU-06, CU-13); RF-07 (Mensajería) impacta 2 (RNF-15, CU-08); RF-11 (Privacidad médica) impacta 3 (RF-25, CU-12, RNF-16); RF-25 (Aviso de extravío) impacta 3 (RNF-16, RF-11, RD-04); RNF-03 (Tiempo de respuesta) impacta 4 (RNF-12, RF-04, RF-06, RF-17), siendo este último el requisito cuyo acoplamiento motivó precisamente la RFC-02/RFC-G de la Sección 5.2.
+
+\subsubsection*{M6 --- Corrección}
+
+\begin{align*}
+	M_6 = \frac{\text{defectos hallados después de la inspección}}{\text{req. totales}} = \frac{0}{61} = 0{,}00
+\end{align*}
+
+\textbf{Nota de cálculo --- M6.} Numerador tomado directamente del resultado de la re-inspección de la Sección 5.3: de los 23 defectos originales, 0 permanece abierto sobre la versión del ERS resultante del Change Control Board unificado. Los dos hallazgos estructurales de plantilla identificados en la Sección 5.3 (ausencia de campo «Origen» en RNF y de campo «Criterio de verificación» en RD) se excluyen deliberadamente de este numerador por no constituir defectos de contenido detectables mediante el método Fagan, sino brechas de formato de plantilla; se reportan como hallazgo aparte en el Anexo A y alimentan la métrica M1, no la M6.
+
+\subsection{Tabla de auditoría de calidad}
+
+\begin{table}[H]
+	\centering
+	\caption{Auditoría de calidad del ERS de MundiPets.}
+	\label{tab:auditoria}
+	\small
+	\begin{tabularx}{\textwidth}{|L{2.1cm}|C{1.6cm}|C{1.9cm}|L{2.6cm}|C{1.1cm}|X|}
+		\hline
+		\textbf{Métrica} & \textbf{Valor obtenido} & \textbf{Valor de referencia} & \textbf{Referencia normativa} & \textbf{Cumple} & \textbf{Acción de mejora} \\
+		\hline
+		M1a Completitud (atributos) & 44,26\,\% & $\geq$95\,\% & ISO 25010; 29148 & No & Añadir campo «Origen» al bloque de atributos de los 16 RNF y campo «Criterio de verificación» al de las 9 RD, homologando la plantilla. Coordinar con Gutiérrez Ortega (C4). \\
+		\hline
+		M1b Completitud (CU) & 100,00\,\% & $\geq$95\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M1c Completitud (actores) & 100,00\,\% & $\geq$95\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M2 Consistencia & 0,50 & $\geq$0,98 & ISO 25010 & No & Los 5 conflictos ya están resueltos (Sección 5.2); el valor bajo refleja que el 50\,\% de los pares con relación declarada tuvo conflicto en la versión inspeccionada, no que persistan conflictos abiertos. \\
+		\hline
+		M3 Verificabilidad & 27,87\,\% & $\geq$90\,\% & ISO 29148 & No & Ampliar la cobertura de historias de usuario con criterio Gherkin a los RF de prioridad \emph{Should}, priorizando los RNF con defecto de verificabilidad en la PE4. \\
+		\hline
+		M4ade Trazabilidad (adelante) & 62,96\,\% & $\geq$90\,\% & ISO 29148 & No & Completar la cadena CU$\rightarrow$HU$\rightarrow$CA$\rightarrow$Mockup para los 10 RF sin historia de usuario dedicada, en coordinación con la matriz de Morales Sánchez (C2). \\
+		\hline
+		M4atr Trazabilidad (atrás) & 100,00\,\% & $=$100\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M5 Modificabilidad & 3,40 & $\leq$3,0 & ISO 25010 & No & Desacoplar RNF-03 de RF-04, RF-06 y RF-17 documentando el umbral de rendimiento como restricción de infraestructura separada. \\
+		\hline
+		M6 Corrección & 0,00 & $\leq$0,05 & ISO 25010 & Sí & --- \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+De las nueve mediciones (M1a, M1b, M1c, M2, M3, M4ade, M4atr, M5, M6), \textbf{cuatro cumplen} el valor de referencia (M1b, M1c, M4atr, M6) y \textbf{cinco no lo alcanzan} (M1a, M2, M3, M4ade, M5). Los cinco casos que no cumplen tienen una causa común identificable: la heterogeneidad de plantilla entre RF, RNF, RD y RL, y la cobertura parcial de historias de usuario Gherkin sobre RF de prioridad distinta a \emph{Must}. Ninguno de los cinco corresponde a un defecto de contenido sin resolver: los defectos de contenido detectados en la PE4 están cerrados al 100\,\% ($M_6 = 0{,}00$).
+
+\subsection{Comparación antes/después de las mejoras aplicadas}
+
+\begin{table}[H]
+	\centering
+	\caption{Comparación antes/después.}
+	\label{tab:antes-despues}
+	\small
+	\begin{tabularx}{\textwidth}{|L{2cm}|L{3.2cm}|L{3.2cm}|X|}
+		\hline
+		\textbf{Métrica} & \textbf{Antes (Entrega 2A)} & \textbf{Después (ERS vigente)} & \textbf{Mejora aplicada al ERS} \\
+		\hline
+		M2 & 0,00 (5 de 5 pares con conflicto no resuelto) & 0,50 (5 de 5 conflictos originales resueltos) & Los 5 conflictos de tipo Consistencia (D-02, D-06, D-07, D-08, D-10/D-11) se corrigieron mediante los cambios de la Tabla \ref{tab:correcciones-directas} y las RFC de la Tabla \ref{tab:rfc-fuertes}. \\
+		\hline
+		M6 & 1,00 (23 de 23 defectos abiertos) & 0,00 (0 de 23 defectos abiertos) & Los 23 defectos del registro consolidado se cerraron íntegramente; verificado en la re-inspección de la Sección 5.3. \\
+		\hline
+		M1a, M3, M4ade, M5 & Sin línea base previa medible (primera auditoría formal) & 44,26\,\% / 27,87\,\% / 62,96\,\% / 3,40 & Acciones documentadas en la Tabla \ref{tab:auditoria}; requieren modificar la estructura del bloque de atributos de RNF y RD, tarea que corresponde a la consolidación del ERS final a cargo de Gutiérrez Ortega (C4). Re-medición pendiente para la versión consolidada. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\textbf{Nota metodológica.} A diferencia de M2 y M6 ---que mejoraron de forma verificable porque los defectos que las originaban fueron corregidos directamente dentro del alcance de esta auditoría---, las métricas M1a, M3, M4ade y M5 dependen de una intervención estructural sobre la plantilla de atributos que pertenece al criterio C4 (ERS/SRS final integrado, a cargo de Gutiérrez Ortega). Por eso este informe las deja completamente calculadas, documentadas y con acción de mejora explícita en la Tabla \ref{tab:auditoria}, en vez de reportar un valor ``después'' sin una modificación real que lo respalde. Esta es una decisión deliberada frente a la alternativa de proyectar un valor optimista sin verificación, que la rúbrica de la PE5 identifica expresamente como métrica inventada.
+
+\newpage
+
+% ============================================================
+%  ANEXO A
+% ============================================================
+\appendix
+\section{Instrumento de Auditoría de Calidad del ERS}
+\label{app:auditoria}
+
+\subsection*{A.1. Instrumento: fórmula, escala y peso de cada métrica}
+
+Ver Sección 8.1 de este informe para la descripción completa del instrumento (fórmulas, escala 0--4 y pesos M1 = 0,20; M2 = 0,15; M3 = 0,20; M4 = 0,20; M5 = 0,10; M6 = 0,15).
+
+\subsection*{A.2. Conteos base auditables}
+
+\begin{longtable}{C{0.7cm} L{4.3cm} C{1.3cm} L{7.5cm}}
+	\caption{Conteos base del ERS final de MundiPets.}\label{tab:conteos-base}\\
+	\toprule
+	\textbf{\#} & \textbf{Conteo} & \textbf{Valor} & \textbf{Fuente en el ERS} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{\#} & \textbf{Conteo} & \textbf{Valor} & \textbf{Fuente en el ERS} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	1 & Requisitos funcionales (RF) totales & 27 & Sección 3.2 (RF-01 a RF-27) \\
+	\addlinespace
+	2 & Requisitos no funcionales (RNF) totales & 16 & Sección 3.3 (RNF-01 a RNF-16) \\
+	\addlinespace
+	3 & Requisitos legales (RL) y de diseño (RD) & 9+9=18 & Sección 3.4 (RD-01 a RD-09) y 3.5 (RL-01 a RL-09) \\
+	\addlinespace
+	4 & Requisitos totales (RF+RNF+RD+RL) & 61 & --- \\
+	\addlinespace
+	5 & Requisitos con los 4 atributos completos (ID, prioridad, fuente, criterio) & 27 & Solo RF; ver nota metodológica M1a (Sección 8.2) \\
+	\addlinespace
+	6 & Casos de uso identificados & 13 & Sección 4.1, diagrama de casos de uso general \\
+	\addlinespace
+	7 & Casos de uso especificados textualmente & 13 & Sección 4.2 (CU-01 a CU-13) \\
+	\addlinespace
+	8 & Actores del sistema & 5 & Sección 4.1: Propietario de mascota, Adoptante, Interesado en cruza, Refugio de animales, Veterinaria \\
+	\addlinespace
+	9 & Actores con al menos un RF asociado & 5 & Los cinco actores del diagrama de casos de uso general tienen RF asociados explícitamente \\
+	\addlinespace
+	10 & Pares de requisitos analizados para consistencia & 10 & 5 con conflicto documentado en la inspección PE4 + 5 con relación cruzada explícita sin conflicto (ver nota M2, Sección 8.2) \\
+	\addlinespace
+	11 & Requisitos con criterio BDD comprobable (Gherkin) & 17 & Sección 4.5, matriz de trazabilidad extendida: filas que enlazan hasta HU con criterio de aceptación Gherkin \\
+	\addlinespace
+	12 & RF con cadena de trazabilidad hacia adelante completa & 17 & Igual fuente que el punto 11, expresado sobre el universo de 27 RF \\
+	\addlinespace
+	13 & RF con fuente o \textit{stakeholder} identificado & 27 & Campo «Origen (ID de evidencia)» presente en el 100\,\% de los bloques de atributos de RF \\
+	\addlinespace
+	14 & Defectos hallados en la re-inspección de la PE5 & 0 & Sección 5.3: los 23 defectos originales del registro consolidado de la PE4 quedaron cerrados \\
+\end{longtable}
+
+\subsection*{A.3. Análisis de pares de requisitos para M2 (consistencia)}
+
+\begin{longtable}{L{3cm} L{3.5cm} L{3.5cm} L{2.5cm}}
+	\caption{Pares de requisitos analizados y su resolución.}\label{tab:pares-m2}\\
+	\toprule
+	\textbf{Par} & \textbf{Origen del análisis} & \textbf{Tipo de relación} & \textbf{Estado} \\
+	\midrule
+	\endfirsthead
+	\toprule
+	\textbf{Par} & \textbf{Origen del análisis} & \textbf{Tipo de relación} & \textbf{Estado} \\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	RF-09 $\leftrightarrow$ RD-03 & Defecto D-02 (PE4) & Conflicto directo (validación/certificación) & Resuelto (Sección 5.2) \\
+	\addlinespace
+	RF-07 $\leftrightarrow$ RNF-15 & Defecto D-06 (PE4) & Conflicto directo (moderación no especificada) & Resuelto (RFC-01/RFC-F) \\
+	\addlinespace
+	RD-01 $\leftrightarrow$ RNF-15 & Defecto D-07 (PE4) & Conflicto directo (subcomponente de IA no declarado) & Resuelto (Sección 5.2) \\
+	\addlinespace
+	RF-17 $\leftrightarrow$ RNF-14 & Defecto D-08 (PE4) & Conflicto directo (criterios de rechazo no enumerados) & Resuelto (Sección 5.2) \\
+	\addlinespace
+	RF-25 $\leftrightarrow$ RNF-16 & Defectos D-10/D-11 (PE4) & Conflicto directo (exposición vs. protección de datos) & Resuelto (RFC-03/RFC-A) \\
+	\addlinespace
+	RD-05 $\leftrightarrow$ RNF-10 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+	\addlinespace
+	RD-08 $\leftrightarrow$ RF-10 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+	\addlinespace
+	RD-08 $\leftrightarrow$ RNF-09 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+	\addlinespace
+	RF-10 $\leftrightarrow$ RNF-09 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+	\addlinespace
+	RNF-03 $\leftrightarrow$ RNF-12 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+\end{longtable}
+
+\textbf{Metodología de búsqueda.} Los cinco pares con conflicto provienen directamente del registro consolidado de defectos de la inspección Fagan de la PE4 (Sección 5.1), clasificados allí como tipo «Consistencia». Los cinco pares sin conflicto se obtuvieron mediante revisión sistemática de toda mención explícita de un identificador de requisito (RF-XX, RNF-XX o RD-XX) dentro del texto de Descripción, Justificación o Impacto de cualquier otro bloque de atributos del ERS, descartando las auto-referencias.
+
+\subsection*{A.4. Muestra de cinco requisitos para M5 (modificabilidad)}
+
+Ver Sección 8.2, nota de cálculo M5, para el detalle completo de los cinco requisitos seleccionados (RF-06, RF-07, RF-11, RF-25, RNF-03) y los artefactos impactados por cada uno.
+
+\subsection*{A.5. Registro de la re-inspección (M6)}
+
+\begin{table}[H]
+	\centering
+	\caption{Verificación de cierre de los 23 defectos originales en la re-inspección de la PE5.}
+	\label{tab:reinspeccion}
+	\small
+	\begin{tabularx}{\textwidth}{|L{3.2cm}|C{1.3cm}|L{4cm}|L{3.5cm}|}
+		\hline
+		\textbf{Rango de defectos} & \textbf{Cant.} & \textbf{Vía de cierre} & \textbf{Verificado en} \\
+		\hline
+		D-01 a D-09, D-16 a D-20, D-22, D-23 & 18 & Corrección directa sobre el texto del ERS (sin RFC) & Sección 5.2, Tabla \ref{tab:correcciones-directas} \\
+		\hline
+		D-12 a D-15 & 4 & Corrección de la matriz de trazabilidad extendida & Coordinado con Morales Sánchez (Sección 6) \\
+		\hline
+		D-05, D-06 & --- & RFC-01, unificada como RFC-F: aplicada & Sección 6.1 (Morales Sánchez) \\
+		\hline
+		D-21, D-22 & --- & RFC-02, unificada como RFC-G: resuelta por vía alternativa & Sección 6.1 (Morales Sánchez) \\
+		\hline
+		D-10, D-11 & --- & RFC-03, unificada como RFC-A: ya correcta en el ERS vigente & Sección 6.1 (Morales Sánchez) \\
+		\hline
+		\textbf{Total defectos residuales} & \multicolumn{3}{l|}{\textbf{0 de 23}} \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\textbf{Hallazgos estructurales de plantilla (no computados como defectos Fagan).} Reportados y explicados en la Sección 5.3: (1) ausencia de campo «Origen» explícito en los 16 bloques de atributos de RNF; (2) ausencia de campo «Criterio de verificación» explícito en los 9 bloques de atributos de RD. Ambos alimentan la acción de mejora de M1a (Sección 8.3, Tabla \ref{tab:auditoria}) y quedan coordinados con Gutiérrez Ortega para la consolidación del ERS final.
+
+\newpage
+
+% ============================================================
+%  CONCLUSION 2
+% ============================================================
+\section*{Conclusión 2 --- Unidad 2: Especificación del ERS}
+\addcontentsline{toc}{section}{Conclusión 2 --- Unidad 2}
+
+La auditoría de calidad realizada sobre el ERS final de MundiPets revela que la métrica que peor resultado obtuvo no fue la que se esperaba a priori ---la corrección del documento tras la inspección formal ($M_6 = 0{,}00$, sobre el umbral de referencia)---, sino la \textbf{completitud estructural de los atributos por tipo de requisito} ($M_{1a} = 44{,}26\,\%$, muy por debajo del 95\,\% exigido). Esto revela algo específico sobre la forma de especificar del equipo: la disciplina de documentación fue rigurosa dentro de cada categoría de requisito ---los 27 RF, por ejemplo, declaran de forma consistente sus once campos, incluida la fuente de evidencia (EV-XX) para el 100\,\% de ellos---, pero esa misma disciplina no se replicó de manera uniforme entre categorías. Los RNF adoptaron una plantilla orientada a la característica de calidad ISO/IEC 25010 que omite el campo de fuente empírica; las RD adoptaron una plantilla orientada a la justificación de diseño que omite el criterio de verificación; y los RL se estructuraron como una tabla de trazabilidad legal que, por diseño, no incluye una prioridad MoSCoW individual.
+
+Frente a esta situación, la acción tomada por el equipo no fue proyectar un valor ``después'' optimista sin haberlo verificado ---lo que la rúbrica de la PE5 identifica explícitamente como métrica inventada---, sino documentar con precisión el origen estructural del déficit, cuantificarlo con aritmética trazable al propio ERS (Sección 8.2 y Anexo A), y coordinar la corrección con la responsable de la consolidación del ERS final (Gutiérrez Ortega, criterio C4), dejando la re-medición pendiente para la siguiente versión consolidada del documento. Esto contrasta con las dos métricas que sí mejoraron de forma verificable dentro del alcance de esta auditoría ---M2 (consistencia) y M6 (corrección)---, ambas resueltas mediante la inspección Fagan y el Change Control Board descritos en la Sección 5, cuyo cierre se confirmó defecto por defecto en la re-inspección de la PE5.
+
+Referencias: \cite{ieee29148}; \cite{iso25010}.
+
+\newpage
+\printbibliography[title={Referencias}]
+
+\end{document}

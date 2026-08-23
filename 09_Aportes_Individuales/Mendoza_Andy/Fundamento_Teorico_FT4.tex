@@ -1,0 +1,246 @@
+% ============================================================
+%  PE5 -- Unidad 5 | PLANTILLA DE TRABAJO DIVIDIDO
+%  MundiPets -- Plataforma de Adopción y Cruza Responsable de Mascotas
+%  Asignatura: Ingeniería de Requisitos (ISR-401) -- UTEQ 2026-2027 PPA
+%  Formato: IEEE onecolumn | Biber + biblatex (estilo IEEE)
+%  Preámbulo trasplantado y adaptado del ERS_SRS_2B_v2_0.tex del PFC,
+%  para que la PE5 y el ERS compartan exactamente el mismo motor de
+%  compilación (mismo compilador, mismo estilo de citas, misma
+%  numeración de tablas/figuras). Ver Sección 0.6 y 0.7 del cuerpo.
+%
+%  COMO USAR ESTE ARCHIVO
+%  ----------------------
+%  Cada bloque  indica QUE debe producir un
+%  integrante en esa sección. El responsable borra la caja 
+%  y la reemplaza por el contenido real. Cuando no quede ninguna caja
+%  gris en el documento, la PE5 está terminada.
+%
+%  COMPILACIÓN (requiere referencias.bib en la misma carpeta):
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      biber    PE5_U5_Trabajo_Dividido
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+%      pdflatex PE5_U5_Trabajo_Dividido.tex
+% ============================================================
+\documentclass[journal,onecolumn]{IEEEtran}
+
+% ── Codificación e idioma ───────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[autostyle=true, spanish=mexican]{csquotes}
+\usepackage[htt]{hyphenat}   % permite guionar dentro de \texttt (evita Overfull)
+
+% ── Tablas ──────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+% ── Figuras ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{figuras/}{./}}
+\usepackage{float}
+\usepackage{pdflscape}   % matriz de trazabilidad en horizontal
+
+% ── Color ───────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{uteqverde}{RGB}{0,110,60}
+\definecolor{codegray}{gray}{0.95}
+\definecolor{codegreen}{rgb}{0.0,0.5,0.0}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.6}
+\definecolor{codepurple}{rgb}{0.5,0.0,0.35}
+
+% ── Geometría ───────────────────────────────────────────────
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm,
+	headheight=14pt, footskip=1.2cm}
+
+% ── Encabezado y pie ────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small PE5 -- Unidad 5 -- Ingeniería de Requisitos}
+\fancyhead[R]{\small MundiPets -- Trabajo dividido}
+\fancyfoot[C]{\thepage}
+
+% ── Espaciado y listas ──────────────────────────────────────
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{3em}   % tolerancia extra de línea
+\makeatletter
+\@ifundefined{labelindent}{}{\let\labelindent\relax}
+\makeatother
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% ── Títulos de sección ──────────────────────────────────────
+\usepackage{titlesec}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+% ── Leyendas ────────────────────────────────────────────────
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ── Bibliografía (biber + estilo IEEE) ──────────────────────
+% Mismo motor que el ERS del PFC: ver Sección 0.6 y 0.7 del cuerpo
+% para el orden exacto de compilación.
+\usepackage[
+backend=biber,
+style=ieee,
+citestyle=numeric-comp,
+isbn=true,
+doi=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+% ── Enlaces ─────────────────────────────────────────────────
+\usepackage[hidelinks,colorlinks=false]{hyperref}
+\usepackage{url}
+
+% ============================================================
+%  CAJA DE GUÍA (fondo gris claro, borde negro)
+% ============================================================
+\usepackage{mdframed}
+\mdfdefinestyle{guia}{
+	linecolor=black,
+	linewidth=0.6pt,
+	backgroundcolor=gray!10,
+	innertopmargin=6pt,
+	innerbottommargin=6pt,
+	innerleftmargin=8pt,
+	innerrightmargin=8pt,
+	skipabove=4pt,
+	skipbelow=4pt
+}
+
+% 
+\newcommand{\guia}[2]{%
+	\begin{mdframed}[style=guia]
+		\noindent\textbf{Responsable: #1}\\[2pt]
+		\textit{#2}
+	\end{mdframed}
+}
+
+% -- Atajos de nombres (evita erratas al repetirlos) ---------
+\newcommand{\rFUE}{FUERTES ARRAES, Edson Daniel}
+\newcommand{\rGUT}{GUTIÉRREZ ORTEGA, Génesis Adriana}
+\newcommand{\rMEN}{MENDOZA PÁRRAGA, Andy Johel}
+\newcommand{\rMOR}{MORALES SÁNCHEZ, Gary Alejandro}
+\newcommand{\rNIE}{NIEVES SÁNCHEZ, Jimmy Samuel}
+\newcommand{\rTODOS}{TODO EL EQUIPO}
+
+% ============================================================
+\begin{document}
+	
+	% ============================================================
+	% PORTADA (mismo formato que el ERS del PFC, Apéndice de portada)
+	% ============================================================
+
+	
+	% -- FT.4 --------------------------------------------------------
+	\subsection*{Fundamentos de los requisitos de inteligencia artificial}
+	\addcontentsline{toc}{subsection}{Fundamentos de requisitos de IA (Mendoza)}
+
+	Especificar los componentes de inteligencia artificial (IA) de MundiPets --moderación
+	de mensajes, verificación de imagen y recomendación de compatibilidad de cruza-- exige un
+	marco distinto del que basta para un requisito determinista, porque el comportamiento del
+	componente no está fijado en el código sino aprendido a partir de datos. Vogelsang y Borg
+	documentaron este desplazamiento de paradigma, de programar a entrenar, a partir de un
+	estudio con científicos de datos: sus hallazgos muestran que la ingeniería de requisitos para
+	sistemas de aprendizaje automático (AA) obliga al equipo a comprender las métricas de
+	rendimiento del modelo para redactar requisitos funcionales verificables, y a incorporar
+	atributos de calidad nuevos --explicabilidad, ausencia de discriminación y requisitos
+	legales específicos-- que no tienen equivalente directo en el desarrollo de software
+	tradicional \cite{vogelsang2019}. Esta distinción es la base de la Sección~\ref{sec:requisitos_ia}: un RF-IA no describe una regla fija sino el comportamiento esperado de un modelo bajo
+	incertidumbre, y un RNF-IA debe fijar umbral, unidad y método de comprobación precisamente
+	porque, a diferencia de un RNF tradicional, el valor obtenido puede variar según los datos con
+	los que se entrenó o se está evaluando el componente.
+
+	Esta observación puntual se confirma a escala mediante el mapeo sistemático de Ahmad, Abdelrazek,
+	Arora, Bano y Grundy, que revisó 43 estudios primarios sobre ingeniería de requisitos para
+	sistemas de IA: los autores concluyen que las herramientas y plantillas de especificación
+	heredadas del desarrollo de software tradicional no capturan de forma adecuada requisitos
+	propios de la IA como los datos de entrenamiento, la ética o la explicabilidad, y señalan que
+	la evaluación empírica de estos atributos --particularmente ética, explicabilidad y
+	confianza-- sigue siendo escasa en la literatura \cite{ahmad2023}. Umm-e-Habiba, Haug, Bogner
+	y Wagner llegan a una conclusión convergente desde un mapeo posterior centrado en la práctica
+	profesional: la disciplina de RE para sistemas de IA es todavía inmadura frente a la RE
+	tradicional, con vacíos particularmente marcados en la gestión de requisitos de datos y en la
+	trazabilidad entre requisito y componente entrenado \cite{Habiba2024}. Esta brecha documentada
+	desde dos ángulos distintos --el mapeo de la literatura académica y el análisis de la práctica
+	profesional-- es el motivo por el cual la ficha de componente de la Sección~\ref{sec:requisitos_ia}
+	obliga a completar explícitamente los campos de datos de entrenamiento, equidad y
+	explicabilidad, y por el cual la Sección~\ref{sec:requisitos_ia} exige trazar cada RF-IA y
+	RNF-IA hacia los requisitos preexistentes del sistema, en vez de dejarlos como una sección
+	narrativa aparte del resto de la especificación.
+
+	Un problema relacionado, y no solo de especificación sino de proceso, es el que documentan
+	Amershi et al.\ a partir de un estudio de campo con equipos de Microsoft: incluso en una
+	organización con procesos ágiles maduros, la integración de componentes de aprendizaje
+	automático introdujo dificultades adicionales de gestión --como el acoplamiento entre datos,
+	modelo y código, y la dificultad de fijar criterios de aceptación estables cuando el
+	desempeño del modelo cambia con cada reentrenamiento-- que los flujos de trabajo Scrum
+	convencionales no anticipaban \cite{amershi2019}. Este hallazgo justifica que el plan de
+	monitoreo de la Sección~\ref{sec:requisitos_ia} no se trate como una tarea de una sola vez,
+	sino como una traza continua que debe revisarse en cada iteración del componente.
+
+	Sobre esa base, Habibullah, Gay y Horkoff aportan evidencia empírica de que los requisitos no
+	funcionales de aprendizaje automático reciben en la práctica profesional un tratamiento
+	heterogéneo: los equipos rara vez documentan explícitamente atributos como equidad,
+	explicabilidad o robustez frente a datos fuera de distribución, y cuando lo hacen carecen de
+	un método sistemático de medición \cite{habibullah2023}. Este hallazgo es la justificación
+	directa de exigir, en la Sección~\ref{sec:requisitos_ia}, que cada RNF-IA de MundiPets declare
+	umbral numérico, unidad y método de comprobación explícitos: sin esa disciplina, la moderación
+	de mensajes o la verificación de imagen quedarían documentadas como intención (``el modelo debe
+	ser preciso'') y no como un requisito auditable.
+
+	El componente legal del marco proviene de dos fuentes complementarias. El Reglamento (UE)
+	2024/1689, conocido como Ley de IA, adopta un enfoque basado en niveles de riesgo y establece
+	obligaciones de transparencia, supervisión humana y documentación técnica proporcionales al
+	riesgo que introduce cada sistema de IA \cite{euaiact2024}; aunque MundiPets opera en Ecuador y
+	no está sujeto directamente a su jurisdicción, el equipo lo adopta como referencia de buenas
+	prácticas para clasificar el riesgo de sus tres componentes y fijar las obligaciones de
+	supervisión humana descritas en la Sección~\ref{sec:etica_ia}. La base legal aplicable dentro
+	de Ecuador es la Ley Orgánica de Protección de Datos Personales, vigente desde su publicación
+	en el Registro Oficial en 2021, que exige finalidad determinada, minimización de datos y
+	consentimiento del titular para el tratamiento de datos personales \cite{lopdp2021}; esa misma
+	ley fue desarrollada operativamente dos años después por su Reglamento General, que precisa los
+	mecanismos concretos de seudonimización, plazos y conservación de la información que la ley de
+	2021 dejó enunciados en términos generales \cite{lopdp_reglamento2023}. Se citan ambas normas,
+	y no solo la más reciente, porque no son versiones sucesivas de un mismo texto sino dos niveles
+	distintos y vigentes de la misma obligación: la ley fija qué se debe garantizar y el reglamento
+	fija cómo se implementa; omitir la ley de 2021 dejaría sin base normativa directa a la
+	obligación misma que el reglamento de 2023 desarrolla.
+
+	En conjunto, estas fuentes explican por qué un componente probabilístico exige medidas que un
+	requisito determinista no necesita: un RF tradicional de MundiPets, como registrar el perfil
+	médico de una mascota, se comprueba una sola vez contra una regla fija y no cambia de
+	comportamiento si cambian los datos de entrada. Un componente de IA, en cambio, puede degradar
+	su desempeño con el tiempo (deriva de datos), producir resultados distintos para grupos de
+	usuarios distintos (inequidad) y tomar decisiones cuyo razonamiento interno no es directamente
+	observable (opacidad); por eso la Sección~\ref{sec:requisitos_ia} exige, además de los RF y RNF
+	de rendimiento habituales, RNF de equidad, un RNF de explicabilidad y un plan de monitoreo en
+	producción que ningún requisito determinista de MundiPets necesita.
+	
+
+	%  REFERENCIAS
+	% ============================================================
+	\printbibliography[title={Referencias}]
+	
+
+	
+\end{document}

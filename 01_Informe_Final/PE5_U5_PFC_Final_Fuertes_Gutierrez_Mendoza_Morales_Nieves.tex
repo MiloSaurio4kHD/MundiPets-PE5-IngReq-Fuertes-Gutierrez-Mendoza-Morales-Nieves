@@ -2566,90 +2566,340 @@ existía inicialmente solo en el documento del ERS.
 	%  SECCION 7 -- REQUISITOS DE IA
 	% ============================================================
 	\section{Requisitos de los Componentes de Inteligencia Artificial}
-	\label{sec:requisitos_ia}
+\label{sec:requisitos_ia}
+
+% -- 7.1 --------------------------------------------------------
+\subsection{Identificación y justificación de los componentes}
+
+MundiPets incorpora tres componentes de apoyo basados en inteligencia artificial, ya
+declarados en el alcance del sistema y en el requisito de diseño RD-01 (integración de
+componentes de inteligencia artificial). Ninguno de los tres sustituye el criterio de un
+profesional veterinario ni toma una decisión definitiva por sí solo: los tres producen una
+salida orientativa que el usuario o un tercero (veterinaria, moderador) puede revisar. Esta
+restricción ya está declarada como límite explícito del sistema desde PE1--PE2 y se mantiene
+como marco de todo lo que sigue en esta sección.
+
+\textbf{IA-01 --- Evaluación de compatibilidad para cruza.} Responde a RF-06, cuyo origen
+documental combina evidencia de propietarios, interesados en cruza y veterinarias (EV-01 a
+EV-08, EV-11, EV-13 a EV-16): los entrevistados señalaron reiteradamente la dificultad de
+evaluar de forma informal si dos mascotas son compatibles para un proceso de cruza responsable,
+considerando raza, edad, estado de salud, antecedentes genéticos y parentesco. Es, además, el
+único de los tres componentes con un derecho legal directamente asociado: el Art.\,20 de la
+LOPDP (RL-06) reconoce al titular el derecho a no ser objeto de una decisión basada únicamente
+en valoraciones automatizadas sin recibir una explicación motivada, lo que ya obligó en PE3--PE4
+a declarar RNF-06 (exactitud) y RNF-13 (explicabilidad) sobre este mismo componente.
+
+\textbf{IA-02 --- Validación de imágenes de perfil.} Responde a RF-17, motivado por evidencia de
+propietarios y veterinarias (EV-01, EV-03, EV-05, EV-07, EV-08) sobre la presencia de
+fotografías irrelevantes, borrosas o no relacionadas con el propósito de la plataforma en las
+publicaciones de mascotas. El componente ya cuenta con RNF-07 (precisión de clasificación) y
+RNF-14 (explicabilidad del rechazo) definidos desde PE3--PE4, lo que permite construir su ficha
+y sus requisitos de IA sin partir de cero.
+
+\textbf{IA-03 --- Moderación de mensajes.} Responde a RF-07 (sistema de mensajería), sobre cuya
+arquitectura ya se especificó en PE3 un componente de moderación de mensajes que clasifica el
+contenido antes de su entrega, motivado por la evidencia de coordinación entre propietarios e
+interesados (EV-02, EV-07, EV-08). RNF-15 (explicabilidad de la moderación) ya exige que, ante
+un mensaje bloqueado, el sistema muestre la categoría de infracción detectada antes de impedir
+el envío.
+
+Los tres componentes comparten el mismo límite declarado en el alcance del sistema: ninguno
+reemplaza la evaluación veterinaria profesional, y ninguna de sus salidas es definitiva sin
+posibilidad de revisión humana. Un solo componente hubiera dejado C3 en N2 según la guía de
+esta práctica; los tres cuentan además con evidencia documental propia y no responden a una
+moda tecnológica, sino a necesidades identificadas directamente en PE1--PE2 y ya incorporadas
+como requisitos del ERS desde PE3.
+
+% -- 7.2 --------------------------------------------------------
+\subsection{Ficha del componente IA-01}
+
+\begin{table}[H]
+	\caption{Ficha del componente de inteligencia artificial IA-01 --- Evaluación de compatibilidad para cruza.}
+	\label{tab:ficha_ia01}
+	\small
+	\begin{tabularx}{\textwidth}{|L{4.2cm}|X|}
+		\hline
+		\textbf{Campo} & \textbf{Contenido} \\
+		\hline
+		Identificador y nombre & IA-01 --- Evaluación de compatibilidad para cruza \\
+		\hline
+		Tarea y tipo & Recomendación (\textit{scoring} de compatibilidad con explicación causal) \\
+		\hline
+		Entradas y salidas & \textbf{Entrada:} raza, edad, sexo, estado de salud, antecedentes genéticos, parentesco e historial médico de las dos mascotas seleccionadas. \textbf{Salida:} nivel de compatibilidad (viable / riesgoso / requiere revisión veterinaria) junto con una explicación causal de máximo 60 palabras (RNF-13) y la advertencia de que el resultado es orientativo. \\
+		\hline
+		Consumidor del resultado & Propietario de mascota e interesado en cruza, para decidir si continúan o no con el proceso de cruza (RF-06); no autoriza ni rechaza el proceso de forma definitiva. \\
+		\hline
+		Datos de entrenamiento & \textbf{Origen:} historiales clínicos y genéticos registrados en la plataforma más evaluaciones veterinarias etiquetadas durante la fase de pruebas. \textbf{Volumen estimado:} conjunto inicial de al menos 300 pares de mascotas evaluados por veterinarios para el conjunto de referencia de RNF-06. \textbf{Etiquetado:} veterinario colegiado, sobre las mismas variables declaradas en RF-06. \textbf{Calidad mínima:} historiales con antecedentes genéticos y médicos completos; se descartan registros con campos obligatorios vacíos. \textbf{Sesgos conocidos:} sobrerrepresentación esperable de razas comunes en la zona de despliegue inicial frente a razas poco frecuentes, lo que puede degradar la exactitud en estas últimas. \textbf{Base legal:} consentimiento del titular y protección de datos desde el diseño (Art.\,7, 8 y 39 LOPDP) \cite{lopdp2021,lopdp_reglamento2023}. \textbf{Conservación:} mientras la mascota o el propietario mantengan una cuenta activa en la plataforma. \\
+		\hline
+		Métricas de éxito & \textbf{Principal:} coincidencia con la evaluación veterinaria $\geq$ 85\,\% (RNF-06). \textbf{Secundarias:} tiempo de generación de la explicación $\leq$ 2\,s y calificación media de comprensión $\geq$ 4/5 en escala Likert (RNF-13). \textbf{Conjunto de evaluación:} muestra representativa de pares de mascotas con evaluación veterinaria de referencia, distinta del conjunto de entrenamiento. \\
+		\hline
+		Equidad & Métrica: diferencia de tasa de coincidencia con la evaluación veterinaria entre razas comunes y razas poco representadas en los datos. Grupos comparados: razas con más de 30 casos en el conjunto de entrenamiento frente a razas con menos de 30 casos. Brecha máxima tolerada: 10 puntos porcentuales (RNF-IA-04, Sección~\ref{sec:req_ia_tabla}). \\
+		\hline
+		Explicabilidad & Se explica el resultado de compatibilidad al propietario y al interesado en cruza, en el momento de recibir el resultado, mediante una explicación causal por factores (raza, edad, estado de salud, antecedentes genéticos) de máximo 60 palabras, conforme a RNF-13 y al derecho a explicación de decisiones automatizadas de RL-06. \\
+		\hline
+		Riesgos y \textit{fallback} & Si el modelo no está disponible o no alcanza el umbral mínimo de confianza en un caso concreto, el sistema muestra el mensaje ``compatibilidad no determinada, se recomienda evaluación veterinaria'' en lugar de forzar una recomendación; el proceso de cruza puede continuar manualmente sin el componente. Una recomendación errónea no bloquea la decisión final del usuario, que conserva la responsabilidad última. \\
+		\hline
+		Clasificación de riesgo & Riesgo limitado conforme al enfoque basado en riesgo del Reglamento (UE) 2024/1689 \cite{euaiact2024}: no es un sistema de identificación biométrica ni de puntuación social, pero al influir en una decisión con efecto sobre el bienestar animal exige las obligaciones de transparencia y explicabilidad ya declaradas en RNF-13 y RL-06. \\
+		\hline
+		Plan de monitoreo & Ver Sección~\ref{sec:monitoreo_ia}: indicador principal de coincidencia con evaluación veterinaria, medido mensualmente sobre una muestra de recomendaciones auditadas. \\
+		\hline
+		Trazas & RF-06, RNF-06, RNF-13, RD-01, RL-06. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\caption{Ficha del componente de inteligencia artificial IA-02 --- Validación de imágenes de perfil.}
+	\label{tab:ficha_ia02}
+	\small
+	\begin{tabularx}{\textwidth}{|L{4.2cm}|X|}
+		\hline
+		\textbf{Campo} & \textbf{Contenido} \\
+		\hline
+		Identificador y nombre & IA-02 --- Validación de imágenes de perfil \\
+		\hline
+		Tarea y tipo & Clasificación (visión: imagen válida / inválida, con motivo de rechazo) \\
+		\hline
+		Entradas y salidas & \textbf{Entrada:} imagen cargada por el usuario al perfil de una mascota. \textbf{Salida:} resultado binario (aceptada / rechazada) y, si es rechazada, el motivo específico (contenido inapropiado, imagen borrosa, tipo de fotografía incorrecto) en máximo 30 palabras (RNF-14). \\
+		\hline
+		Consumidor del resultado & Propietario de mascota, que recibe el resultado al momento de publicar; veterinaria, en el caso de imágenes asociadas a validación de información médica. \\
+		\hline
+		Datos de entrenamiento & \textbf{Origen:} conjunto etiquetado de fotografías de mascotas (válidas) y de imágenes irrelevantes, ofensivas o de baja calidad (inválidas), construido para las pruebas de RNF-07. \textbf{Volumen estimado:} conjunto de evaluación con representación equilibrada de ambas clases, suficiente para sostener la meta de RNF-07. \textbf{Etiquetado:} manual, por el equipo responsable de moderación de contenido, siguiendo la política de contenido de la plataforma. \textbf{Calidad mínima:} imágenes con resolución legible; se descartan archivos corruptos o no soportados antes del etiquetado. \textbf{Sesgos conocidos:} posible menor exactitud en mascotas de especies poco representadas en el conjunto inicial (por ejemplo, especies distintas a perros y gatos). \textbf{Base legal:} consentimiento del titular al publicar contenido e interés legítimo de la plataforma en mantener la política de contenido (Art.\,7 y 8 LOPDP) \cite{lopdp2021}. \textbf{Conservación:} mientras la publicación permanezca activa en la plataforma. \\
+		\hline
+		Métricas de éxito & \textbf{Principal:} clasificación correcta $\geq$ 95\,\% (RNF-07). \textbf{Secundaria:} 100\,\% de los rechazos con motivo específico mostrado y calificación media de comprensión $\geq$ 4/5 (RNF-14). \textbf{Conjunto de evaluación:} lote de imágenes etiquetadas manualmente, distinto del usado para ajustar el clasificador. \\
+		\hline
+		Equidad & Métrica: diferencia de tasa de rechazo correcto entre especies con mayor representación en el conjunto de entrenamiento (perros, gatos) y especies con menor representación. Grupos comparados: especies con más de 50 imágenes de referencia frente a especies con menos de 50. Brecha máxima tolerada: 10 puntos porcentuales (RNF-IA-05, Sección~\ref{sec:req_ia_tabla}). \\
+		\hline
+		Explicabilidad & Se explica el motivo del rechazo al propietario, en el momento de intentar publicar la imagen, mediante una explicación por contraste (``se rechazó por X en lugar de Y'') de máximo 30 palabras, conforme a RNF-14. \\
+		\hline
+		Riesgos y \textit{fallback} & Si el componente no está disponible, el sistema permite la publicación en estado ``pendiente de revisión'' y la deriva a moderación manual, en vez de bloquear indefinidamente al usuario. Un falso rechazo puede apelarse mediante revisión manual; un falso positivo (imagen inapropiada no detectada) queda sujeto al reporte posterior de otros usuarios. \\
+		\hline
+		Clasificación de riesgo & Riesgo mínimo/limitado conforme al Reglamento (UE) 2024/1689 \cite{euaiact2024}: es un sistema de moderación de contenido, no de identificación de personas; su principal obligación derivada es la transparencia del motivo de rechazo, ya cubierta por RNF-14. \\
+		\hline
+		Plan de monitoreo & Ver Sección~\ref{sec:monitoreo_ia}: indicador de tasa de clasificación correcta, medido sobre una muestra semanal de imágenes revisadas manualmente como control de calidad. \\
+		\hline
+		Trazas & RF-17, RNF-07, RNF-14, RD-01. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\caption{Ficha del componente de inteligencia artificial IA-03 --- Moderación de mensajes.}
+	\label{tab:ficha_ia03}
+	\small
+	\begin{tabularx}{\textwidth}{|L{4.2cm}|X|}
+		\hline
+		\textbf{Campo} & \textbf{Contenido} \\
+		\hline
+		Identificador y nombre & IA-03 --- Moderación de mensajes \\
+		\hline
+		Tarea y tipo & Clasificación (texto: lenguaje ofensivo / spam / solicitud de pago externo / conversación dentro de tema) \\
+		\hline
+		Entradas y salidas & \textbf{Entrada:} texto del mensaje enviado entre dos usuarios en el sistema de mensajería (RF-07). \textbf{Salida:} decisión de entrega o bloqueo del mensaje y, si se bloquea, la categoría de infracción detectada (RNF-15) mostrada antes del bloqueo. \\
+		\hline
+		Consumidor del resultado & El usuario que redacta el mensaje, que recibe la notificación de bloqueo con la categoría antes de que el mensaje se envíe. \\
+		\hline
+		Datos de entrenamiento & \textbf{Origen:} conjunto etiquetado de mensajes de ejemplo con y sin contenido inapropiado, construido para las pruebas del componente. \textbf{Volumen estimado:} conjunto de evaluación balanceado entre las categorías declaradas (ofensivo, spam, pago externo, fuera de tema, apropiado). \textbf{Etiquetado:} manual, por el equipo de moderación, según la política de contenido de mensajería. \textbf{Calidad mínima:} mensajes en español, del dominio de adopción/cruza de mascotas, sin datos personales de terceros no involucrados. \textbf{Sesgos conocidos:} riesgo de sobre-bloqueo de mensajes con vocabulario coloquial del dominio veterinario que el modelo no ha visto en entrenamiento (por ejemplo, términos médicos poco comunes mal clasificados como spam). \textbf{Base legal:} interés legítimo de la plataforma en prevenir fraude y contenido ofensivo, y consentimiento del titular al aceptar los términos de uso de la mensajería (Art.\,7, 8 y 10 lit.\,e LOPDP) \cite{lopdp2021}. \textbf{Conservación:} la conversación se conserva mientras ambos usuarios mantengan cuenta activa; los mensajes bloqueados no se entregan pero se registran para auditoría de moderación. \\
+		\hline
+		Métricas de éxito & \textbf{Principal:} 100\,\% de los mensajes moderados con categoría de infracción mostrada antes del bloqueo (RNF-15). \textbf{Secundaria:} calificación media de comprensión de la notificación $\geq$ 4/5 (RNF-15). \textbf{Conjunto de evaluación:} lote de mensajes de prueba etiquetados manualmente, con casos de las cuatro categorías de infracción y de mensajes apropiados. \\
+		\hline
+		Equidad & Métrica: diferencia de tasa de falsos bloqueos (mensajes apropiados marcados como infracción) entre mensajes que usan vocabulario técnico veterinario y mensajes de lenguaje general. Grupos comparados: mensajes con terminología clínica frente a mensajes sin ella. Brecha máxima tolerada: 10 puntos porcentuales (RNF-IA-04\,bis, Sección~\ref{sec:req_ia_tabla}). \\
+		\hline
+		Explicabilidad & Se explica al remitente, antes de bloquear el envío, la categoría de infracción detectada mediante una explicación por ejemplos (``mensajes como este suelen clasificarse como X''), conforme a RNF-15. \\
+		\hline
+		Riesgos y \textit{fallback} & Si el componente no está disponible, los mensajes se entregan sin moderación automática y quedan sujetos al canal de reporte manual entre usuarios, en vez de bloquear por completo la mensajería. Un falso bloqueo puede apelarse solicitando revisión manual del mensaje retenido. \\
+		\hline
+		Clasificación de riesgo & Riesgo limitado conforme al Reglamento (UE) 2024/1689 \cite{euaiact2024}: modera comunicación entre usuarios sin tomar decisiones sobre acceso a servicios esenciales; su obligación principal es la transparencia de la categoría de bloqueo, ya cubierta por RNF-15. \\
+		\hline
+		Plan de monitoreo & Ver Sección~\ref{sec:monitoreo_ia}: indicador de tasa de falsos bloqueos, medido mensualmente sobre una muestra de mensajes bloqueados revisados manualmente. \\
+		\hline
+		Trazas & RF-07, RNF-15, RD-01. \\
+		\hline
+	\end{tabularx}
+\end{table}
+\newpage
+
+% -- 7.3 --------------------------------------------------------
+\subsection{Requisitos funcionales y no funcionales de IA}
+\label{sec:req_ia_tabla}
+
+\begin{longtable}{|L{2.4cm}|c|L{7.2cm}|L{3.6cm}|}
+	\caption{Requisitos funcionales y no funcionales de los componentes de IA.}
+	\label{tab:req_ia} \\
+	\hline
+	\textbf{ID} & \textbf{Tipo} & \textbf{Enunciado con umbral y unidad} & \textbf{Método de comprobación} \\
+	\hline
+	\endfirsthead
 	
-	% -- 7.1 --------------------------------------------------------
-	\subsection{Identificación y justificación de los componentes}
+	\multicolumn{4}{l}{\small\textit{Tabla~\ref{tab:req_ia} (continuación).}} \\
+	\hline
+	\textbf{ID} & \textbf{Tipo} & \textbf{Enunciado con umbral y unidad} & \textbf{Método de comprobación} \\
+	\hline
+	\endhead
 	
-	% -- 7.2 --------------------------------------------------------
-	\subsection{Ficha del componente IA-01}
+	\hline
+	\multicolumn{4}{r}{\small\textit{Continúa en la página siguiente.}} \\
+	\endfoot
 	
-	\begin{table}[H]
-		\caption{Ficha del componente de inteligencia artificial IA-01.}
-		\label{tab:ficha_ia01}
-		\small
-		\begin{tabularx}{\textwidth}{|L{4.2cm}|X|}
-			\hline
-			\textbf{Campo} & \textbf{Contenido} \\
-			\hline
-			Identificador y nombre & IA-01 --- \\
-			\hline
-			Tarea y tipo & (recomendación / clasificación / detección de anomalías / conversación / visión) \\
-			\hline
-			Entradas y salidas & Variables de entrada, formato y semántica de la salida \\
-			\hline
-			Consumidor del resultado & Quién usa la salida y para qué decisión \\
-			\hline
-			Datos de entrenamiento & Origen, volumen estimado, variables, etiquetado, calidad mínima, sesgos conocidos, base legal del tratamiento y política de conservación \\
-			\hline
-			Métricas de éxito & Métrica principal con umbral, métricas secundarias, conjunto de evaluación \\
-			\hline
-			Equidad & Métrica de equidad, grupos comparados, brecha máxima tolerada \\
-			\hline
-			Explicabilidad & Qué se explica, a quién, en qué formato y en qué momento \\
-			\hline
-			Riesgos y \textit{fallback} & Consecuencia del error y comportamiento del sistema si el modelo falla o no está disponible \\
-			\hline
-			Clasificación de riesgo & Nivel conforme al enfoque basado en riesgo del Reglamento (UE) 2024/1689 \cite{euaiact2024} y obligaciones derivadas \\
-			\hline
-			Plan de monitoreo & Indicadores en producción, frecuencia de medición, umbral de alerta por deriva, criterio de reentrenamiento o retirada \\
-			\hline
-			Trazas & RF y RNF del sistema con los que se relaciona \\
-			\hline
-		\end{tabularx}
-	\end{table}
+	\hline
+	\endlastfoot
 	
-	% -- 7.3 --------------------------------------------------------
-	\subsection{Requisitos funcionales y no funcionales de IA}
-	\label{sec:req_ia_tabla}
-	
-	\begin{table}[H]
-		\caption{Requisitos funcionales y no funcionales de los componentes de IA.}
-		\label{tab:req_ia}
-		\small
-		\begin{tabularx}{\textwidth}{|L{2.2cm}|c|X|L{3.2cm}|}
-			\hline
-			\textbf{ID} & \textbf{Tipo} & \textbf{Enunciado con umbral y unidad} & \textbf{Método de comprobación} \\
-			\hline
-			RF-IA-01 & RF & & \\
-			\hline
-			RF-IA-02 & RF & & \\
-			\hline
-			RF-IA-03 & RF & & \\
-			\hline
-			RNF-IA-01 & Rendimiento & & \\
-			\hline
-			RNF-IA-02 & Rendimiento & & \\
-			\hline
-			RNF-IA-03 & Rendimiento & & \\
-			\hline
-			RNF-IA-04 & Equidad & & \\
-			\hline
-			RNF-IA-05 & Equidad & & \\
-			\hline
-			RNF-IA-06 & Explicabilidad & & \\
-			\hline
-		\end{tabularx}
-	\end{table}
-	
-	% -- 7.4 --------------------------------------------------------
-	\subsection{Ética, privacidad y clasificación de riesgo}
-	\label{sec:etica_ia}
-	
-	% -- 7.5 --------------------------------------------------------
-	\subsection{Plan de monitoreo y trazado de los requisitos de IA}
-	\label{sec:monitoreo_ia}
-	
+	\multicolumn{4}{|l|}{\textit{IA-01 --- Evaluación de compatibilidad para cruza}} \\
+	\hline
+	RF-IA-01 & RF & El sistema deberá generar un resultado de compatibilidad (viable / riesgoso / requiere revisión veterinaria) para todo par de mascotas seleccionado, en un tiempo máximo de 3\,s. & Seleccionar 20 pares de mascotas y medir el tiempo hasta obtener el resultado. \\
+	\hline
+	RF-IA-02 & RF & El sistema deberá mostrar, junto al resultado de compatibilidad, una explicación causal de máximo 60 palabras que liste los factores considerados (raza, edad, estado de salud, antecedentes genéticos). & Verificar en 20 casos de prueba que la explicación no supere 60 palabras y mencione al menos dos factores. \\
+	\hline
+	RF-IA-03 & RF & El sistema deberá incluir la advertencia ``resultado orientativo, no sustituye evaluación veterinaria'' en el 100\,\% de los resultados de compatibilidad emitidos. & Revisar 20 resultados emitidos y comprobar la presencia literal de la advertencia. \\
+	\hline
+	RNF-IA-01 & Rendimiento & El sistema deberá generar recomendaciones de compatibilidad con una coincidencia $\geq$ 85\,\% respecto a la evaluación veterinaria de referencia (RNF-06). & Comparar 100 recomendaciones contra la evaluación de un veterinario sobre el conjunto de prueba. \\
+	\hline
+	RNF-IA-02 & Rendimiento & El sistema deberá generar la explicación causal en un tiempo no mayor a 2\,s (RNF-13). & Medir el tiempo de generación en 30 solicitudes consecutivas. \\
+	\hline
+	RNF-IA-03 & Rendimiento & El sistema deberá mantener el componente de compatibilidad disponible $\geq$ 99\,\% del tiempo mensual, mostrando un mensaje de no disponibilidad ante fallas en lugar de bloquear el flujo de cruza. & Registrar el tiempo de actividad del servicio de IA durante un mes de monitoreo. \\
+	\hline
+	RNF-IA-04 & Equidad & El sistema deberá mantener una diferencia de tasa de coincidencia con la evaluación veterinaria no mayor a 10 puntos porcentuales entre razas con $>$30 casos y razas con $<$30 casos en el conjunto de entrenamiento. & Calcular la tasa de coincidencia por grupo de razas sobre el conjunto de evaluación y comparar la brecha. \\
+	\hline
+	RNF-IA-05 & Equidad & El sistema deberá mantener una diferencia de tasa de coincidencia no mayor a 10 puntos porcentuales entre mascotas de razas puras y mestizas. & Calcular la tasa de coincidencia por subgrupo (pura / mestiza) sobre el conjunto de evaluación y comparar la brecha. \\
+	\hline
+	RNF-IA-06 & Explicabilidad & El sistema deberá lograr una calificación media de comprensión de la explicación $\geq$ 4/5 en escala Likert 1--5 (RNF-13). & Aplicar encuesta de comprensión a usuarios técnicos y no técnicos tras mostrar el resultado. \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{IA-02 --- Validación de imágenes de perfil}} \\
+	\hline
+	RF-IA-07 & RF & El sistema deberá clasificar toda imagen cargada como aceptada o rechazada en un tiempo máximo de 2\,s. & Cargar 30 imágenes y medir el tiempo de respuesta de la clasificación. \\
+	\hline
+	RF-IA-08 & RF & El sistema deberá mostrar, cuando una imagen sea rechazada, el motivo específico del rechazo en máximo 30 palabras (RNF-14). & Cargar 15 imágenes inválidas y verificar la presencia y extensión del motivo mostrado. \\
+	\hline
+	RF-IA-09 & RF & El sistema deberá permitir cargar una nueva imagen de forma inmediata tras un rechazo, sin reiniciar el flujo de publicación. & Rechazar una imagen y comprobar que el usuario puede cargar una nueva sin salir del formulario de publicación. \\
+	\hline
+	RNF-IA-07 & Rendimiento & El sistema deberá clasificar correctamente $\geq$ 95\,\% de las imágenes del conjunto de evaluación (RNF-07). & Evaluar el componente contra un conjunto de imágenes etiquetadas manualmente y calcular la tasa de acierto. \\
+	\hline
+	RNF-IA-08 & Rendimiento & El sistema deberá procesar imágenes de hasta 10\,MB sin superar el tiempo de clasificación declarado en RF-IA-07. & Cargar imágenes de distintos tamaños (hasta 10\,MB) y medir el tiempo de clasificación. \\
+	\hline
+	RNF-IA-09 & Rendimiento & El sistema deberá mantener el componente de validación disponible $\geq$ 99\,\% del tiempo mensual, derivando la imagen a revisión manual en caso de indisponibilidad en lugar de bloquear la publicación. & Registrar el tiempo de actividad del servicio de validación de imágenes durante un mes de monitoreo. \\
+	\hline
+	RNF-IA-10 & Equidad & El sistema deberá mantener una diferencia de tasa de clasificación correcta no mayor a 10 puntos porcentuales entre especies con $>$50 imágenes de referencia y especies con $<$50. & Calcular la tasa de acierto por especie sobre el conjunto de evaluación y comparar la brecha. \\
+	\hline
+	RNF-IA-11 & Equidad & El sistema deberá mantener una diferencia de tasa de falso rechazo no mayor a 10 puntos porcentuales entre imágenes con buena y baja iluminación. & Evaluar el componente sobre subconjuntos de imágenes agrupados por condición de iluminación. \\
+	\hline
+	RNF-IA-12 & Explicabilidad & El sistema deberá mostrar un motivo específico en el 100\,\% de los rechazos, con calificación media de comprensión $\geq$ 4/5 en escala Likert. & Revisar 15 rechazos y encuestar la comprensión del motivo mostrado a los usuarios. \\
+	\hline
+	\multicolumn{4}{|l|}{\textit{IA-03 --- Moderación de mensajes}} \\
+	\hline
+	RF-IA-10 & RF & El sistema deberá clasificar todo mensaje enviado como apropiado o infractor (ofensivo, spam, pago externo, fuera de tema) antes de su entrega. & Enviar 30 mensajes de las cuatro categorías de infracción y uno apropiado, y verificar la clasificación. \\
+	\hline
+	RF-IA-11 & RF & El sistema deberá mostrar, cuando un mensaje sea bloqueado, la categoría de infracción detectada antes de impedir el envío (RNF-15). & Enviar 15 mensajes con contenido inapropiado y verificar que se muestra la categoría antes del bloqueo. \\
+	\hline
+	RF-IA-12 & RF & El sistema deberá permitir editar y reenviar un mensaje bloqueado sin perder el contenido no infractor del mensaje original. & Bloquear un mensaje, editarlo y comprobar que el sistema conserva el texto no infractor al reenviarlo. \\
+	\hline
+	RNF-IA-13 & Rendimiento & El sistema deberá emitir la decisión de moderación en un tiempo máximo de 1\,s desde el envío del mensaje. & Enviar 30 mensajes y medir el tiempo entre el envío y la decisión de moderación. \\
+	\hline
+	RNF-IA-14 & Rendimiento & El sistema deberá mostrar la categoría de infracción en el 100\,\% de los mensajes moderados, antes del bloqueo (RNF-15). & Revisar 15 mensajes bloqueados y comprobar la presencia de la categoría mostrada. \\
+	\hline
+	RNF-IA-15 & Rendimiento & El sistema deberá mantener el componente de moderación disponible $\geq$ 99\,\% del tiempo mensual, entregando los mensajes sin moderación automática en caso de indisponibilidad en lugar de bloquear la mensajería. & Registrar el tiempo de actividad del servicio de moderación durante un mes de monitoreo. \\
+	\hline
+	RNF-IA-16 & Equidad & El sistema deberá mantener una diferencia de tasa de falso bloqueo no mayor a 10 puntos porcentuales entre mensajes con vocabulario técnico veterinario y mensajes de lenguaje general. & Evaluar el componente sobre subconjuntos de mensajes agrupados por tipo de vocabulario y comparar la brecha. \\
+	\hline
+	RNF-IA-17 & Equidad & El sistema deberá mantener una diferencia de tasa de falso bloqueo no mayor a 10 puntos porcentuales entre mensajes largos ($>$200 caracteres) y mensajes cortos. & Evaluar el componente sobre subconjuntos de mensajes agrupados por longitud y comparar la brecha. \\
+	\hline
+	RNF-IA-18 & Explicabilidad & El sistema deberá lograr una calificación media de comprensión de la notificación de bloqueo $\geq$ 4/5 en escala Likert 1--5. & Aplicar encuesta de comprensión a usuarios tras recibir una notificación de bloqueo. \\
+	\hline
+\end{longtable}
+
+% -- 7.4 --------------------------------------------------------
+\subsection{Ética, privacidad y clasificación de riesgo}
+\label{sec:etica_ia}
+
+\textbf{Finalidad.} Cada componente de IA de MundiPets tiene una finalidad determinada y
+declarada en su ficha (Tablas~\ref{tab:ficha_ia01}--\ref{tab:ficha_ia03}): apoyar la decisión
+de un proceso de cruza (IA-01), mantener la calidad del contenido publicado (IA-02) y proteger
+la comunicación entre usuarios (IA-03). Ninguno de los tres reutiliza los datos tratados para
+un fin distinto del declarado, conforme al principio de finalidad de la LOPDP \cite{lopdp2021}.
+
+\textbf{Minimización de datos.} IA-01 procesa únicamente las variables clínicas y genéticas
+necesarias para evaluar compatibilidad (Tabla~\ref{tab:ficha_ia01}), sin acceder a datos de
+contacto o ubicación del propietario. IA-02 procesa la imagen cargada, sin metadatos de
+geolocalización asociados. IA-03 procesa el texto del mensaje, sin acceder al historial médico
+o genético de las mascotas de los usuarios que conversan. Este alcance limitado de variables
+por componente responde directamente al principio de minimización del Art.\,10 LOPDP.
+
+\textbf{Consentimiento.} El tratamiento de datos por los tres componentes queda cubierto por el
+consentimiento otorgado al registrarse y al aceptar los términos de uso de la plataforma
+(Art.\,7 y 8 LOPDP), en línea con la base legal ya declarada en RD-04 (protección de datos
+personales) para el resto del sistema. El usuario puede rechazar el uso de IA-01 y proceder de
+forma manual sin perder acceso al resto de funcionalidades del sistema, conforme al
+\textit{fallback} declarado en su ficha.
+
+\textbf{Seudonimización.} Los conjuntos de evaluación usados para medir RNF-IA-04, RNF-IA-05,
+RNF-IA-10, RNF-IA-11, RNF-IA-16 y RNF-IA-17 (Tabla~\ref{tab:req_ia}) se construyen con
+identificadores internos desvinculados del nombre y contacto del propietario, conforme al
+mecanismo de seudonimización que desarrolla el Reglamento General de la LOPDP
+\cite{lopdp_reglamento2023}; la reidentificación solo es posible mediante el sistema de
+producción, no mediante el conjunto de evaluación.
+
+\textbf{Supervisión humana.} Los tres componentes son de apoyo y no de decisión definitiva: la
+salida de IA-01 no autoriza ni rechaza un proceso de cruza, la de IA-02 puede derivarse a
+revisión manual y la de IA-03 puede apelarse. En los tres casos existe una vía de revisión
+humana declarada en el campo ``Riesgos y \textit{fallback}'' de la ficha correspondiente, en
+línea con el enfoque de supervisión humana significativa del Reglamento (UE) 2024/1689
+\cite{euaiact2024}.
+
+\textbf{Clasificación de riesgo.} Conforme al enfoque basado en niveles de riesgo del
+Reglamento (UE) 2024/1689, ninguno de los tres componentes de MundiPets pertenece a la
+categoría de riesgo inaceptable ni de alto riesgo definidas en dicho reglamento: no realizan
+identificación biométrica, puntuación social ni evaluación de acceso a servicios esenciales.
+IA-01 se clasifica como riesgo limitado por influir en una decisión con efecto sobre el
+bienestar animal y estar sujeto a un derecho legal de explicación (RL-06); IA-02 e IA-03 se
+clasifican como riesgo mínimo/limitado, con la obligación de transparencia ya cubierta por
+RNF-14 y RNF-15 respectivamente. Estas clasificaciones se detallan por componente en el campo
+``Clasificación de riesgo'' de cada ficha (Tablas~\ref{tab:ficha_ia01}--\ref{tab:ficha_ia03}).
+
+\textbf{Base legal específica de Ecuador.} Al tratarse de datos personales de propietarios y,
+en el caso de IA-01, de datos clínicos y genéticos de las mascotas asociadas a una persona
+identificable, el tratamiento de los tres componentes se rige por la Ley Orgánica de
+Protección de Datos Personales \cite{lopdp2021} y su Reglamento General
+\cite{lopdp_reglamento2023}, además del Art.\,20 LOPDP (RL-06) ya declarado como base legal
+directa del bloque de explicabilidad de IA-01. Esta base legal no es una declaración genérica:
+tiene fuente normativa identificable (artículo y norma), criterio de aceptación (los campos de
+las fichas de esta sección) y traza hacia los requisitos correspondientes, igual que cualquier
+otro requisito legal del sistema.
+
+% -- 7.5 --------------------------------------------------------
+\subsection{Plan de monitoreo y trazado de los requisitos de IA}
+\label{sec:monitoreo_ia}
+
+\begin{table}[H]
+	\caption{Plan de monitoreo en producción de los componentes de inteligencia artificial.}
+	\label{tab:monitoreo_ia}
+	\small
+	\begin{tabularx}{\textwidth}{|L{1.6cm}|X|L{3.0cm}|L{3.6cm}|}
+		\hline
+		\textbf{Comp.} & \textbf{Indicador y frecuencia} & \textbf{Umbral de alerta por deriva} & \textbf{Criterio de reentrenamiento o retirada} \\
+		\hline
+		IA-01 & Coincidencia con evaluación veterinaria (RNF-IA-01), medida mensualmente sobre una muestra auditada de recomendaciones emitidas. & Caída sostenida por debajo de 80\,\% durante dos meses consecutivos. & Reentrenar con el conjunto de casos auditados del período; si tras el reentrenamiento no se recupera el umbral de RNF-06 en el siguiente ciclo, retirar el componente y volver al flujo manual declarado en su \textit{fallback}. \\
+		\hline
+		IA-02 & Tasa de clasificación correcta (RNF-IA-07), medida semanalmente sobre una muestra de imágenes revisadas manualmente como control de calidad. & Caída sostenida por debajo de 90\,\% durante tres semanas consecutivas. & Reentrenar incorporando los casos mal clasificados detectados en el control de calidad; si la tasa no se recupera en dos ciclos de reentrenamiento, derivar temporalmente todas las imágenes a revisión manual. \\
+		\hline
+		IA-03 & Tasa de falsos bloqueos (RNF-IA-16, RNF-IA-17), medida mensualmente sobre una muestra de mensajes bloqueados revisados manualmente. & Tasa de falsos bloqueos superior a 15\,\% durante un mes de medición. & Reentrenar con los mensajes mal clasificados identificados en la revisión; si la tasa no mejora, desactivar temporalmente la moderación automática y operar con el canal de reporte manual entre usuarios. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+Los tres planes de monitoreo comparten un mismo principio: ninguna deriva detectada retira un
+componente de forma automática. El umbral de alerta dispara una revisión y, si corresponde, un
+reentrenamiento; solo la falta de recuperación tras el reentrenamiento activa el \textit{fallback}
+manual ya declarado en la ficha de cada componente (Tablas~\ref{tab:ficha_ia01}--\ref{tab:ficha_ia03}),
+de modo que el sistema nunca queda sin una vía de operación cuando un componente de IA se
+degrada o deja de estar disponible.
+
+Finalmente, los 27 requisitos de la Tabla~\ref{tab:req_ia} se trazan hacia los RF y RNF
+preexistentes del sistema del siguiente modo: los requisitos de IA-01 (RF-IA-01 a RF-IA-03,
+RNF-IA-01 a RNF-IA-06) trazan hacia RF-06, RNF-06, RNF-13 y RL-06; los de IA-02 (RF-IA-07 a
+RF-IA-09, RNF-IA-07 a RNF-IA-12) trazan hacia RF-17, RNF-07 y RNF-14; y los de IA-03 (RF-IA-10 a
+RF-IA-12, RNF-IA-13 a RNF-IA-18) trazan hacia RF-07 y RNF-15. Estas filas se entregan a
+MORALES SÁNCHEZ, Gary Alejandro para su integración en la matriz de trazabilidad final
+(Sección 6, Matriz de trazabilidad final): ningún requisito de IA queda aislado, porque todos sirven a
+una funcionalidad ya especificada o modifican su criterio de aceptación.
 	\newpage
 	
 	% ============================================================

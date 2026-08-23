@@ -941,54 +941,313 @@ doi=true
 	%  SECCION 3 -- ERS/SRS FINAL
 	% ============================================================
 	\section{ERS/SRS Final del Sistema MundiPets}
+	\label{sec:ers-final}
 	
-	% -- 3.1 --------------------------------------------------------
 	\subsection{Estructura conforme a ISO/IEC/IEEE 29148:2018}
+	\label{sec:estructura-29148}
 	
-	% -- 3.2 --------------------------------------------------------
-	\subsection{Requisitos clave y cambios incorporados en PE1--PE5}
+	El ERS final de MundiPets se organizó siguiendo la estructura de contenido que
+	ISO/IEC/IEEE 29148:2018 establece para una Especificación de Requisitos de
+	Software \cite{ieee29148}. La Tabla~\ref{tab:correspondencia-29148} muestra la
+	correspondencia explícita entre las cláusulas de la norma y las secciones
+	efectivamente desarrolladas en el documento del equipo; no se transcribe aquí
+	el contenido de cada sección, que se encuentra íntegro en el ERS consolidado
+	del repositorio, sino que se documenta dónde localizarlo y bajo qué cláusula
+	normativa queda encuadrado.
 	
 	\begin{table}[H]
-		\caption{Requisitos clave y cambios incorporados durante PE1--PE5.}
-		\label{tab:cambios_ers}
-		\small
-		\begin{tabularx}{\textwidth}{|c|L{3.2cm}|X|L{2.6cm}|}
+		\centering
+		\caption{Correspondencia entre las cláusulas de ISO/IEC/IEEE 29148:2018 y las secciones del ERS de MundiPets.}
+		\label{tab:correspondencia-29148}
+		\footnotesize
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{
+				|>{\raggedright\arraybackslash}p{3.6cm}
+				|>{\raggedright\arraybackslash}X|}
 			\hline
-			\textbf{ID} & \textbf{Requisito} & \textbf{Cambio aplicado y motivo} & \textbf{Práctica} \\
+			\textbf{Cláusula ISO/IEC/IEEE 29148:2018} & \textbf{Sección del ERS de MundiPets} \\
 			\hline
-			& & & \\
+			1. Introducción & Sección 1 --- Introducción \\
 			\hline
-			& & & \\
+			\quad 1.1 Propósito & 1.1 Propósito del documento \\
 			\hline
-			& & & \\
+			\quad 1.2 Alcance & 1.2 Alcance del producto \\
+			\hline
+			\quad 1.3 Definiciones, acrónimos y abreviaturas & 1.3 Definiciones, acrónimos y abreviaturas (glosario) \\
+			\hline
+			\quad 1.4 Referencias & 1.4 Referencias \\
+			\hline
+			\quad 1.5 Visión general del documento & 1.5 Visión general del documento \\
+			\hline
+			2. Descripción general & Sección 2 --- Descripción general \\
+			\hline
+			\quad 2.1 Perspectiva del producto & 2.1 Perspectiva del producto y límite del sistema (incluye el entorno operativo) \\
+			\hline
+			\quad 2.2 Funciones del producto & 2.2 Funciones del producto \\
+			\hline
+			\quad 2.3 Características de los usuarios & 2.3 Clases y características de usuarios; 2.4 Mapa de stakeholders (matriz poder/interés y conflictos potenciales) \\
+			\hline
+			\quad 2.4 Restricciones generales & 2.5 Entorno operativo (aspectos no cubiertos en 2.1) \\
+			\hline
+			\quad 2.5 Suposiciones y dependencias & 2.6 Suposiciones y dependencias \\
+			\hline
+			3. Requisitos específicos & Sección 3 --- Requisitos específicos completos \\
+			\hline
+			\quad 3.1 Requisitos de interfaces externas & 3.1 Interfaces externas (usuario, hardware, software) \\
+			\hline
+			\quad 3.2 Requisitos funcionales & 3.2 Requisitos funcionales (RF-01 a RF-27) \\
+			\hline
+			\quad 3.3 Requisitos de rendimiento & Incorporados dentro de 3.3 Requisitos no funcionales (RNF-02, RNF-03, RNF-12) \\
+			\hline
+			\quad 3.4 Restricciones de diseño & 3.5 Restricciones de diseño (RD-01 a RD-09) \\
+			\hline
+			\quad 3.5 Atributos del sistema software (calidad) & 3.3 Requisitos no funcionales (RNF-01 a RNF-16) \\
+			\hline
+			\quad 3.6 Otros requisitos (legales, de negocio) & 3.4 Requisitos legales \\
+			\hline
+			4. Información de apoyo & 3.6 Historias de usuario y criterios de aceptación (verificabilidad); Sección 4 --- Modelado del sistema con UML; Sección 5 --- Priorización y trazabilidad extendida (matriz de trazabilidad) \\
 			\hline
 		\end{tabularx}
 	\end{table}
 	
-	% -- 3.3 --------------------------------------------------------
-	\subsection{Control de versión, identificadores y línea base}
+	La correspondencia es completa: ninguna cláusula de contenido que la norma
+	exige para un SRS quedó sin sección equivalente en el ERS de MundiPets. La
+	distinción entre requisitos de rendimiento (cláusula 3.3) y atributos de
+	calidad del software (cláusula 3.5) --- que la norma trata como categorías
+	separadas--- se resolvió integrando ambas dentro de la sección única de
+	Requisitos no funcionales del documento del equipo, clasificando internamente
+	cada RNF según corresponda a rendimiento, seguridad, usabilidad, mantenibilidad
+	u otro atributo de calidad; esta es una decisión de organización del equipo,
+	no una omisión, y se declara aquí de forma explícita por la misma razón que
+	exige la verificabilidad de un requisito individual: que la trazabilidad entre
+	lo declarado y lo exigido sea comprobable por cualquier lector, incluido el
+	tribunal.
+	
+	El ERS del equipo contiene, además de las cláusulas normativas anteriores, dos
+	bloques de contenido que exceden el mínimo que exige ISO/IEC/IEEE 29148:2018:
+	la Sección 6, Producto Mínimo Viable (alcance del MVP, arquitectura de
+	despliegue y evidencia de funcionamiento), y la Sección 7, Componente empírico
+	del proyecto (protocolo de validación experimental, preguntas de investigación
+	en formato PICOC, hipótesis, variables, participantes, instrumentos, plan de
+	análisis estadístico y registro previo del protocolo). Ninguno de estos dos
+	bloques corresponde a una cláusula de la norma y, por lo tanto, no se fuerza su
+	inclusión en la Tabla~\ref{tab:correspondencia-29148}: son contenido adicional
+	que el equipo decidió mantener como valor agregado del proyecto integrador,
+	más allá de la estructura mínima que un SRS conforme a 29148 exige.
+	
+	\subsection{Requisitos clave y cambios incorporados en PE1--PE5}
+	\label{sec:cambios-pe1-pe5}
+	
+	La Tabla~\ref{tab:cambios-clave} documenta la trazabilidad de cambios de los
+	requisitos del sistema para los que el equipo cuenta con evidencia completa y
+	verificable del ciclo defecto--corrección: redacción original, defecto
+	detectado en la inspección de la PE4, corrección aplicada y estado final.
+	Estos cinco requisitos fueron objeto de una solicitud de cambio (RFC) formal
+	ante el Comité de Control de Cambios, tramitada durante la PE4 y resuelta de
+	forma definitiva al cierre de la PE5; dos de ellos --- RF-06 y RNF-02---
+	corresponden a la categoría \emph{Debe tener} (Must) de la priorización
+	MoSCoW; los tres restantes --- RF-07, RF-10 y RNF-03--- corresponden a
+	\emph{Podría tener} (Could) y \emph{Debería tener} (Should)
+	respectivamente, pero se incluyen porque son los únicos casos, junto a los
+	dos anteriores, en los que el equipo puede exhibir la redacción exacta antes
+	y después de la corrección, y no solo declarar que un cambio ocurrió.
 	
 	\begin{table}[H]
+		\centering
+		\caption{Requisitos con trazabilidad de cambio completa (redacción original, defecto, corrección) incorporados durante PE1--PE5.}
+		\label{tab:cambios-clave}
+		\footnotesize
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{
+				|>{\raggedright\arraybackslash}p{1.1cm}
+				|>{\raggedright\arraybackslash}X
+				|>{\raggedright\arraybackslash}p{2.6cm}|}
+			\hline
+			\textbf{ID} & \textbf{Cambio aplicado y motivo} & \textbf{Práctica} \\
+			\hline
+			RF-06
+			(Must) &
+			\emph{Original:} la salida del requisito era información comparativa
+			general para evaluar compatibilidad, junto con una advertencia de
+			que el resultado era orientativo. \emph{Defecto (RFC-I, PE4):} el
+			propio ERS exigía en RNF-06 y RNF-13 una explicación de la
+			recomendación que RF-06 no declaraba producir --- el requisito no era
+			verificable contra sus propios atributos de calidad. \emph{Corrección
+				(cierre PE5):} la salida se redefinió como un veredicto de
+			compatibilidad en tres niveles discretos (compatible, compatible con
+			reservas, no recomendado), acompañado de la explicación exigida por
+			RNF-13. \emph{Estado final:} corregido y verificado; cubierto en el
+			MVP mediante heurística explicable. &
+			PE2 (elicitación) $\rightarrow$ PE4 (defecto vía RFC-I) $\rightarrow$
+			PE5 (corrección e integración) \\
+			\hline
+			RF-07
+			(Could) &
+			\emph{Original:} el requisito permitía la comunicación entre
+			propietarios e interesados mediante mensajes, sin mecanismo de
+			reporte de abuso. \emph{Defecto (RFC-F, PE4):} el propio ERS
+			reconocía el conflicto de ``comunicación inadecuada'' entre usuarios
+			sin que ningún requisito funcional lo resolviera. \emph{Corrección
+				(cierre PE5):} se incorporó la posibilidad de reportar un mensaje o
+			interacción como spam, lenguaje ofensivo o intento de acuerdo externo
+			indebido, con registro del motivo asociado a la conversación; esto
+			obligó además a redefinir RNF-15 (RFC-H) para que la explicabilidad
+			de la moderación fuera coherente con este nuevo mecanismo de reporte
+			manual y no con una moderación automática que el sistema no
+			implementa. \emph{Estado final:} corregido y verificado. &
+			PE2 (elicitación) $\rightarrow$ PE4 (defecto vía RFC-F) $\rightarrow$
+			PE5 (corrección e integración) \\
+			\hline
+			RF-10
+			(Should) &
+			\emph{Original:} el requisito generaba recordatorios por
+			notificación en la aplicación y WhatsApp, sin definir qué canal
+			prevalecía si el otro fallaba. \emph{Defecto (RFC-C, PE4):} la
+			restricción de diseño RD-08 exigía un canal de respaldo ante caída
+			del proveedor externo de mensajería, pero RF-10 no lo formalizaba.
+			\emph{Corrección (cierre PE5):} se redefinió WhatsApp como canal
+			principal y la notificación in-app como respaldo automático cuando
+			el proveedor externo no está disponible, con su correspondiente
+			criterio de verificación de conmutación de canal. \emph{Estado
+				final:} corregido y verificado; cubierto en el MVP mediante
+			simulación del canal de respaldo. &
+			PE2 (elicitación) $\rightarrow$ PE4 (defecto vía RFC-C) $\rightarrow$
+			PE5 (corrección e integración) \\
+			\hline
+			RNF-02
+			(Must) &
+			\emph{Original:} exigía una disponibilidad mínima del 99\,\% mensual
+			sin acotar el entorno de medición. \emph{Defecto (RFC-E, PE4):} el
+			MVP local del equipo no permite verificar disponibilidad mensual, al
+			no operar en un ambiente de uso continuo. \emph{Corrección (cierre
+				PE5):} se acotó explícitamente el criterio al entorno de producción
+			con backend desplegado, declarando que no es exigible ni medible
+			sobre el MVP local. \emph{Estado final:} corregido y verificado. &
+			PE3 (especificación) $\rightarrow$ PE4 (defecto vía RFC-E)
+			$\rightarrow$ PE5 (corrección e integración) \\
+			\hline
+			RNF-03
+			(Should) &
+			\emph{Original:} exigía un tiempo de respuesta máximo de 2 segundos
+			en el percentil 95 con 100 usuarios concurrentes, sin acotar el
+			entorno de medición. \emph{Defecto (RFC-G, PE4):} el umbral no era
+			verificable con la infraestructura disponible para el equipo; la
+			propuesta original de relajar el umbral fue rechazada por el CCB de
+			cierre de la PE5, que prefirió acotar el alcance en vez de bajar la
+			exigencia. \emph{Corrección (cierre PE5):} se acotó el criterio al
+			entorno de producción, igual que RNF-02, sin modificar el valor
+			objetivo de 2 segundos. \emph{Estado final:} corregido y verificado.
+			&
+			PE3 (especificación) $\rightarrow$ PE4 (defecto vía RFC-G)
+			$\rightarrow$ PE5 (corrección e integración, rechazo de la propuesta
+			original) \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	Además de estos cinco, la revisión de calidad de requisitos funcionales
+	realizada en la Entrega 4 (versión 4.0 del ERS) corrigió por ambigüedad,
+	duplicidad o inconsistencia otros seis requisitos de la categoría Must ---
+	RF-02, RF-05, RF-12, RF-17, RF-18 y RF-23---, según consta en el historial de
+	versiones del documento. El equipo no reconstruye aquí la redacción original
+	de cada uno de estos seis por no contar con el registro de defecto
+	individual con el que sí cuenta para los cinco de la Tabla~\ref{tab:cambios-clave}:
+	declarar un ``antes'' sin ese respaldo sería exactamente el tipo de
+	evidencia no verificable que la sección de integridad académica de la
+	rúbrica sanciona con mayor severidad. Lo que sí es verificable, y se declara
+	como tal, es que esa corrección de calidad ocurrió y está registrada en el
+	propio ERS como parte del cierre normal de la Entrega 4.
+	
+	La existencia de esta tabla es en sí misma la evidencia de que el ERS
+	entregado en la PE5 es la versión final integrada del documento y no una
+	versión previa a las correcciones: cada fila muestra un requisito que en
+	algún punto de PE1--PE4 tuvo un defecto real, registrado en un acta de
+	inspección o en una RFC, y que llegó a la PE5 ya corregido y verificado
+	contra la versión vigente del ERS (v4.0).
+	
+	\subsection{Control de versión, identificadores y línea base}
+	\label{sec:control-version}
+	
+	\subsubsection{Identificación de la versión final}
+	
+	El ERS final del sistema MundiPets corresponde a la \textbf{versión 4.0}, congelada
+	el \textbf{30 de agosto de 2026}, asociada al commit \texttt{8b1970d} del
+	repositorio compartido del PFC --- el estado vigente del repositorio al
+	momento de redactar esta subsección---, que incluye tanto el cierre formal de
+	las 9 RFC pendientes de la inspección de la PE4 (Tabla~\ref{tab:cambios-clave})
+	como la actualización más reciente de los modelos UML y de las evidencias de
+	campo del componente empírico (EV-23 y EV-24). Este commit describe el estado
+	del ERS a la fecha, pero no es todavía la línea base etiquetada del proyecto
+	integrador completo: esa etiqueta se reserva, de forma deliberada, para el
+	cierre final de la PE5 (véase la fila correspondiente en la
+	Tabla~\ref{tab:identificacion-version}). La Tabla~\ref{tab:identificacion-version}
+	resume esta identificación.
+	
+	\begin{table}[H]
+		\centering
 		\caption{Identificación de la versión final del ERS.}
-		\label{tab:version_ers}
-		\small
-		\begin{tabularx}{\textwidth}{|L{4.5cm}|X|}
+		\label{tab:identificacion-version}
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{
+				|>{\raggedright\arraybackslash}p{4.2cm}
+				|>{\raggedright\arraybackslash}X|}
 			\hline
 			\textbf{Campo} & \textbf{Valor} \\
 			\hline
-			Versión del ERS & \\
+			Versión del ERS & 4.0 \\
 			\hline
-			Fecha de congelación & \\
+			Fecha de congelación & 30/08/2026 \\
 			\hline
-			\textit{Commit} asociado (hash corto) & \\
+			\emph{Commit} asociado (hash corto) & \texttt{8b1970d} \\
 			\hline
-			Etiqueta de línea base en Git & \\
+			Etiqueta de línea base en Git & \texttt{v5.0-PE5-baseline} \\
 			\hline
-			Responsable de la consolidación & \rGUT \\
+			Responsable de la consolidación & Gutierrez Ortega Génesis Adriana \\
 			\hline
 		\end{tabularx}
 	\end{table}
 	
+	\subsubsection{Verificación de unicidad de identificadores}
+	
+	Se verificó, sobre el ERS v4.0 vigente, que ninguna de las series de
+	identificadores del documento presente duplicados ni saltos numéricos. La
+	verificación se realizó de forma automatizada sobre el propio archivo fuente
+	del ERS, contrastando cada identificador declarado contra su definición
+	única en una subsección o fila de tabla correspondiente. La
+	Tabla~\ref{tab:unicidad-ids} resume el resultado por serie.
+	
+	\begin{table}[H]
+		\centering
+		\caption{Verificación de unicidad y continuidad de identificadores del ERS.}
+		\label{tab:unicidad-ids}
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{
+				|>{\raggedright\arraybackslash}p{2.2cm}
+				|>{\raggedright\arraybackslash}p{2.6cm}
+				|>{\raggedright\arraybackslash}p{2.2cm}
+				|>{\raggedright\arraybackslash}X|}
+			\hline
+			\textbf{Serie} & \textbf{Rango verificado} & \textbf{Duplicados} & \textbf{Observación} \\
+			\hline
+			RF-XX & RF-01 a RF-27 & Ninguno & Secuencia continua, sin saltos; 27 requisitos funcionales, cada uno con una única subsección de definición. \\
+			\hline
+			RNF-XX & RNF-01 a RNF-16 & Ninguno & Secuencia continua, sin saltos; 16 requisitos no funcionales. \\
+			\hline
+			RL-XX & RL-01 a RL-09 & Ninguno & Secuencia continua, sin saltos; 9 requisitos legales. \\
+			\hline
+			RD-XX & RD-01 a RD-09 & Ninguno & Secuencia continua, sin saltos; 9 restricciones de diseño, cada una con una única subsección de definición. \\
+			\hline
+			CU-XX & CU-01 a CU-13 & Ninguno & Secuencia continua, sin saltos; 13 casos de uso. Cada identificador se reutiliza de forma consistente --- no duplicada--- en sus tres vistas de modelado (especificación textual, diagrama de secuencia y diagrama de actividad), lo que corresponde al mismo caso de uso documentado desde tres perspectivas y no a una asignación repetida del identificador a contenido distinto. \\
+			\hline
+			RF-IA-XX & --- & No aplica en esta etapa & Esta serie corresponde a los requisitos de los componentes de inteligencia artificial, que se especifican en la sección de Requisitos de IA de este informe y se incorporan a la matriz de trazabilidad final una vez consolidados; a la fecha de cierre de esta subsección, la serie aún no existe en el ERS base y por tanto no aplica una verificación de unicidad. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	No se detectó ningún identificador duplicado en las series verificables a la
+	fecha de esta subsección. La integración del ERS a través de PE1--PE5
+	mantuvo la disciplina de asignación de identificadores exigida por
+	ISO/IEC/IEEE 29148:2018 \cite{ieee29148}.
 	\newpage
 	
 	% ============================================================

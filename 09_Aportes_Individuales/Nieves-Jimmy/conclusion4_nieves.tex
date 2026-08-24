@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[numbers]{natbib}
+\bibliographystyle{ieeetr}
+
+\title{PE5 -- Vista previa individual\\Conclusión 4 --- Unidad 4: Validación y gestión de cambios}
+\author{Nieves Sánchez, Jimmy Samuel}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+
+\subsection*{Conclusión 4 --- Unidad 4: Validación y gestión de cambios}
+
+La inspección formal detecta con alta eficacia los defectos de contenido para
+los que fue diseñada, pero no está concebida para exponer huecos
+estructurales en el propio formato de especificación, que solo emergen al
+reauditar el documento completo bajo una lente distinta \citep{wohlin2012}.
+Así lo evidencia el diagnóstico de trazabilidad realizado para el criterio
+C2 sobre el ERS final de MundiPets: la inspección Fagan de la PE4 se acotó
+explícitamente a la Sección 3 (Requisitos) del documento, por lo que nunca
+revisó los modelos UML de la Sección 4. Como consecuencia, el equipo modeló
+en el diagrama de clases una entidad \textit{VeterinaryAppointment} para
+gestionar citas veterinarias sin que existiera ningún RF ni CU que la
+respaldara y que además contradecía directamente dos exclusiones de
+alcance ya declaradas en el propio ERS (``no reemplaza consulta
+veterinaria'', ``no ofrece agenda médica completa''). Este defecto de tipo
+cadena rota no fue detectado por la inspección Fagan por diseño, no por
+descuido de los inspectores, sino hasta que se realizó el diagnóstico
+sistemático de cobertura de trazabilidad de la PE5, al cruzar cada clase del
+diagrama contra el ERS. Como resultado, la clase se eliminó de la partición
+Mascotas y Salud, diferenciando el recordatorio pasivo (RF-10), que sí está
+en alcance, de la reserva activa de turnos, que permanece fuera de él.
+Consistente con lo registrado en la retrospectiva del equipo (Sección 9),
+donde se identificó que ni siquiera la propia revisión de trazabilidad
+estuvo exenta de una segunda pasada, el equipo adopta como práctica extender
+la verificación cruzada más allá del alcance formal de la inspección de
+contenido, cubriendo también la consistencia entre los modelos y el texto
+del ERS, tal como exige la gestión de configuración de \citep{ieee29148}.
+
+\bibliography{conclusion4_referencias}
+
+\end{document}

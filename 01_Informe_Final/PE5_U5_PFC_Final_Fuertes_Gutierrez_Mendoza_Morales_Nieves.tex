@@ -3463,6 +3463,7 @@ repositorio de la PE5.
 	
 	\textbf{Hallazgos estructurales de plantilla (no computados como defectos Fagan).} Reportados y explicados en la Sección 5.3: (1) ausencia de campo «Origen» explícito en los 16 bloques de atributos de RNF; (2) ausencia de campo «Criterio de verificación» explícito en los 9 bloques de atributos de RD. Ambos alimentan la acción de mejora de M1a (Sección 8.3, Tabla \ref{tab:auditoria}) y quedan coordinados con Gutiérrez Ortega para la consolidación del ERS final.
 	
+	\newpage
 % -- ANEXO B ---------------------------------------------------
 \section{Banco de Preguntas del Tribunal con Respuestas Ancladas}
 \label{app:preguntas}
@@ -3563,32 +3564,113 @@ repositorio de la PE5.
 			\hline
 			\textbf{Integrante} & \textbf{Aportes concretos (artefactos y secciones)} & \textbf{Evidencia en Git (\textit{commits}, archivos, fechas)} \\
 			\hline
-			\rFUE & & \\
+			\rFUE &
+			Sección 8 (Métricas de Calidad del ERS): instrumento de auditoría, conteos base, cálculo de M1--M6, comparación antes/después, registro de re-inspección. Aporte individual completo (\texttt{PE5\_Aporte\_FUERTES}) con el detalle de la inspección Fagan de su subgrupo (23 defectos). Estructura inicial del repositorio. &
+			12 \textit{commits} (20--23/08/2026). Archivos: \texttt{03\_Metricas/calculos/*.md}, \texttt{conteos\_base.csv/.md}, \texttt{antes\_despues.md}, \texttt{evidencia\_reinspeccion/registro\_reinspeccion.md}, \texttt{instrumento\_auditoria.md} (23/08); \texttt{09\_Aportes\_Individuales/Fuertes\_Daniel/} (22/08) \\
 			\hline
-			\rMOR & & \\
+			\rMOR &
+			Sección 4 (Modelos UML) y Sección 6 (Gestión y Trazabilidad): diagramas UML completos (casos de uso, clases, secuencia, actividades, estado, componentes, contexto), diagnóstico de cobertura de trazabilidad (2 cadenas rotas, 3 trazas parciales) y sincronización backlog--ERS. &
+			13 \textit{commits} (21--23/08/2026). Archivos: \texttt{07\_Modelos\_UML/} (36 figuras), \texttt{09\_Aportes\_Individuales/Morales\_Gary/FundamentoTeorico\_Seccion4\_Seccion6\_MoralesGary.tex} y figuras asociadas \\
 			\hline
-			\rMEN & & \\
+			\rMEN &
+			Sección 7 (Requisitos de los Componentes de IA): fichas de los 3 componentes (IA-01, IA-02, IA-03), requisitos RF-IA/RNF-IA, datos de entrenamiento, ética/privacidad/riesgo, plan de monitoreo. Conclusión 5 (Unidad 5, pendiente de integrar al maestro). &
+			16 \textit{commits} (21--23/08/2026). Archivos: \texttt{05\_Requisitos\_IA/} completa (7 archivos, 21/08); \texttt{09\_Aportes\_Individuales/Mendoza\_Andy/} \\
 			\hline
-			\rGUT & & \\
+			\rGUT &
+			Sección 2 (Metodología de IR), Sección 3 (ERS/SRS Final: estructura conforme a ISO/IEC/IEEE 29148:2018, correspondencia de cláusulas, trazabilidad de cambio de 5 requisitos), Fundamento Teórico (bloque FT.2), Conclusión 1 (Unidad 1). &
+			11 \textit{commits} (22--23/08/2026). Archivos: \texttt{09\_Aportes\_Individuales/Gutierrez\_Genesis/Seccion2\_Metodologia.tex}, \texttt{Seccion3\_1\_ERS\_Estructura.tex}, \texttt{Seccion3\_3.2\_ERS\_Final\_v2.tex}, \texttt{fundamento\_teorico\_FT2.tex} \\
 			\hline
-			\rNIE & & \\
+			\rNIE &
+			Fundamento Teórico (gestión de proyecto), Sección 1 (Introducción), Sección 9 (Retrospectiva del Equipo), Resumen/Abstract bilingüe, Conclusión 4 (Unidad 4: caso \textit{VeterinaryAppointment}), Sección 11.2 (Reglas de la defensa). Carga del ERS de referencia y sus figuras a \texttt{02\_ERS\_Final/}. &
+			13 \textit{commits} (22--23/08/2026). Archivos: \texttt{09\_Aportes\_Individuales/Nieves-Jimmy/} (8 archivos), \texttt{00\_Gestion/retrospectiva/}, \texttt{02\_ERS\_Final/ERS\_SRS\_2B\_v2\_0.tex} y figuras, secciones integradas directamente en \texttt{01\_Informe\_Final/...tex} \\
 			\hline
 		\end{tabularx}
+		
+		\vspace{0.3cm}
 	\end{table}
+	
 	
 	\begin{figure}[H]
 		\centering
-		\fbox{\parbox{0.85\textwidth}{\centering\vspace{2cm}
-				\textit{[Insertar captura del historial de \textit{commits} con autoría y fecha por integrante]}
-				\vspace{2cm}}}
+			\includegraphics[width=0.95\textwidth]{historial_commits.png}
 		\caption{Historial de \textit{commits} del repositorio al corte de la PE5.}
 		\label{fig:commits}
 	\end{figure}
+
+
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{contribuciones_integrante.png}
+	\caption{Contribuciones por integrante.}
+	\label{fig:contributions}
+	\end{figure}
+	
+	\newpage
 	
 	% -- ANEXO D ---------------------------------------------------
 	\section{Retrospectiva Start--Stop--Continue (detalle)}
 	\label{app:retrospectiva}
+	La retrospectiva se ejecutó como parte del ensayo general de la defensa
+	técnica, documentado en el repositorio
+	(\texttt{06\_Defensa/ensayos/README.md}). 
 	
+	\begin{table}[H]
+		\centering
+		\caption{Detalle de la sesión de retrospectiva.}
+		\label{tab:sesion-retro}
+		\small
+		\begin{tabularx}{\textwidth}{|L{3.2cm}|X|}
+			\hline
+			\textbf{Campo} & \textbf{Valor} \\
+			\hline
+			Fecha & 23 de agosto de 2026 \\
+			\hline
+			Modalidad & Virtual \\
+			\hline
+			Duración & 30 minutos (15:00--15:30): 20 min de exposición + 10 min de preguntas \\
+			\hline
+			Participantes & Fuertes Arraes, Edson Daniel; Gutiérrez Ortega, Génesis Adriana; Mendoza Párraga, Andy Johel; Morales Sánchez, Gary Alejandro; Nieves Sánchez, Jimmy Samuel (los cinco integrantes) \\
+			\hline
+			Dinámica utilizada & Ensayo cronometrado de la defensa siguiendo el guion y el reparto de tiempos por bloque, seguido de una ronda de preguntas simulada con el banco de 22 preguntas del Anexo B \\
+			\hline
+			Coordinador & Nieves Sánchez, Jimmy Samuel \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	
+	
+	\subsection*{Acuerdos alcanzados, con responsable y plazo}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Acuerdos de la retrospectiva: responsable y plazo por acción de mejora.}
+		\label{tab:acuerdos-retro}
+		\small
+		\begin{tabularx}{\textwidth}{|c|X|L{2.7cm}|L{3.2cm}|}
+			\hline
+			\textbf{Categoría} & \textbf{Acuerdo / acción de mejora} & \textbf{Responsable} & \textbf{Plazo} \\
+			\hline
+			Start & Definir el cronograma (Tabla 4) & Nieves Sánchez & Antes de re-crear el tag final \\
+			\hline
+			Start & Explicar de forma sencilla las siglas (ERS, RF, RNF, M1a, M6, etc.) en la exposición & Todo el equipo & Antes de la defensa real \\
+			\hline
+			Start & Conseguir evidencia de la PE4 del subgrupo de Fuertes & Fuertes Arraes & Antes de re-crear el tag final \\
+			\hline
+			Stop & Exceder el último minuto en lecciones aprendidas y conclusiones & Nieves Sánchez & Practicar antes de la defensa real \\
+			\hline
+			Stop & Confundir defectos de contenido con hallazgos estructurales de plantilla al exponer & Fuertes Arraes, Mendoza Párraga & Antes de la defensa real \\
+			\hline
+			Stop & Dejar la evidencia del ensayo sin adjuntar & Nieves Sánchez & Inmediato \\
+			\hline
+			Continue & Anclar cada respuesta al artefacto concreto que la respalda & Todo el equipo & Vigente \\
+			\hline
+			Continue & Practicar preguntas sobre secciones que no son propias & Todo el equipo & Vigente \\
+			\hline
+			Continue & Usar el caso \textit{VeterinaryAppointment} como ejemplo de verificación fuera del alcance de Fagan & Nieves Sánchez & Vigente \\
+			\hline
+		\end{tabularx}
+	\end{table}
 	% -- ANEXO E ---------------------------------------------------
 	\section{Referencias y Declaración de Uso de Inteligencia Artificial}
 	\label{app:ia_declaracion}

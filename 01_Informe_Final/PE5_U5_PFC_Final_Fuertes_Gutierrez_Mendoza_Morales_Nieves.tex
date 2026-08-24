@@ -1348,7 +1348,7 @@ artificial intelligence requirements, MundiPets.
 	compatibilidad, recibe validaciones), refleja la decisión de tratar la
 	inteligencia artificial como un límite del sistema desacoplado del resto
 	de actores humanos, y no como una función interna invisible. Esto
-	anticipa que los componentes de IA (Sección~\ref{sec:req_ia}) tienen
+	anticipa que los componentes de IA (Sección~\ref{sec:requisitos_ia}) tienen
 	contratos de entrada/salida propios y auditables, no una lógica difusa
 	mezclada con el resto del sistema.
 	
@@ -1785,7 +1785,7 @@ artificial intelligence requirements, MundiPets.
 	probabilístico nunca es la única barrera de decisión: existe una regla
 	determinista de consanguinidad que puede anular un buen puntaje de
 	compatibilidad. Esto es la aplicación directa del límite declarado en la
-	Sección~\ref{sec:req_ia} (``no reemplaza la evaluación veterinaria
+	Sección~\ref{sec:requisitos_ia} (``no reemplaza la evaluación veterinaria
 	profesional''): la IA aporta una señal, pero una regla de negocio dura
 	puede vetarla.
 	
@@ -2992,6 +2992,7 @@ una funcionalidad ya especificada o modifican su criterio de aceptación.
 	%  SECCION 8 -- METRICAS DE CALIDAD
 	% ============================================================
 	\section{Métricas de Calidad del ERS}
+\label{sec:metricas}
 
 \subsection{Instrumento de auditoría}
 
@@ -3324,7 +3325,7 @@ repositorio de la PE5.
 	
 	Como verificación previa obligatoria, cada integrante debe responder, antes
 	de la defensa, cuatro preguntas del banco de 22 preguntas del tribunal
-	(Anexo B) correspondientes a una parte del proyecto que no desarrolló
+	(Anexo~\ref{app:preguntas}) correspondientes a una parte del proyecto que no desarrolló
 	personalmente. Este muestreo interno es el mismo criterio que aplicará el
 	tribunal el día de la defensa, y su objetivo es detectar a tiempo cualquier
 	zona del proyecto que el equipo domine de forma desigual, antes de que lo
@@ -3341,11 +3342,126 @@ repositorio de la PE5.
 	% ============================================================
 	%  ANEXOS
 	% ============================================================
-	\appendix
+	\appendices
 	
 	% -- ANEXO A ---------------------------------------------------
 	\section{Instrumento de Auditoría de Calidad del ERS}
 	\label{app:auditoria}
+		\subsection*{A.1. Instrumento: fórmula, escala y peso de cada métrica}
+	
+	Ver Sección 8.1 de este informe para la descripción completa del instrumento (fórmulas, escala 0--4 y pesos M1 = 0,20; M2 = 0,15; M3 = 0,20; M4 = 0,20; M5 = 0,10; M6 = 0,15).
+	
+	\subsection*{A.2. Conteos base auditables}
+	
+	\begin{longtable}{C{0.7cm} L{4.3cm} C{1.3cm} L{7.5cm}}
+		\caption{Conteos base del ERS final de MundiPets.}\label{tab:conteos-base}\\
+		\toprule
+		\textbf{\#} & \textbf{Conteo} & \textbf{Valor} & \textbf{Fuente en el ERS} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\textbf{\#} & \textbf{Conteo} & \textbf{Valor} & \textbf{Fuente en el ERS} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endfoot
+		1 & Requisitos funcionales (RF) totales & 27 & Sección 3.2 (RF-01 a RF-27) \\
+		\addlinespace
+		2 & Requisitos no funcionales (RNF) totales & 16 & Sección 3.3 (RNF-01 a RNF-16) \\
+		\addlinespace
+		3 & Requisitos legales (RL) y de diseño (RD) & 9+9=18 & Sección 3.4 (RD-01 a RD-09) y 3.5 (RL-01 a RL-09) \\
+		\addlinespace
+		4 & Requisitos totales (RF+RNF+RD+RL) & 61 & --- \\
+		\addlinespace
+		5 & Requisitos con los 4 atributos completos (ID, prioridad, fuente, criterio) & 27 & Solo RF; ver nota metodológica M1a (Sección 8.2) \\
+		\addlinespace
+		6 & Casos de uso identificados & 13 & Sección 4.1, diagrama de casos de uso general \\
+		\addlinespace
+		7 & Casos de uso especificados textualmente & 13 & Sección 4.2 (CU-01 a CU-13) \\
+		\addlinespace
+		8 & Actores del sistema & 5 & Sección 4.1: Propietario de mascota, Adoptante, Interesado en cruza, Refugio de animales, Veterinaria \\
+		\addlinespace
+		9 & Actores con al menos un RF asociado & 5 & Los cinco actores del diagrama de casos de uso general tienen RF asociados explícitamente \\
+		\addlinespace
+		10 & Pares de requisitos analizados para consistencia & 10 & 5 con conflicto documentado en la inspección PE4 + 5 con relación cruzada explícita sin conflicto (ver nota M2, Sección 8.2) \\
+		\addlinespace
+		11 & Requisitos con criterio BDD comprobable (Gherkin) & 17 & Sección 4.5, matriz de trazabilidad extendida: filas que enlazan hasta HU con criterio de aceptación Gherkin \\
+		\addlinespace
+		12 & RF con cadena de trazabilidad hacia adelante completa & 17 & Igual fuente que el punto 11, expresado sobre el universo de 27 RF \\
+		\addlinespace
+		13 & RF con fuente o \textit{stakeholder} identificado & 27 & Campo «Origen (ID de evidencia)» presente en el 100\,\% de los bloques de atributos de RF \\
+		\addlinespace
+		14 & Defectos hallados en la re-inspección de la PE5 & 0 & Sección 5.3: los 23 defectos originales del registro consolidado de la PE4 quedaron cerrados \\
+	\end{longtable}
+	
+	\subsection*{A.3. Análisis de pares de requisitos para M2 (consistencia)}
+	
+	\begin{longtable}{L{3cm} L{3.5cm} L{3.5cm} L{2.5cm}}
+		\caption{Pares de requisitos analizados y su resolución.}\label{tab:pares-m2}\\
+		\toprule
+		\textbf{Par} & \textbf{Origen del análisis} & \textbf{Tipo de relación} & \textbf{Estado} \\
+		\midrule
+		\endfirsthead
+		\toprule
+		\textbf{Par} & \textbf{Origen del análisis} & \textbf{Tipo de relación} & \textbf{Estado} \\
+		\midrule
+		\endhead
+		\bottomrule
+		\endfoot
+		RF-09 $\leftrightarrow$ RD-03 & Defecto D-02 (PE4) & Conflicto directo (validación/certificación) & Resuelto (Sección 5.2) \\
+		\addlinespace
+		RF-07 $\leftrightarrow$ RNF-15 & Defecto D-06 (PE4) & Conflicto directo (moderación no especificada) & Resuelto (RFC-01/RFC-F) \\
+		\addlinespace
+		RD-01 $\leftrightarrow$ RNF-15 & Defecto D-07 (PE4) & Conflicto directo (subcomponente de IA no declarado) & Resuelto (Sección 5.2) \\
+		\addlinespace
+		RF-17 $\leftrightarrow$ RNF-14 & Defecto D-08 (PE4) & Conflicto directo (criterios de rechazo no enumerados) & Resuelto (Sección 5.2) \\
+		\addlinespace
+		RF-25 $\leftrightarrow$ RNF-16 & Defectos D-10/D-11 (PE4) & Conflicto directo (exposición vs. protección de datos) & Resuelto (RFC-03/RFC-A) \\
+		\addlinespace
+		RD-05 $\leftrightarrow$ RNF-10 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+		\addlinespace
+		RD-08 $\leftrightarrow$ RF-10 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+		\addlinespace
+		RD-08 $\leftrightarrow$ RNF-09 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+		\addlinespace
+		RF-10 $\leftrightarrow$ RNF-09 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+		\addlinespace
+		RNF-03 $\leftrightarrow$ RNF-12 & Mención cruzada explícita & Relación declarada, sin conflicto & Sin acción \\
+	\end{longtable}
+	
+	\textbf{Metodología de búsqueda.} Los cinco pares con conflicto provienen directamente del registro consolidado de defectos de la inspección Fagan de la PE4 (Sección 5.1), clasificados allí como tipo «Consistencia». Los cinco pares sin conflicto se obtuvieron mediante revisión sistemática de toda mención explícita de un identificador de requisito (RF-XX, RNF-XX o RD-XX) dentro del texto de Descripción, Justificación o Impacto de cualquier otro bloque de atributos del ERS, descartando las auto-referencias.
+	
+	\subsection*{A.4. Muestra de cinco requisitos para M5 (modificabilidad)}
+	
+	Ver Sección 8.2, nota de cálculo M5, para el detalle completo de los cinco requisitos seleccionados (RF-06, RF-07, RF-11, RF-25, RNF-03) y los artefactos impactados por cada uno.
+	
+	\subsection*{A.5. Registro de la re-inspección (M6)}
+	
+	\begin{table}[H]
+		\centering
+		\caption{Verificación de cierre de los 23 defectos originales en la re-inspección de la PE5.}
+		\label{tab:reinspeccion}
+		\small
+		\begin{tabularx}{\textwidth}{|L{3.2cm}|C{1.3cm}|L{4cm}|L{3.5cm}|}
+			\hline
+			\textbf{Rango de defectos} & \textbf{Cant.} & \textbf{Vía de cierre} & \textbf{Verificado en} \\
+			\hline
+			D-01 a D-09, D-16 a D-20, D-22, D-23 & 18 & Corrección directa sobre el texto del ERS (sin RFC) & Sección 5.2, Tabla \ref{tab:correcciones-directas} \\
+			\hline
+			D-12 a D-15 & 4 & Corrección de la matriz de trazabilidad extendida & Coordinado con Morales Sánchez (Sección 6) \\
+			\hline
+			D-05, D-06 & --- & RFC-01, unificada como RFC-F: aplicada & Sección 6.1 (Morales Sánchez) \\
+			\hline
+			D-21, D-22 & --- & RFC-02, unificada como RFC-G: resuelta por vía alternativa & Sección 6.1 (Morales Sánchez) \\
+			\hline
+			D-10, D-11 & --- & RFC-03, unificada como RFC-A: ya correcta en el ERS vigente & Sección 6.1 (Morales Sánchez) \\
+			\hline
+			\textbf{Total defectos residuales} & \multicolumn{3}{l|}{\textbf{0 de 23}} \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\textbf{Hallazgos estructurales de plantilla (no computados como defectos Fagan).} Reportados y explicados en la Sección 5.3: (1) ausencia de campo «Origen» explícito en los 16 bloques de atributos de RNF; (2) ausencia de campo «Criterio de verificación» explícito en los 9 bloques de atributos de RD. Ambos alimentan la acción de mejora de M1a (Sección 8.3, Tabla \ref{tab:auditoria}) y quedan coordinados con Gutiérrez Ortega para la consolidación del ERS final.
 	
 	% -- ANEXO B ---------------------------------------------------
 	\section{Banco de Preguntas del Tribunal con Respuestas Ancladas}

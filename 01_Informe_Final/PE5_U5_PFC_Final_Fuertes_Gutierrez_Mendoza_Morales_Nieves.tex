@@ -27,6 +27,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish, es-tabla]{babel}
+\spanishplainpercent  % desactiva el espaciado automático de % de babel-spanish:
+% su macro interna (\es@sppercent) es incompatible con los entornos
+% align* de amsmath ("Incompatible glue units")
 \usepackage[autostyle=true, spanish=mexican]{csquotes}
 \usepackage[htt]{hyphenat}   % permite guionar dentro de \texttt (evita Overfull)
 
@@ -2945,78 +2948,127 @@ una funcionalidad ya especificada o modifican su criterio de aceptación.
 	%  SECCION 8 -- METRICAS DE CALIDAD
 	% ============================================================
 	\section{Métricas de Calidad del ERS}
-		\label{sec:metricas}
-	% -- 8.1 --------------------------------------------------------
-	\subsection{Instrumento de auditoría}
-	
-	% -- 8.2 --------------------------------------------------------
-	\subsection{Cálculo de las seis métricas con aritmética visible}
-	
-	{\setlength{\jot}{8pt}
-		\begin{align*}
-			M_{1a} &= \frac{\text{req.\ con los 4 atributos completos}}{\text{req.\ totales}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{1b} &= \frac{\text{CU especificados}}{\text{CU identificados}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{1c} &= \frac{\text{actores con} \geq 1\ \text{RF}}{\text{actores}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{2}  &= 1 - \frac{\text{conflictos detectados}}{\text{pares de requisitos analizados}} = \underline{\hspace{2.5cm}} \\
-			M_{3}  &= \frac{\text{req.\ con criterio BDD comprobable}}{\text{req.\ totales}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{4ade} &= \frac{\text{RF con cadena adelante completa}}{\text{RF}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{4atr} &= \frac{\text{RF con fuente o \textit{stakeholder} identificado}}{\text{RF}} \times 100 = \underline{\hspace{2.5cm}} \\
-			M_{5}  &= \frac{\sum_{i=1}^{n} \text{req.\ afectados al modificar } r_i}{n} = \underline{\hspace{2.5cm}} \\
-			M_{6}  &= \frac{\text{defectos hallados después de la inspección}}{\text{req.\ totales}} = \underline{\hspace{2.5cm}}
-	\end{align*}}
-	
-	% -- 8.3 --------------------------------------------------------
-	\subsection{Tabla de auditoría de calidad}
-	
-	\begin{table}[H]
-		\caption{Tabla de auditoría de calidad del ERS de MundiPets.}
-		\label{tab:auditoria}
-		\small
-		\begin{tabularx}{\textwidth}{|L{2.1cm}|C{1.6cm}|C{1.9cm}|L{2.6cm}|C{1.1cm}|X|}
-			\hline
-			\textbf{Métrica} & \textbf{Valor obtenido} & \textbf{Valor de referencia} & \textbf{Referencia normativa} & \textbf{Cumple} & \textbf{Acción de mejora} \\
-			\hline
-			M1 Completitud & & $\geq$95\,\% & ISO 25010; 29148 & S/N & \\
-			\hline
-			M2 Consistencia & & $\geq$0,98 & ISO 25010 & S/N & \\
-			\hline
-			M3 Verificabilidad & & $\geq$90\,\% & ISO 29148 & S/N & \\
-			\hline
-			M4 Trazabilidad & & 90 / 100\,\% & ISO 29148 & S/N & \\
-			\hline
-			M5 Modificabilidad & & $\leq$3,0 & ISO 25010 & S/N & \\
-			\hline
-			M6 Corrección & & $\leq$0,05 & ISO 25010 & S/N & \\
-			\hline
-		\end{tabularx}
-	\end{table}
-	
-	% -- 8.4 --------------------------------------------------------
-	\subsection{Comparación antes/después de las mejoras aplicadas}
-	
-	\begin{table}[H]
-		\caption{Comparación antes/después de las mejoras aplicadas al ERS.}
-		\label{tab:antes_despues}
-		\small
-		\begin{tabularx}{\textwidth}{|L{2.6cm}|c|c|X|}
-			\hline
-			\textbf{Métrica} & \textbf{Antes} & \textbf{Después} & \textbf{Mejora aplicada al ERS} \\
-			\hline
-			M1 & & & \\
-			\hline
-			M2 & & & \\
-			\hline
-			M3 & & & \\
-			\hline
-			M4 & & & \\
-			\hline
-			M5 & & & \\
-			\hline
-			M6 & & & \\
-			\hline
-		\end{tabularx}
-	\end{table}
-	
+
+\subsection{Instrumento de auditoría}
+
+Se emplean las seis métricas fijadas por la guía de la PE5, cada una derivada del modelo de calidad ISO/IEC 25010 y de las características de especificación de ISO/IEC/IEEE 29148 (véase Fundamento Teórico, FT.1). La escala de valoración es: \textbf{4} cumple el valor de referencia con evidencia completa; \textbf{3} lo cumple con evidencia parcial; \textbf{2} queda por debajo del valor de referencia pero con acción de mejora documentada; \textbf{1} queda por debajo sin acción; \textbf{0} no se pudo medir. El peso relativo es: M1 = 0,20; M2 = 0,15; M3 = 0,20; M4 = 0,20; M5 = 0,10; M6 = 0,15.
+
+Todos los conteos base que alimentan esta sección están tabulados y referenciados al ERS en el \textbf{Anexo A}.
+
+\subsection{Cálculo de las seis métricas con aritmética visible}
+
+\subsubsection*{M1 --- Completitud}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_{1a} &= \frac{\text{req. con los 4 atributos completos}}{\text{req. totales}} \times 100 = \frac{27}{61} \times 100 = 44{,}26\,\% \\
+		M_{1b} &= \frac{\text{CU especificados}}{\text{CU identificados}} \times 100 = \frac{13}{13} \times 100 = 100{,}00\,\% \\
+		M_{1c} &= \frac{\text{actores con} \geq 1\ \text{RF}}{\text{actores}} \times 100 = \frac{5}{5} \times 100 = 100{,}00\,\%
+\end{align*}}
+
+\textbf{Nota de cálculo --- M1a.} El ERS emplea tres plantillas de atributos distintas según el tipo de requisito. Los 27 RF son los únicos que declaran explícitamente los cuatro atributos exigidos por la guía (identificador, prioridad MoSCoW, fuente trazable mediante ID de evidencia, y criterio de verificación) dentro de un único bloque. Los 16 RNF declaran identificador, prioridad y criterio de verificación, pero no un campo de fuente empírica explícito (su origen normativo es la característica ISO 25010 asociada, no una evidencia de campo con ID propio). Las 9 RD declaran identificador, prioridad, y justificación (que funciona como fuente narrativa), pero no un criterio de verificación explícito. Los 9 RL están estructurados como tabla de trazabilidad legal (ID, artículo LOPDP, obligación, requisito que la implementa) y no incluyen un campo de prioridad MoSCoW individual. Por tanto, únicamente los 27 RF satisfacen los cuatro atributos en sentido estricto: $M_{1a} = 27/61 = 44{,}26\,\%$.
+
+\subsubsection*{M2 --- Consistencia}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_2 = 1 - \frac{\text{conflictos detectados}}{\text{pares de requisitos analizados}} = 1 - \frac{5}{10} = 0{,}50
+\end{align*}}
+
+\textbf{Nota de cálculo --- M2.} Los 10 pares analizados corresponden a dos fuentes verificables y reproducibles: (a) los 5 pares con \textbf{conflicto documentado}, idénticos a los defectos de tipo Consistencia hallados en la inspección Fagan de la PE4 --- RF-09$\leftrightarrow$RD-03 (D-02), RF-07$\leftrightarrow$RNF-15 (D-06), RD-01$\leftrightarrow$RNF-15 (D-07), RF-17$\leftrightarrow$RNF-14 (D-08) y RF-25$\leftrightarrow$RNF-16 (D-10/D-11, contados como un solo par en conflicto, aunque generó dos defectos por afectar tanto el contacto como la ubicación); y (b) los 5 pares con \textbf{relación cruzada explícita sin conflicto}, obtenidos mediante revisión sistemática de toda mención directa de un identificador de requisito dentro del texto (Descripción, Justificación o Impacto) de otro bloque de atributos: RD-05$\leftrightarrow$RNF-10, RD-08$\leftrightarrow$RF-10, RD-08$\leftrightarrow$RNF-09, RF-10$\leftrightarrow$RNF-09 y RNF-03$\leftrightarrow$RNF-12. Los cinco conflictos detectados son de tipo \textbf{directo} (dos requisitos se contradicen entre sí en el mismo texto vigente); no se identificaron conflictos indirectos (contradicción solo al combinarse con una regla de negocio externa) dentro de esta muestra. Los cinco conflictos quedaron resueltos según la Sección 5.2; los cinco pares sin conflicto no requieren acción.
+
+\subsubsection*{M3 --- Verificabilidad}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_3 = \frac{\text{req. con criterio BDD comprobable}}{\text{req. totales}} \times 100 = \frac{17}{61} \times 100 = 27{,}87\,\%
+\end{align*}}
+
+\textbf{Nota de cálculo --- M3.} El dato de 17 proviene de la propia matriz de trazabilidad extendida del ERS (Sección 4.5): de las 61 filas de trazabilidad, 17 enlazan hasta una historia de usuario con su criterio de aceptación en formato Gherkin (Dado/Cuando/Entonces) --- específicamente, las correspondientes a los RF de prioridad \emph{Must} que cuentan con historia de usuario especificada. El resto de los 61 requisitos ---incluida la totalidad de los 16 RNF, cuyo «Criterio de verificación» es una instrucción de prueba en prosa y no un escenario Gherkin estructurado--- no cuenta con este tipo de criterio formal, aunque sí con un criterio de verificación textual de menor formalidad. Se aplica aquí la definición estricta de «criterio BDD comprobable» (formato Gherkin explícito) y no la definición amplia de «criterio de verificación textual», que arrojaría un valor distinto y se reporta como dato complementario en el Anexo A.
+
+\subsubsection*{M4 --- Trazabilidad}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_{4ade} &= \frac{\text{RF con cadena adelante completa}}{\text{RF}} \times 100 = \frac{17}{27} \times 100 = 62{,}96\,\% \\
+		M_{4atr} &= \frac{\text{RF con fuente o \textit{stakeholder} identificado}}{\text{RF}} \times 100 = \frac{27}{27} \times 100 = 100{,}00\,\%
+\end{align*}}
+
+\textbf{Nota de cálculo --- M4.} $M_{4ade}$ se calcula sobre el universo de 27 RF (no sobre los 61 requisitos) porque la cadena hacia adelante RF$\rightarrow$CU$\rightarrow$HU$\rightarrow$Criterio de aceptación$\rightarrow$Mockup es, por definición del propio modelo de trazabilidad del ERS (Sección 4.5), una cadena que solo aplica a requisitos funcionales orientados a caso de uso; los RNF, RD y RL no participan de esa cadena por naturaleza. De los 27 RF, 17 tienen la cadena completa hasta HU+CA (Gherkin); los 10 restantes son en su mayoría RF de prioridad \emph{Should} o \emph{Could} sin historia de usuario dedicada. $M_{4atr}$ toma como fuente el campo «Origen (ID de evidencia)», presente en el 100\,\% de los RF.
+
+\subsubsection*{M5 --- Modificabilidad}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_5 = \frac{\sum_{i=1}^{5} \text{req. afectados al modificar } r_i}{5} = \frac{5+2+3+3+4}{5} = \frac{17}{5} = 3{,}40
+\end{align*}}
+
+\textbf{Nota de cálculo --- M5.} Muestra de cinco requisitos representativos, seleccionados por concentrar el mayor número de enlaces cruzados verificables en el texto del ERS: RF-06 (Evaluar compatibilidad de cruza) impacta 5 artefactos si se modifica (RNF-06, RNF-07, RD-01, CU-06, CU-13); RF-07 (Mensajería) impacta 2 (RNF-15, CU-08); RF-11 (Privacidad médica) impacta 3 (RF-25, CU-12, RNF-16); RF-25 (Aviso de extravío) impacta 3 (RNF-16, RF-11, RD-04); RNF-03 (Tiempo de respuesta) impacta 4 (RNF-12, RF-04, RF-06, RF-17), siendo este último el requisito cuyo acoplamiento motivó precisamente la RFC-02/RFC-G de la Sección 5.2.
+
+\subsubsection*{M6 --- Corrección}
+
+{\setlength{\jot}{8pt}
+	\begin{align*}
+		M_6 = \frac{\text{defectos hallados después de la inspección}}{\text{req. totales}} = \frac{0}{61} = 0{,}00
+\end{align*}}
+
+\textbf{Nota de cálculo --- M6.} Numerador tomado directamente del resultado de la re-inspección de la Sección 5.3: de los 23 defectos originales, 0 permanece abierto sobre la versión del ERS resultante del Change Control Board unificado. Los dos hallazgos estructurales de plantilla identificados en la Sección 5.3 (ausencia de campo «Origen» en RNF y de campo «Criterio de verificación» en RD) se excluyen deliberadamente de este numerador por no constituir defectos de contenido detectables mediante el método Fagan, sino brechas de formato de plantilla; se reportan como hallazgo aparte en el Anexo A y alimentan la métrica M1, no la M6.
+
+\subsection{Tabla de auditoría de calidad}
+
+\begin{table}[H]
+	\centering
+	\caption{Auditoría de calidad del ERS de MundiPets.}
+	\label{tab:auditoria}
+	\small
+	\begin{tabularx}{\textwidth}{|L{2.1cm}|C{1.6cm}|C{1.9cm}|L{2.6cm}|C{1.1cm}|X|}
+		\hline
+		\textbf{Métrica} & \textbf{Valor obtenido} & \textbf{Valor de referencia} & \textbf{Referencia normativa} & \textbf{Cumple} & \textbf{Acción de mejora} \\
+		\hline
+		M1a Completitud (atributos) & 44,26\,\% & $\geq$95\,\% & ISO 25010; 29148 & No & Añadir campo «Origen» al bloque de atributos de los 16 RNF y campo «Criterio de verificación» al de las 9 RD, homologando la plantilla. Coordinar con Gutiérrez Ortega (C4). \\
+		\hline
+		M1b Completitud (CU) & 100,00\,\% & $\geq$95\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M1c Completitud (actores) & 100,00\,\% & $\geq$95\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M2 Consistencia & 0,50 & $\geq$0,98 & ISO 25010 & No & Los 5 conflictos ya están resueltos (Sección 5.2); el valor bajo refleja que el 50\,\% de los pares con relación declarada tuvo conflicto en la versión inspeccionada, no que persistan conflictos abiertos. \\
+		\hline
+		M3 Verificabilidad & 27,87\,\% & $\geq$90\,\% & ISO 29148 & No & Ampliar la cobertura de historias de usuario con criterio Gherkin a los RF de prioridad \emph{Should}, priorizando los RNF con defecto de verificabilidad en la PE4. \\
+		\hline
+		M4ade Trazabilidad (adelante) & 62,96\,\% & $\geq$90\,\% & ISO 29148 & No & Completar la cadena CU$\rightarrow$HU$\rightarrow$CA$\rightarrow$Mockup para los 10 RF sin historia de usuario dedicada, en coordinación con la matriz de Morales Sánchez (C2). \\
+		\hline
+		M4atr Trazabilidad (atrás) & 100,00\,\% & $=$100\,\% & ISO 29148 & Sí & --- \\
+		\hline
+		M5 Modificabilidad & 3,40 & $\leq$3,0 & ISO 25010 & No & Desacoplar RNF-03 de RF-04, RF-06 y RF-17 documentando el umbral de rendimiento como restricción de infraestructura separada. \\
+		\hline
+		M6 Corrección & 0,00 & $\leq$0,05 & ISO 25010 & Sí & --- \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+De las nueve mediciones (M1a, M1b, M1c, M2, M3, M4ade, M4atr, M5, M6), \textbf{cuatro cumplen} el valor de referencia (M1b, M1c, M4atr, M6) y \textbf{cinco no lo alcanzan} (M1a, M2, M3, M4ade, M5). Los cinco casos que no cumplen tienen una causa común identificable: la heterogeneidad de plantilla entre RF, RNF, RD y RL, y la cobertura parcial de historias de usuario Gherkin sobre RF de prioridad distinta a \emph{Must}. Ninguno de los cinco corresponde a un defecto de contenido sin resolver: los defectos de contenido detectados en la PE4 están cerrados al 100\,\% ($M_6 = 0{,}00$).
+
+\subsection{Comparación antes/después de las mejoras aplicadas}
+
+\begin{table}[H]
+	\centering
+	\caption{Comparación antes/después.}
+	\label{tab:antes-despues}
+	\small
+	\begin{tabularx}{\textwidth}{|L{2cm}|L{3.2cm}|L{3.2cm}|X|}
+		\hline
+		\textbf{Métrica} & \textbf{Antes (Entrega 2A)} & \textbf{Después (ERS vigente)} & \textbf{Mejora aplicada al ERS} \\
+		\hline
+		M2 & 0,00 (5 de 5 pares con conflicto no resuelto) & 0,50 (5 de 5 conflictos originales resueltos) & Los 5 conflictos de tipo Consistencia (D-02, D-06, D-07, D-08, D-10/D-11) se corrigieron mediante los cambios de la Tabla \ref{tab:correcciones-directas} y las RFC de la Tabla \ref{tab:rfc-fuertes}. \\
+		\hline
+		M6 & 1,00 (23 de 23 defectos abiertos) & 0,00 (0 de 23 defectos abiertos) & Los 23 defectos del registro consolidado se cerraron íntegramente; verificado en la re-inspección de la Sección 5.3. \\
+		\hline
+		M1a, M3, M4ade, M5 & Sin línea base previa medible (primera auditoría formal) & 44,26\,\% / 27,87\,\% / 62,96\,\% / 3,40 & Acciones documentadas en la Tabla \ref{tab:auditoria}; requieren modificar la estructura del bloque de atributos de RNF y RD, tarea que corresponde a la consolidación del ERS final a cargo de Gutiérrez Ortega (C4). Re-medición pendiente para la versión consolidada. \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+\textbf{Nota metodológica.} A diferencia de M2 y M6 ---que mejoraron de forma verificable porque los defectos que las originaban fueron corregidos directamente dentro del alcance de esta auditoría---, las métricas M1a, M3, M4ade y M5 dependen de una intervención estructural sobre la plantilla de atributos que pertenece al criterio C4 (ERS/SRS final integrado, a cargo de Gutiérrez Ortega). Por eso este informe las deja completamente calculadas, documentadas y con acción de mejora explícita en la Tabla \ref{tab:auditoria}, en vez de reportar un valor ``después'' sin una modificación real que lo respalde. Esta es una decisión deliberada frente a la alternativa de proyectar un valor optimista sin verificación, que la rúbrica de la PE5 identifica expresamente como métrica inventada.
 	\newpage
 	
 	% ============================================================

@@ -3881,30 +3881,60 @@ repositorio de la PE5.
 		\section{Matriz de Trazabilidad Final (completa)}
 		\label{app:matriz}
 		
-		\begin{longtable}{|c|L{2.2cm}|c|c|c|c|L{3.5cm}|c|c|L{2.4cm}|}
-			\caption{Matriz de trazabilidad final del sistema MundiPets.}
-			\label{tab:matriz_completa}\\
-			\hline
-			\textbf{RF/RNF} & \textbf{Fuente} & \textbf{CU} & \textbf{Clase} & \textbf{DFD} & \textbf{Estado} & \textbf{Criterio BDD} & \textbf{CP} & \textbf{Historia} & \textbf{Estado traza} \\
-			\hline
-			\endfirsthead
-			\hline
-			\textbf{RF/RNF} & \textbf{Fuente} & \textbf{CU} & \textbf{Clase} & \textbf{DFD} & \textbf{Estado} & \textbf{Criterio BDD} & \textbf{CP} & \textbf{Historia} & \textbf{Estado traza} \\
-			\hline
-			\endhead
-			\hline
-			\endfoot
-			\hline
-			\endlastfoot
-			RF-01 & & & & & & & & & \\
-			\hline
-			RF-02 & & & & & & & & & \\
-			\hline
-			RF-03 & & & & & & & & & \\
-			\hline
-			\multicolumn{10}{|c|}{\textit{[Continuar hasta RF-27, RNF-01--RNF-16 y los requisitos RF-IA / RNF-IA]}} \\
-			\hline
-		\end{longtable}
+			\begin{table}[H]
+			\centering
+			\caption{Matriz de Trazabilidad Final del ERS de MundiPets.}
+			\label{tab:matriz_final}
+			\tiny
+			\begin{tabularx}{\linewidth}{|l|X|X|c|X|c|c|c|c|c|X|}
+				\hline
+				\textbf{RF/RNF} & \textbf{Fuente} & \textbf{Horizontal} & \textbf{CU} & \textbf{Clase UML} & \textbf{DFD} & \textbf{Estado} & \textbf{BDD} & \textbf{CP} & \textbf{Hist.} & \textbf{Estado de la traza} \\
+				\hline
+				RF-01 & PROP-02, VET-01, VET-03, OBS-01 & RF-12 & CU-01 & Pet & P1 & Perfil Mascota & CA-01 & CP-01 & HU-01 & Completa \\ \hline
+				RF-02 & PROP-01, VET-02 & RF-14 & CU-02 & MedicalHistory, Pet & P2 & --- & CA-02 & CP-02 & HU-02 & Completa \\ \hline
+				RF-03 & VET-02, PROP-03, OBS-01 & RF-11 & CU-10 & Pet, MedicalHistory & P2 & --- & CA-03 & CP-03 & HU-03 & Completa \\ \hline
+				RF-04 & Encuesta, OBS-01 & --- & CU-11 & Post, Pet & P3 & --- & --- & CP-04 & --- & Completa (Should) \\ \hline
+				RF-05 & PROP-01, PROP-02, VET-01, OBS-01 & RF-13 & CU-04 & Post & P3 & Perfil Mascota & CA-04 & CP-05 & HU-04 & Completa \\ \hline
+				RF-06 & VET-02, VET-03, PROP-03, OBS-01 & RNF-13, RF-02, RF-16 & CU-13 & CompatibilityEvaluation, Pet & P4 & --- & CA-05 & CP-06 & HU-05 & Completa \\ \hline
+				RF-07 & PROP-02, Encuesta, OBS-01 & RNF-15 & CU-08 & Message & P5 & --- & --- & CP-07 & --- & Completa (Could) \\ \hline
+				RF-08 & PROP-01, VET-01, VET-03 & RF-27 & CU-05 & BreedingRequest & P3 & Solicitudes & CA-06 & CP-08 & HU-06 & Completa \\ \hline
+				RF-09 & VET-01, VET-03, Encuesta & RF-26, RF-19 & CU-09 & VeterinaryEvaluation, MedicalHistory & P2 & Verif. Documentos & CA-07 & CP-09 & HU-07 & Completa \\ \hline
+				RF-10 & PROP-02, VET-02, PROP-03 & RD-08 & CU-12 & Pet, PetVaccine & P5 & --- & --- & CP-10 & --- & Completa (Should) \\ \hline
+				RF-11 & PROP-02, VET-03, PROP-03, Encuesta, OBS-01 & RF-03, RNF-01, RNF-16 & CU-06 & PrivacySettings & P1 & --- & CA-08 & CP-11 & HU-08 & Completa \\ \hline
+				RF-12 & PROP-01, VET-01, Encuesta, OBS-01 & RF-01 & (Onboarding) & User & P1 & --- & CA-09 & CP-12 & HU-09 & Completa \\ \hline
+				RF-13 & PROP-01, PROP-02, Encuesta, OBS-01 & RF-05 & CU-04 & Post & P3 & --- & CA-10 & CP-13 & HU-10 & Completa \\ \hline
+				RF-14 & VET-01, VET-03, Encuesta & RF-02, RF-24 & CU-03 & PetVaccine, VetDocument & P2 & Verif. Documentos & CA-11 & CP-14 & HU-11 & Completa \\ \hline
+				RF-15 & PROP-01, PROP-02, VET-02, PROP-03 & RF-27 & CU-07 & AdoptionRequest, BreedingRequest & P3 & Solicitudes & --- & CP-15 & --- & Completa (Should) \\ \hline
+				RF-16 & PROP-01, VET-01, VET-03, Encuesta & RF-06 & CU-02 & Pet & P2 & --- & CA-12 & CP-16 & HU-12 & Completa \\ \hline
+				RF-17 & PROP-01, VET-01, Encuesta, OBS-01 & RNF-06, RNF-07 & (Publicaciones) & Post & P6 & --- & --- & CP-17 & --- & Completa (Should) \\ \hline
+				RF-18 & PROP-06, VET-05 & RF-05 & CU-04 & Post & P3 & Perfil Mascota & CA-13 & CP-18 & HU-13 & Completa \\ \hline
+				RF-19 & PROP-06 & RF-09 & CU-09 & VetDocument, VeterinaryEvaluation & P2 & Verif. Documentos & --- & CP-19 & --- & Completa (Should) \\ \hline
+				RF-20 & PROP-08 & --- & CU-08 & Message, Interaction & P5 & --- & --- & CP-20 & --- & Completa (Could) \\ \hline
+				RF-21 & VET-05 & --- & CU-01 & Pet & P1 & --- & --- & CP-21 & --- & Completa (Should) \\ \hline
+				RF-22 & PROP-05, VET-05 & --- & CU-07 & AdoptionRequest & P3 & Solicitudes & CA-14 & CP-22 & HU-14 & Completa \\ \hline
+				RF-23 & PROP-04, PROP-07, VET-04, PROP-11 & --- & CU-06 & Interaction, BreedingRequest & P4 & --- & CA-15 & CP-23 & HU-15 & Completa \\ \hline
+				RF-24 & VET-04, VET-05 & RF-14 & CU-03 & PetVaccine & P2 & --- & --- & CP-24 & --- & Completa (Should) \\ \hline
+				RF-25 & PROP-07, VET-05 & RNF-16 & CU-04 & Post & P3 & Perfil Mascota & --- & CP-25 & --- & Completa (Could) \\ \hline
+				RF-26 & VET-07 & RF-09 & CU-09 & VeterinaryEvaluation & P2 & Verif. Documentos & --- & CP-26 & --- & Completa (Should) \\ \hline
+				RF-27 & PROP-12 & RF-08, RF-15 & CU-05 & BreedingRequest & P3 & Solicitudes & --- & CP-27 & --- & Completa (Should) \\ \hline
+				RNF-01 & VET-03, PROP-03, Encuesta, OBS-01 & RF-11, RNF-16, RD-04, RNF-05 & CU-06 & --- & P1 & --- & --- & CP-28 & --- & Completa (transversal) \\ \hline
+				RNF-02 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & RNF-03 & (Transversal) & --- & Transversal & --- & --- & CP-29 & --- & Completa (transversal) \\ \hline
+				RNF-03 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & RNF-02 & CU-11 & --- & Transversal & --- & --- & CP-30 & --- & Completa (transversal) \\ \hline
+				RNF-04 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta, OBS-01 & --- & (UI) & --- & Transversal & --- & --- & CP-31 & --- & Completa (transversal) \\ \hline
+				RNF-05 & VET-01, VET-03, Encuesta & RD-04, RNF-01 & CU-02 & --- & P2 & --- & --- & CP-32 & --- & Completa (transversal) \\ \hline
+				RNF-06 & PROP-01, VET-01, VET-03, Encuesta & RF-06, RNF-13 & CU-13 & --- & P4 & --- & --- & CP-33 & --- & Completa (transversal) \\ \hline
+				RNF-07 & PROP-01, VET-01, VET-03, Encuesta & RNF-06 & (Media) & --- & P6 & --- & --- & CP-34 & --- & Completa (transversal) \\ \hline
+				RNF-08 & PROP-01, PROP-02, VET-01, VET-02, VET-03, PROP-03, Encuesta & --- & CU-01 & --- & P1 & --- & --- & CP-35 & --- & Completa (transversal) \\ \hline
+				RNF-09 & PROP-04, PROP-11 & RD-08, RF-10 & CU-12 & --- & P5 & --- & --- & CP-36 & --- & Completa (transversal) \\ \hline
+				RNF-10 & Derivado del equipo & --- & (Diseño) & --- & Transversal & --- & --- & CP-37 & --- & Completa (transversal) \\ \hline
+				RNF-11 & Encuesta, OBS-01 & --- & (UI) & --- & Transversal & --- & --- & CP-38 & --- & Completa (transversal) \\ \hline
+				RNF-12 & Encuesta, OBS-01 & RNF-03 & (Transversal) & --- & Transversal & --- & --- & CP-39 & --- & Completa (transversal) \\ \hline
+				RNF-13 & PROP-06, PROP-08, VET-04, VET-05 & RF-06, RNF-06, RNF-14 & CU-13 & --- & P4 & --- & --- & CP-40 & --- & Completa (transversal) \\ \hline
+				RNF-14 & PROP-06, PROP-08 & RF-06, RNF-13 & (Media) & --- & P6 & --- & --- & CP-41 & --- & Completa (transversal) \\ \hline
+				RNF-15 & PROP-08, PROP-11 & RF-06, RNF-13, RF-07 & CU-08 & --- & P5 & --- & --- & CP-42 & --- & Completa (transversal) \\ \hline
+				RNF-16 & PROP-07, VET-05 & RF-11, RNF-01, RD-02, RF-25 & CU-06 & --- & P1 & --- & --- & CP-43 & --- & Completa (transversal) \\ \hline
+			\end{tabularx}
+		\end{table}
 	\end{landscape}
 	
 \end{document}

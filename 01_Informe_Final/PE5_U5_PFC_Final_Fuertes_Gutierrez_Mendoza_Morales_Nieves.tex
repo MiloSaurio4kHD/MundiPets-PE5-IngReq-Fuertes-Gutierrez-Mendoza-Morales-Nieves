@@ -3132,9 +3132,49 @@ repositorio de la PE5.
 	
 	\subsection*{Conclusión 1 --- Unidad 1: Fundamentos y elicitación}
 	\addcontentsline{toc}{subsection}{Conclusión 1 --- Unidad 1}
+	La Unidad 1 del curso combina dos temas que el equipo trabajó en prácticas
+	distintas: en la PE1 se construyeron los fundamentos y el contexto del
+	sistema mediante análisis documental, sin elicitación de campo todavía; en
+	la PE2 se ejecutó la elicitación real, con entrevistas y un cuestionario
+	digital. Por eso la evidencia de esta conclusión proviene de la PE2, que es
+	la práctica donde efectivamente se puede responder qué técnica reveló
+	requisitos nuevos y qué actor quedó sin representación directa en el
+	proceso.
+	
+	La técnica que reveló requisitos inéditos no fue el cuestionario (EV-07),
+	que solo cuantificó preferencias ya conocidas, sino la combinación de
+	entrevista con sesión de \emph{walkthrough}. Las dos últimas evidencias
+	recolectadas, EV-23 y EV-24, produjeron directamente RF-27 (control de
+	cruzas repetitivas, por riesgo de maltrato animal) y RF-26 (segunda opinión
+	veterinaria), ninguno anticipado por las quince entrevistas previas ni por
+	el cuestionario \cite{pohl2025}. Además, el Refugio de animales
+	clasificado como actor clave en la matriz de poder e interés de la PE1
+	no fue entrevistado, encuestado ni observado en ninguna de las 24
+	evidencias de campo; el equipo compensó esto de forma indirecta, trazando
+	sus requisitos contra evidencia de propietarios y observación, sin fuente
+	propia del refugio \cite{swebok2024}.
+	
+	Esto muestra que la calidad de la elicitación no depende de cuántas
+	técnicas se apliquen, sino de qué tan bien cada una llega a la fuente
+	correcta: el cuestionario amplió cobertura pero no profundidad, mientras
+	que la conversación abierta con revisión guiada del sistema fue la única
+	capaz de sacar a la luz necesidades que los propios usuarios no habían
+	verbalizado antes de interactuar con él. Al mismo tiempo, la ausencia del
+	Refugio de animales deja claro que un stakeholder puede quedar
+	``cubierto'' en la matriz de trazabilidad sin haber sido consultado nunca
+	directamente, lo cual es una brecha real de validez del ERS no grave
+	por sí sola, pero sí una limitación que el equipo debe reconocer
+	explícitamente en vez de presentar la cobertura indirecta como
+	equivalente a una fuente primaria.
+	
+	
 	
 	\subsection*{Conclusión 2 --- Unidad 2: Especificación del ERS}
 	\addcontentsline{toc}{subsection}{Conclusión 2 --- Unidad 2}
+	
+		La auditoría de calidad realizada sobre el ERS final de MundiPets revela que la métrica que peor resultado obtuvo no fue la que se esperaba a priori ---la corrección del documento tras la inspección formal ($M_6 = 0{,}00$, sobre el umbral de referencia)---, sino la \textbf{completitud estructural de los atributos por tipo de requisito} ($M_{1a} = 44{,}26\,\%$, muy por debajo del 95\,\% exigido). Esto revela algo específico sobre la forma de especificar del equipo: la disciplina de documentación fue rigurosa dentro de cada categoría de requisito ---los 27 RF, por ejemplo, declaran de forma consistente sus once campos, incluida la fuente de evidencia (EV-XX) para el 100\,\% de ellos---, pero esa misma disciplina no se replicó de manera uniforme entre categorías. Los RNF adoptaron una plantilla orientada a la característica de calidad ISO/IEC 25010 que omite el campo de fuente empírica; las RD adoptaron una plantilla orientada a la justificación de diseño que omite el criterio de verificación; y los RL se estructuraron como una tabla de trazabilidad legal que, por diseño, no incluye una prioridad MoSCoW individual.
+	
+	Frente a esta situación, la acción tomada por el equipo no fue proyectar un valor ``después'' optimista sin haberlo verificado ---lo que la rúbrica de la PE5 identifica explícitamente como métrica inventada---, sino documentar con precisión el origen estructural del déficit, cuantificarlo con aritmética trazable al propio ERS (Sección 8.2 y Anexo A), y coordinar la corrección con la responsable de la consolidación del ERS final (Gutiérrez Ortega, criterio C4), dejando la re-medición pendiente para la siguiente versión consolidada del documento. Esto contrasta con las dos métricas que sí mejoraron de forma verificable dentro del alcance de esta auditoría ---M2 (consistencia) y M6 (corrección)---, ambas resueltas mediante la inspección Fagan y el Change Control Board descritos en la Sección 5, cuyo cierre se confirmó defecto por defecto en la re-inspección de la PE5.
 	
 	\subsection*{Conclusión 3 --- Unidad 3: Modelado UML y trazabilidad}
 	\addcontentsline{toc}{subsection}{Conclusión 3 --- Unidad 3}

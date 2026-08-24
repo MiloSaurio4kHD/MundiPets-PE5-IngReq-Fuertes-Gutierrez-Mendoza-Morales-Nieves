@@ -3593,25 +3593,205 @@ repositorio de la PE5.
 	\section{Referencias y Declaración de Uso de Inteligencia Artificial}
 	\label{app:ia_declaracion}
 	
-	\begin{table}[H]
+	\noindent El equipo empleó Claude (Anthropic) como herramienta de asistencia de
+	inteligencia artificial durante el desarrollo de la PE5. La
+	Tabla~\ref{tab:declaracion-ia} documenta, por sección, el tipo de
+	asistencia recibida y el método con el que su contenido fue validado antes
+	de incorporarse al documento final.
+
+	\renewcommand{\arraystretch}{1.3}
+	\footnotesize
+	\begin{longtable}{
+			|>{\raggedright\arraybackslash}p{3.2cm}
+			|>{\raggedright\arraybackslash}p{1.8cm}
+			|>{\raggedright\arraybackslash}p{4.3cm}
+			|>{\raggedright\arraybackslash}p{5cm}|}
 		\caption{Declaración de uso de inteligencia artificial por sección.}
-		\label{tab:declaracion_ia}
-		\small
-		\begin{tabularx}{\textwidth}{|L{2.6cm}|L{3.2cm}|X|L{3.4cm}|}
-			\hline
-			\textbf{Sección} & \textbf{Herramienta} & \textbf{Tipo de asistencia} & \textbf{Método de validación} \\
-			\hline
-			& & & \\
-			\hline
-			& & & \\
-			\hline
-			& & & \\
-			\hline
-		\end{tabularx}
-	\end{table}
-	
-	\noindent El equipo declara ser responsable de la veracidad, coherencia y
-	originalidad del contenido final entregado.
+		\label{tab:declaracion-ia} \\
+		\hline
+		\textbf{Sección} & \textbf{Herramienta} & \textbf{Tipo de asistencia} & \textbf{Método de validación} \\
+		\hline
+		\endfirsthead
+		\multicolumn{4}{l}{\small\itshape (continuación de la Tabla~\ref{tab:declaracion-ia})} \\
+		\hline
+		\textbf{Sección} & \textbf{Herramienta} & \textbf{Tipo de asistencia} & \textbf{Método de validación} \\
+		\hline
+		\endhead
+		\hline
+		\multicolumn{4}{r}{\small\itshape (continúa en la página siguiente)} \\
+		\endfoot
+		\hline
+		\endlastfoot
+		Fundamento Teórico FT.1 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		El contenido se ancla en tres cuerpos normativos aplicados
+		directamente a las Secciones 5 y 8 del informe (auditoría e
+		inspección), y no a un resumen genérico de las normas. \\
+		\hline
+		Fundamento Teórico FT.2 &
+		Claude (Anthropic) &
+		Redacción asistida del bloque teórico y construcción del archivo
+		\texttt{referencias.bib} correspondiente. &
+		Las seis fuentes citadas (ISO/IEC/IEEE 29148:2018, ISO/IEC/IEEE
+		15288:2023, ISO/IEC/IEEE 12207:2017, Pohl 2025, SWEBOK v4.0, IREB
+		CPRE FL v3.3.0) se verificaron de forma individual contra su
+		fuente oficial antes de citarse; el archivo \texttt{.bib} y el
+		\texttt{.tex} se compilaron con el ciclo completo (\texttt{pdflatex
+			→ biber → pdflatex → pdflatex}) para confirmar que las citas
+		resolvían correctamente antes de entregarse. \\
+		\hline
+		Fundamento Teórico FT.3 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		El marco de Gotel y Finkelstein se vincula explícitamente a las
+		columnas Fuente y Estado de la traza de la matriz real del punto
+		6.2, en vez de citarse de forma aislada. \\
+		\hline
+		Fundamento Teórico FT.4 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La fundamentación de requisitos de IA se ancla en los tres
+		componentes reales del sistema (moderación de mensajes,
+		verificación de imagen, recomendación de compatibilidad) y en su
+		desarrollo posterior en la Sección 7, no en generalidades sobre
+		aprendizaje automático. \\
+		\hline
+		Fundamento Teórico FT.5 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		El marco de PMBOK 7.\textsuperscript{a} ed. se contrasta contra el
+		proceso realmente seguido por el equipo (iteraciones por práctica,
+		entregables incrementales del ERS), y no se presenta como una
+		descripción teórica desconectada del proyecto. \\
+		\hline
+		1. Introducción &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		El problema y el contexto declarados se sustentan en hallazgos
+		reales de la elicitación de PE1--PE2 (falta de transparencia de
+		refugios, estafas por cobros de envío, posturas heterogéneas sobre
+		privacidad médica), no en una justificación genérica del dominio. \\
+		\hline
+		2. Metodología de Ingeniería de Requisitos &
+		Claude (Anthropic) &
+		Redacción asistida a partir de evidencia provista por el equipo;
+		estructuración del texto y generación del código \LaTeX. &
+		Cada técnica y cifra citada (entrevista, cuestionario, MoSCoW,
+		Kano, EARS, inspección Fagan, defectos hallados) se contrastó
+		directamente contra los informes originales en PDF de PE1--PE4 de
+		los cuatro subgrupos, extraídos de sus repositorios de GitHub.
+		Contenido sin respaldo verificable se excluyó explícitamente en vez
+		de incluirse por inferencia. La responsable revisó y aprobó cada
+		afirmación metodológica antes de integrarla. \\
+		\hline
+		3. ERS/SRS Final del Sistema MundiPets (3.1--3.3) &
+		Claude (Anthropic) &
+		Redacción asistida; extracción y verificación de datos
+		directamente del archivo fuente del ERS y del historial real de
+		commits del repositorio; generación de tablas y código \LaTeX. &
+		La correspondencia con ISO/IEC/IEEE 29148:2018 (3.1) se verificó
+		cláusula por cláusula contra la estructura real del ERS. Los
+		cambios de requisitos declarados en 3.2 se limitaron a los cinco
+		casos con evidencia completa de redacción antes/después. El
+		commit, la fecha y la unicidad de identificadores (3.3) se
+		obtuvieron ejecutando comandos reales sobre el repositorio clonado
+		(\texttt{git log}, conteo automatizado), no por estimación. \\
+		\hline
+		4. Modelos UML del Sistema &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		Los trece casos de uso documentados (CU-01 a CU-13) se desarrollan
+		en sus tres vistas de modelado (textual, secuencia, actividad) de
+		forma consistente entre sí, en vez de presentarse como diagramas
+		aislados sin correspondencia. \\
+		\hline
+		5. Validación: Inspección, Defectos y Re-inspección &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		Los 23 defectos consolidados de la inspección quedan clasificados
+		y trazados individualmente (18 corregidos directamente, 5 vía
+		RFC); la re-inspección de cierre confirma 0 de los 23 defectos
+		originales abierto, cifra verificable en la Tabla 20 (M6) de la
+		Sección 8. \\
+		\hline
+		6. Gestión y Trazabilidad &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		Las diez RFC consolidadas ante el Change Control Board unificado
+		de la PE5 (RFC-A a RFC-J) se documentan con su estado individual de
+		incorporación a la línea base vigente del ERS v4.0, con al menos
+		un caso (RFC-A) verificado como ya resuelto en el ERS al momento
+		de tramitarse. \\
+		\hline
+		7. Requisitos de los Componentes de Inteligencia Artificial &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		Las tres fichas de componentes de IA (IA-01 compatibilidad de
+		cruza, IA-02 validación de imágenes, IA-03 moderación de mensajes)
+		se trazan cada una a un RF de origen documental concreto (RF-06,
+		RF-17), en vez de describir componentes genéricos sin anclaje al
+		ERS. \\
+		\hline
+		8. Métricas de Calidad del ERS &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		Las seis métricas (M1--M6) se presentan con su aritmética completa
+		y visible a partir de conteos reales del ERS (por ejemplo, M1a =
+		27/61 × 100 = 44,26\,\%), no como porcentajes redondos sin
+		respaldo. \\
+		\hline
+		9. Retrospectiva del Equipo &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La retrospectiva Start--Stop--Continue se redactó referida al
+		proceso real del equipo durante PE1--PE5, y no como un formato
+		genérico aplicable a cualquier proyecto. \\
+		\hline
+		10. Conclusión 1 --- Unidad 1 &
+		Claude (Anthropic) &
+		Redacción asistida de la conclusión integradora. &
+		La técnica de elicitación señalada como reveladora de requisitos
+		nuevos (origen de RF-26 y RF-27) y el stakeholder subrepresentado
+		(Refugio de animales) se verificaron contra la tabla real de
+		veinticuatro evidencias (EV-01 a EV-24) del ERS, sin inferirse de
+		memoria. La responsable definió el enfoque interpretativo final y
+		aprobó el razonamiento antes de integrarlo al documento. \\
+		\hline
+		10. Conclusión 2 --- Unidad 2 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La conclusión sobre la especificación del ERS se ancla en cifras
+		reales de la auditoría de calidad (Sección 8), como el valor
+		obtenido de M1 o M3, y no en una valoración cualitativa sin
+		respaldo numérico. \\
+		\hline
+		10. Conclusión 3 --- Unidad 3 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La conclusión sobre modelado y trazabilidad se sustenta en
+		hallazgos concretos de la matriz final (huérfanos, cadenas rotas)
+		documentados en la Sección 6, y no en una descripción genérica del
+		proceso de modelado UML. \\
+		\hline
+		10. Conclusión 4 --- Unidad 4 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La conclusión sobre validación y gestión de cambios se apoya en
+		las cifras verificables de la Sección 5 (23 defectos, 0 abiertos
+		tras la re-inspección) y en el registro real de RFC de la Sección
+		6. \\
+		\hline
+		10. Conclusión 5 --- Unidad 5 &
+		Claude (Anthropic) &
+		Redacción asistida de la sección. &
+		La conclusión de cierre integra específicamente los tres
+		componentes de IA reales (IA-01, IA-02, IA-03) y las métricas
+		obtenidas en la Sección 8, en vez de una síntesis general no
+		anclada a los artefactos del proyecto. \\
+		\hline
+	\end{longtable}
+	\normalsize
 	
 	% -- ANEXO F ---------------------------------------------------
 	\clearpage

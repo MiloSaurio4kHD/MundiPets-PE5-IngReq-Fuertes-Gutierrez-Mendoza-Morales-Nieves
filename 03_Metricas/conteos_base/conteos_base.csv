@@ -1,0 +1,15 @@
+numero,conteo,valor,fuente_ers
+1,Requisitos funcionales (RF) totales,27,Seccion 3.2 (RF-01 a RF-27)
+2,Requisitos no funcionales (RNF) totales,16,Seccion 3.3 (RNF-01 a RNF-16)
+3,Requisitos legales (RL) y de diseno (RD),9+9=18,"Seccion 3.4 (RD-01 a RD-09) y 3.5 (RL-01 a RL-09)"
+4,Requisitos totales (RF+RNF+RD+RL),61,-
+5,Requisitos con los 4 atributos completos,27,Solo RF; ver nota M1a
+6,Casos de uso identificados,13,Seccion 4.1
+7,Casos de uso especificados textualmente,13,Seccion 4.2 (CU-01 a CU-13)
+8,Actores del sistema,5,Seccion 4.1
+9,Actores con al menos un RF asociado,5,Seccion 4.1
+10,Pares de requisitos analizados para consistencia,10,5 con conflicto + 5 sin conflicto
+11,Requisitos con criterio BDD comprobable (Gherkin),17,Seccion 4.5
+12,RF con cadena de trazabilidad hacia adelante completa,17,Seccion 4.5 (sobre universo de 27 RF)
+13,RF con fuente o stakeholder identificado,27,Campo Origen (ID de evidencia)
+14,Defectos hallados en la re-inspeccion de la PE5,0,Ver evidencia_reinspeccion/

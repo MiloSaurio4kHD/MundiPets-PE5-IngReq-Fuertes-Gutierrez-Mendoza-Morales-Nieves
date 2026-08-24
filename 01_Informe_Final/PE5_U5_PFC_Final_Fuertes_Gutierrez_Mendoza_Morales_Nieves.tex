@@ -3132,40 +3132,7 @@ repositorio de la PE5.
 	
 	\subsection*{Conclusión 1 --- Unidad 1: Fundamentos y elicitación}
 	\addcontentsline{toc}{subsection}{Conclusión 1 --- Unidad 1}
-	La Unidad 1 del curso combina dos temas que el equipo trabajó en prácticas
-	distintas: en la PE1 se construyeron los fundamentos y el contexto del
-	sistema mediante análisis documental, sin elicitación de campo todavía; en
-	la PE2 se ejecutó la elicitación real, con entrevistas y un cuestionario
-	digital. Por eso la evidencia de esta conclusión proviene de la PE2, que es
-	la práctica donde efectivamente se puede responder qué técnica reveló
-	requisitos nuevos y qué actor quedó sin representación directa en el
-	proceso.
 	
-	La técnica que reveló requisitos inéditos no fue el cuestionario (EV-07),
-	que solo cuantificó preferencias ya conocidas, sino la combinación de
-	entrevista con sesión de \emph{walkthrough}. Las dos últimas evidencias
-	recolectadas, EV-23 y EV-24, produjeron directamente RF-27 (control de
-	cruzas repetitivas, por riesgo de maltrato animal) y RF-26 (segunda opinión
-	veterinaria), ninguno anticipado por las quince entrevistas previas ni por
-	el cuestionario \cite{pohl2025}. Además, el Refugio de animales
-	clasificado como actor clave en la matriz de poder e interés de la PE1
-	no fue entrevistado, encuestado ni observado en ninguna de las 24
-	evidencias de campo; el equipo compensó esto de forma indirecta, trazando
-	sus requisitos contra evidencia de propietarios y observación, sin fuente
-	propia del refugio \cite{swebok2024}.
-	
-	Esto muestra que la calidad de la elicitación no depende de cuántas
-	técnicas se apliquen, sino de qué tan bien cada una llega a la fuente
-	correcta: el cuestionario amplió cobertura pero no profundidad, mientras
-	que la conversación abierta con revisión guiada del sistema fue la única
-	capaz de sacar a la luz necesidades que los propios usuarios no habían
-	verbalizado antes de interactuar con él. Al mismo tiempo, la ausencia del
-	Refugio de animales deja claro que un stakeholder puede quedar
-	``cubierto'' en la matriz de trazabilidad sin haber sido consultado nunca
-	directamente, lo cual es una brecha real de validez del ERS no grave
-	por sí sola, pero sí una limitación que el equipo debe reconocer
-	explícitamente en vez de presentar la cobertura indirecta como
-	equivalente a una fuente primaria.
 	
 	
 	
@@ -3178,6 +3145,9 @@ repositorio de la PE5.
 	
 	\subsection*{Conclusión 3 --- Unidad 3: Modelado UML y trazabilidad}
 	\addcontentsline{toc}{subsection}{Conclusión 3 --- Unidad 3}
+	
+	El cierre de la trazabilidad de MundiPets confirma, sobre un caso concreto, la	distinción que proponen Gotel y Finkelstein entre trazabilidad previa y	posterior a la especificación \cite{gotel1994}: de los 43 elementos vigentes	del ERS (27 RF y 16 RNF), el 100\,\% contaba con fuente identificada --la mitad	previa del marco--, pero el diagnóstico de cobertura de la	Sección~\ref{sec:trazabilidad} detectó 2 cadenas rotas y 3 trazas parciales en	la mitad posterior, la que Mucha, Kaufmann y Riehle señalan como la menos	estudiada y más frágil de mantener durante el ciclo de vida de un proyecto	\cite{mucha2024}. Las clases \textit{Administrator}, \textit{Role},	\textit{UserRole} y \textit{VeterinaryAppointment} son el ejemplo directo de una	cadena rota: existían en el diagrama de clases sin ningún RF que las respaldara,	señal de alcance no solicitado que se resolvió eliminándolas del modelo en vez	de inventar a posteriori un requisito que las justificara. 	Las 3 trazas parciales --RF-11, RF-20 y RF-23-- exigieron el movimiento	inverso: no sobraba modelo, faltaba clase. Cada una tenía CU, historia de	usuario y criterio de aceptación, pero ningún elemento propio en el diagrama de	clases, de modo que la cadena posterior a la especificación se cortaba antes de	llegar al modelo. Incorporar \textit{PrivacySettings} e \textit{Interaction}, y	compartir el método \textit{checkRiskAlert()} entre \textit{Interaction} y	\textit{BreedingRequest}, cerró las 5 patologías sin dejar ninguna pendiente.	El resultado no es solo una matriz sin huérfanos: es la evidencia de que	verificar ambas direcciones de la trazabilidad en una sola tabla, y no solo el	origen o solo la realización de cada requisito, es lo que permite distinguir un	requisito mal documentado de un modelo con alcance no autorizado --la misma	distinción que sostiene, en la Sección~\ref{sec:req_ia_tabla}, el trazado de	cada requisito de IA hacia el RF que lo origina.
+	
 	
 	\subsection*{Conclusión 4 --- Unidad 4: Validación y gestión de cambios}
 	\addcontentsline{toc}{subsection}{Conclusión 4 --- Unidad 4}

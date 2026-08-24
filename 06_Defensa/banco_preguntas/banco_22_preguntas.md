@@ -37,12 +37,12 @@ MoSCoW clasificó los requisitos por urgencia de implementación (Must/Should/Co
 ## Validación
 
 **8. ¿Qué defectos se encontraron en la inspección de la PE4 y cómo se corrigieron?**
-*(Completar con el resumen de defectos de la inspección de la PE4 y las correcciones aplicadas — responsable: Fuertes.)*
-*Artefacto: informe de inspección de la PE4.*
+Se hallaron 23 defectos consolidados sobre la Sección 3 del ERS (2 críticos, 16 mayores, 5 menores), con Consistencia (7) y Trazabilidad (6) como tipos más frecuentes. Los dos defectos críticos afectaban al mismo requisito, RF-25, en contradicción de privacidad con RNF-16. De los 23, 18 se corrigieron directamente sobre el texto por ser defectos de redacción sin impacto en alcance; los 3 restantes (RF-07, RNF-03, RF-25), por afectar alcance, calidad medible o una restricción normativa, se formalizaron como RFC y pasaron por el Change Control Board.
+*Artefacto: ERS; Tabla de participantes, roles y esfuerzo de la inspección; Tabla de clasificación de los 23 defectos consolidados (Sección 5.1–5.2).*
 
 **9. ¿Qué defectos residuales quedaron tras la re-inspección de la PE5?**
-*(Completar con el registro de defectos residuales de la re-inspección — responsable: Fuertes.)*
-*Artefacto: registro de re-inspección; Anexo A.*
+Ninguno: de los 23 defectos originales, 0 permanece abierto. Los 18 corregidos directamente están incorporados en el texto vigente y las 3 RFC (RF-07, RNF-03, RF-25) quedaron resueltas, sin defectos nuevos introducidos por las correcciones. La re-inspección sí identificó dos hallazgos estructurales de plantilla, no computados como defectos Fagan por no ser errores de contenido: ausencia de campo "Origen" en los 16 RNF y de campo "Criterio de verificación" en las 9 RD. Ambos se documentan como acción de mejora para M1a, coordinada con Gutiérrez Ortega.
+*Artefacto: ERS; Sección 5.3 (re-inspección y hallazgos estructurales).*
 
 **10. ¿Cómo se valida un requisito con criterio BDD?**
 Cada requisito con criterio BDD comprobable se redacta en formato Dado/Cuando/Entonces y se verifica ejecutando el escenario descrito contra el comportamiento observado del sistema o del MVP.
@@ -70,11 +70,11 @@ Tres: evaluación de compatibilidad para cruza (IA-01), validación de imágenes
 
 **15. ¿Qué pasa si un componente de IA no está disponible?**
 Ninguno bloquea el sistema: IA-01 muestra "compatibilidad no determinada, se recomienda evaluación veterinaria"; IA-02 deriva la imagen a revisión manual; IA-03 entrega los mensajes sin moderación automática. Los tres mantienen ≥ 99 % de disponibilidad mensual como objetivo.
-*Artefacto: fichas de IA-01, IA-02, IA-03 (campo "Riesgos y *fallback*"); plan de monitoreo.*
+*Artefacto: fichas de IA-01, IA-02, IA-03 (campo "Riesgos y fallback"); plan de monitoreo.*
 
 **16. ¿Qué decide el modelo y qué pasa cuando se equivoca?**
 IA-01 decide un nivel de compatibilidad orientativo, nunca definitivo; IA-02 decide aceptar o rechazar una imagen, con posibilidad de apelación por revisión manual; IA-03 decide bloquear o entregar un mensaje, también apelable. Ningún error de los tres componentes toma la decisión final por el usuario.
-*Artefacto: fichas de IA-01, IA-02, IA-03 (campos "Consumidor del resultado" y "Riesgos y *fallback*").*
+*Artefacto: fichas de IA-01, IA-02, IA-03 (campos "Consumidor del resultado" y "Riesgos y fallback").*
 
 **17. ¿Cómo se mide la equidad de los componentes de IA y qué brecha se tolera?**
 Cada componente mide la diferencia de tasa de acierto (o falso bloqueo/rechazo) entre subgrupos con distinta representación en los datos —razas, especies e iluminación, o tipo de vocabulario y longitud del mensaje— con una brecha máxima tolerada de 10 puntos porcentuales en los 6 RNF de equidad.
@@ -87,16 +87,16 @@ El consentimiento del titular y la protección de datos desde el diseño conform
 ## Métricas
 
 **19. ¿Qué métrica salió peor y qué hicieron al respecto?**
-*(Completar con la métrica, M1–M6, de menor cumplimiento y la acción de mejora aplicada, una vez cerrada la Tabla de auditoría — responsable: Fuertes.)*
-*Artefacto: tabla de auditoría de calidad; comparación antes/después.*
+M1a (completitud de atributos) obtuvo el peor resultado: 44,26 % frente al 95 % de referencia, muy por debajo incluso de M3 (verificabilidad, 27,87 %) en términos de brecha relativa al umbral exigido. La causa no es contenido faltante sino heterogeneidad de plantilla: los 16 RNF no declaran un campo "Origen" explícito y las 9 RD no declaran "Criterio de verificación". La acción de mejora documentada es añadir ambos campos y homologar la plantilla entre categorías de requisito, coordinada con Gutiérrez Ortega (C4) para la consolidación del ERS final.
+*Artefacto: Tabla de auditoría de calidad (Sección 8.3); Conclusión 2.*
 
 **20. Enséñenme los conteos con los que calcularon la verificabilidad.**
-*(Completar con los conteos base de M3 —requisitos con criterio BDD comprobable sobre requisitos totales— y la referencia exacta a la subsección del ERS — responsable: Fuertes.)*
-*Artefacto: Tabla 3 (Conteos base del ERS); Anexo A (conteos auditables).*
+M3 = 17/61 × 100 = 27,87 %. El numerador (17) proviene de la matriz de trazabilidad extendida del ERS (Sección 4.5): de las 61 filas, 17 enlazan hasta una historia de usuario con criterio de aceptación en formato Gherkin (Dado/Cuando/Entonces), correspondientes a los RF de prioridad *Must* con historia de usuario especificada. El resto de los 61 requisitos, incluidos los 16 RNF (cuyo criterio de verificación es prosa, no Gherkin estructurado), no cuenta con este criterio formal, aunque sí con un criterio de verificación textual de menor formalidad, reportado como dato complementario en el Anexo A.
+*Artefacto: ERS, Sección 4.5 (matriz de trazabilidad extendida); Sección 8.2, nota de cálculo M3.*
 
 **21. ¿Por qué el peso de M1 (completitud) es mayor que el de M5 (impacto de cambio)?**
-Porque la completitud de atributos obligatorios es una condición de piso para que el resto de métricas sea calculable de forma confiable, mientras que el impacto de cambio se mide sobre una muestra y es más sensible a la elección de los cinco requisitos evaluados.
-*Artefacto: instrumento de auditoría (pesos M1–M6).*
+El instrumento de auditoría asigna M1 = 0,20 y M5 = 0,10, el menor peso de las seis métricas. La completitud de atributos obligatorios (M1) es una condición de piso: si un requisito no declara sus campos básicos, el resto de métricas (verificabilidad, trazabilidad) no puede calcularse de forma confiable sobre él. El impacto de cambio (M5) se mide sobre una muestra de solo cinco requisitos representativos, por lo que su valor es más sensible a la elección de esa muestra y se pondera menos que una métrica calculada sobre el universo completo de 61 requisitos.
+*Artefacto: Sección 8.1 (instrumento de auditoría, escala y pesos M1–M6).*
 
 ## Ética e integridad académica
 
